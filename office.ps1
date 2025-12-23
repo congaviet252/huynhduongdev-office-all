@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
     if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1 | iex"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm office.msedu.vn | iex"
         break
     }
 
@@ -9,7 +9,7 @@
     Add-Type -AssemblyName PresentationFramework, System.Drawing, PresentationFramework, System.Windows.Forms, WindowsFormsIntegration, PresentationCore
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
-# GIAO DIỆN XAML MỚI (MODERN DARK THEME)
+# GIAO DIỆN XAML MỚI (MODERN DARK THEME + FACEBOOK LINK)
 $xamlInput = @'
 <Window x:Class="install.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -60,7 +60,7 @@ $xamlInput = @'
             <Setter Property="Margin" Value="0,5,10,5"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="GroupName" Value="OfficeVersion"/> <!-- Quan trọng: Group chung để chỉ chọn 1 -->
+            <Setter Property="GroupName" Value="OfficeVersion"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
@@ -124,8 +124,8 @@ $xamlInput = @'
             <Border Background="#2D2D30" CornerRadius="5" Padding="10" Margin="0,0,0,15">
                 <StackPanel>
                     <TextBlock Text="HUỲNH DƯƠNG" Foreground="#00A4EF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
-                    <TextBlock Text="DEVELOPER PRO" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
-                    <Image x:Name="image" Height="60" Width="60" Source="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Margin="0,10,0,0" Visibility="Hidden"/>
+                    <TextBlock Text="DEVELOPER" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+                    <Image x:Name="image" Height="60" Width="60" Source="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/551384385_122223446444134054_1467993974427749848_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=J5mqzzj9NzIQ7kNvwG0ZRRx&_nc_oc=AdkUOvUdojgnksikilA6jBv2XA0Kg_lmRz3dQmnpzex63LXIOBkRUXxf6B5QAaO84IvBlIJafdCfPtxMEXcivN3Z&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=SYS6WLeOiT-BZPAPeaBU6w&oh=00_AflY8hLhQt8k7IyVGH3MMxa--kteDNhP0Aas1CGmoOKLWw&oe=69505394" Margin="0,10,0,0" Visibility="Hidden"/>
                 </StackPanel>
             </Border>
 
@@ -174,11 +174,20 @@ $xamlInput = @'
             <ProgressBar x:Name="progressbar" Height="5" Margin="0,10,0,0" Background="#333333" BorderThickness="0" Foreground="#00A4EF"/>
             <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
             
-            <Label x:Name="Link1" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand">
-                <Hyperlink NavigateUri="https://msedu.vn" Foreground="#00A4EF" TextDecorations="None">
-                    <TextBlock Text="🌐 msedu.vn"/>
-                </Hyperlink>
-            </Label>
+            <!-- Link Web & Facebook -->
+            <StackPanel Margin="0,15,0,0">
+                <Label x:Name="Link1" HorizontalAlignment="Center" Cursor="Hand" Padding="5,2">
+                    <Hyperlink NavigateUri="https://nlacc.site" Foreground="#DDDDDD" TextDecorations="None">
+                        <TextBlock Text="🌐 Website: nlacc.site"/>
+                    </Hyperlink>
+                </Label>
+                
+                <Label x:Name="LinkFacebook" HorizontalAlignment="Center" Cursor="Hand" Padding="5,2">
+                    <Hyperlink NavigateUri="https://www.facebook.com/huynh.duong.389204/" Foreground="#1877F2" TextDecorations="None" FontWeight="Bold">
+                        <TextBlock Text="f  FB Của Tao!"/>
+                    </Hyperlink>
+                </Label>
+            </StackPanel>
         </StackPanel>
 
         <!-- === CỘT PHẢI: DANH SÁCH OFFICE === -->
@@ -255,7 +264,6 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2019Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
                                 <RadioButton x:Name="radioButton2019PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
                                 
-                                <!-- Hidden Logic fields to prevent error -->
                                 <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -274,7 +282,6 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2016ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
                                 <RadioButton x:Name="radioButton2016VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
                                 
-                                <!-- Hidden Logic fields -->
                                 <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -293,7 +300,6 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2013Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
                                 <RadioButton x:Name="radioButton2013Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
                                 
-                                <!-- Hidden Logic fields -->
                                 <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -342,7 +348,12 @@ $xamlInput = @'
         Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)
     }
 
+    # --- KHU VỰC CẤU HÌNH LINK FACEBOOK ---
+    # Thay link facebook của bạn vào bên dưới:
+    $FacebookURL = "https://www.facebook.com/HuynhDuongDeveloperPro" 
+    
     $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
+    $LinkFacebook.Add_PreviewMouseDown({[system.Diagnostics.Process]::start($FacebookURL)})
 
 # Download links
     $uri            = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
