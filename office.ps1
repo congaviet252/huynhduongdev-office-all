@@ -9,7 +9,7 @@
     Add-Type -AssemblyName PresentationFramework, System.Drawing, PresentationFramework, System.Windows.Forms, WindowsFormsIntegration, PresentationCore
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
-# GIAO DIỆN XAML MỚI (MODERN DARK THEME + FACEBOOK LINK)
+# GIAO DIỆN XAML MỚI (MODERN DARK THEME) + LINK FACEBOOK
 $xamlInput = @'
 <Window x:Class="install.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -18,8 +18,8 @@ $xamlInput = @'
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:install"
         mc:Ignorable="d"
-        Title="Huỳnh Dương Developer - Office Installer" 
-        Height="650" Width="1100" 
+        Title="Huỳnh Dương Developer Pro - Office Installer" 
+        Height="680" Width="1100" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize"
         Background="#1E1E1E"
@@ -174,20 +174,16 @@ $xamlInput = @'
             <ProgressBar x:Name="progressbar" Height="5" Margin="0,10,0,0" Background="#333333" BorderThickness="0" Foreground="#00A4EF"/>
             <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
             
-            <!-- Link Web & Facebook -->
-            <StackPanel Margin="0,15,0,0">
-                <Label x:Name="Link1" HorizontalAlignment="Center" Cursor="Hand" Padding="5,2">
-                    <Hyperlink NavigateUri="https://nlacc.site" Foreground="#DDDDDD" TextDecorations="None">
-                        <TextBlock Text="🌐 Website: nlacc.site"/>
-                    </Hyperlink>
-                </Label>
+            
                 
-                <Label x:Name="LinkFacebook" HorizontalAlignment="Center" Cursor="Hand" Padding="5,2">
-                    <Hyperlink NavigateUri="https://www.facebook.com/huynh.duong.389204/" Foreground="#1877F2" TextDecorations="None" FontWeight="Bold">
-                        <TextBlock Text="f  FB Của Tao!"/>
+                <!-- LINK FACEBOOK MỚI THÊM VÀO ĐÂY -->
+                <Label x:Name="LinkFacebook" HorizontalAlignment="Center" Cursor="Hand" Margin="0,5,0,0" Padding="0">
+                    <Hyperlink NavigateUri="https://www.facebook.com/huynh.duong.389204/" Foreground="#1877F2" FontWeight="Bold" TextDecorations="None">
+                        <TextBlock Text="📘 Liên hệ FB Tao"/>
                     </Hyperlink>
                 </Label>
             </StackPanel>
+
         </StackPanel>
 
         <!-- === CỘT PHẢI: DANH SÁCH OFFICE === -->
@@ -348,12 +344,11 @@ $xamlInput = @'
         Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)
     }
 
-    # --- KHU VỰC CẤU HÌNH LINK FACEBOOK ---
-    # Thay link facebook của bạn vào bên dưới:
-    $FacebookURL = "https://www.facebook.com/HuynhDuongDeveloperPro" 
-    
+    # SỰ KIỆN CLICK LINK WEB VÀ FACEBOOK
     $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
-    $LinkFacebook.Add_PreviewMouseDown({[system.Diagnostics.Process]::start($FacebookURL)})
+    
+    # --- THAY ĐỔI LINK FACEBOOK CỦA BẠN TẠI ĐÂY ---
+    $LinkFacebook.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://www.facebook.com/huynhduong')}) 
 
 # Download links
     $uri            = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
