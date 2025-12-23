@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
     if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm office.msedu.vn | iex"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "iex (irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1)"
         break
     }
 
@@ -9,153 +9,429 @@
     Add-Type -AssemblyName PresentationFramework, System.Drawing, PresentationFramework, System.Windows.Forms, WindowsFormsIntegration, PresentationCore
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
-# Place your xaml code from Visual Studio in here string (between @ symbols)
-# $xamlinput = @'<xaml code here'@
-
+# GIAO DIỆN XAML ĐƯỢC NÂNG CẤP 3D / MATERIAL DESIGN
 $xamlInput = @'
 <Window x:Class="install.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:install"
-        mc:Ignorable="d"
-        Title="Huỳnh Dương Developer Full Office Free - By VuDuy" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Width="1140" Height="522">
-    <Grid Margin="0,0,0,-6">
-        <GroupBox x:Name="groupBoxMicrosoftOffice" Header="Lựa Chọn Phiên Bản Office:" BorderBrush="#FF164A69" Margin="125,10,0,0" Height="444" Width="986" FontFamily="Roboto" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Canvas HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Rectangle Height="81" Stroke="#FFDA2323" Width="135" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="11" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label x:Name="Label365" Content="Microsoft 365" FontWeight="Bold" Canvas.Left="19" Background="#FFDA2323" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="8" Foreground="White" Padding="8,4,8,4"/>
-                <RadioButton x:Name="radioButton365Home" Content="Home (Cá nhân)" Canvas.Left="19" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
-                <RadioButton x:Name="radioButton365Business" Content="Business (Kinh doanh)" Canvas.Left="19" Canvas.Top="54" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
-                <RadioButton x:Name="radioButton365Enterprise" Content="Enterprise (DN)" Canvas.Left="19" Canvas.Top="73" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
-                <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="159" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="160,0,0,0"/>
-                <Label x:Name="Label2021" Content="Office 2021" FontWeight="Bold" Canvas.Left="167" Canvas.Top="8" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" UseLayoutRounding="True" Padding="8,4,8,4" ScrollViewer.CanContentScroll="True" Background="#FF3C10DE" Margin="160,0,0,0"/>
-                <RadioButton x:Name="radioButton2021Pro" Content="Professional" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="172" Canvas.Top="35" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Std" Content="Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021ProjectPro" Content="Project Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="69" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021ProjectStd" Content="Project Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="87" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021VisioPro" Content="Visio Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="107" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021VisioStd" Content="Visio Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="127" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Word" Content="Word" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="147" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Excel" Content="Excel" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="167" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021PowerPoint" Content="PowerPoint" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="187" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Outlook" Content="Outlook" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="207" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Access" Content="Access" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="227" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021Publisher" Content="Publisher" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="247" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021HomeStudent" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="267" Content="HomeStudent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2021HomeBusiness" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="172" Canvas.Top="290" Content="HomeBusiness" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="325" Canvas.Top="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,0,0,0"/>
-                <Label x:Name="Label2019" Content="Office 2019" FontWeight="Bold" Canvas.Left="334" Background="#FF0F8E40" Canvas.Top="8" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Padding="8,4,8,4" Margin="160,0,0,0"/>
-                <RadioButton x:Name="radioButton2019Pro" Content="Professional" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="30" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Std" Content="Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="50" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019ProjectPro" Content="Project Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019ProjectStd" Content="Project Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="90" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019VisioPro" Content="Visio Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019VisioStd" Content="Visio Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="130" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Word" Content="Word" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Excel" Content="Excel" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="170" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019PowerPoint" Content="PowerPoint" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="190" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Outlook" Content="Outlook" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="208" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Access" Content="Access" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019Publisher" Content="Publisher" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019HomeStudent" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="270" Content="HomeStudent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2019HomeBusiness" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="330" Canvas.Top="290" Content="HomeBusiness" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="490" Canvas.Top="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,0,0,0"/>
-                <RadioButton x:Name="radioButton2016Pro" Content="Professional" IsChecked="False" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Left="498" Canvas.Top="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Std" Content="Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="50" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016ProjectPro" Content="Project Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="70" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016ProjectStd" Content="Project Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="90" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016VisioPro" Content="Visio Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="110" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016VisioStd" Content="Visio Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="130" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Word" Content="Word" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="150" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Excel" Content="Excel" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="170" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016PowerPoint" Content="PowerPoint" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="190" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Outlook" Content="Outlook" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="207" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Access" Content="Access" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="230" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016Publisher" Content="Publisher" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="250" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <RadioButton x:Name="radioButton2016OneNote" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Content="OneNote" Canvas.Top="270" Canvas.Left="498" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,5,0,0"/>
-                <Label x:Name="Label2016" Content="Office 2016" FontWeight="Bold" Canvas.Left="500" Background="#FFA28210" Canvas.Top="8" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="8,4,8,4" Foreground="White" Margin="160,0,0,0"/>
-                <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="656" Canvas.Top="20" VerticalAlignment="Center" Margin="160,0,50,0"/>
-                <Label x:Name="Label2013" Content="Office 2013" FontWeight="Bold" Canvas.Left="667" Background="#FF1B0F0F" Canvas.Top="8" VerticalAlignment="Center" Foreground="White" Padding="8,4,8,4" Margin="160,0,50,0"/>
-                <RadioButton x:Name="radioButton2013Pro" Content="Professional" IsChecked="False" Padding="5,5,5,5" VerticalContentAlignment="Center" Canvas.Left="670" Canvas.Top="30" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Std" Content="Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="50" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013ProjectPro" Content="Project Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="70" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013ProjectStd" Content="Project Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="90" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013VisioPro" Content="Visio Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="110" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013VisioStd" Content="Visio Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="130" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Word" Content="Word" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="150" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Excel" Content="Excel" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="170" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013PowerPoint" Content="PowerPoint" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="190" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Outlook" Content="Outlook" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="210" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Access" Content="Access" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="230" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <RadioButton x:Name="radioButton2013Publisher" Content="Publisher" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Top="250" Canvas.Left="670" VerticalAlignment="Center" Margin="160,5,50,0"/>
-                <Rectangle x:Name="RemoveAll" Stroke="#FFDC281F" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Height="50" Width="291" Canvas.Top="343" Canvas.Left="600" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <RadioButton x:Name="radioButtonRemoveAllApp" Content="Tôi Đồng Ý" FontFamily="Roboto" FontSize="11" VerticalContentAlignment="Center" IsChecked="False" Canvas.Left="620" Canvas.Top="363" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock x:Name="textBoxRemoveAll" TextWrapping="Wrap" Text="(*) Gỡ Bỏ Hoàn Toàn Các Ứng Dụng Office Đã Cài Đặt Trên Máy." FontSize="10.5" Canvas.Left="598" Canvas.Top="406" Foreground="#FFED551B" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                <TextBox x:Name="textBox1" TextWrapping="Wrap" Text="(*) Mặc định cài đặt Microsoft Office 64-bit với ngôn ngữ Tiếng Anh." Canvas.Top="338" FontSize="10.5" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="-3" Margin="0,2,0,2" Padding="0,0,0,2"/>
-                <TextBox x:Name="textBox2" TextWrapping="Wrap" Text="(*) Chế độ mặc định là Cài đặt (Install). Nếu cần tải bộ cài, vui lòng chọn Chế độ Download." Canvas.Top="360" FontSize="10.5" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="-3" Padding="0,0,0,2"/>
-                <TextBox x:Name="textBox3" TextWrapping="Wrap" Text="(*) Nếu chọn Chế độ Tải về (Download). File tải về sẽ được lưu trên Desktop." Canvas.Top="377" FontSize="10.5" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="-3" Padding="0,0,0,2" Margin="0,2,0,2"/>
-                <TextBox x:Name="textBox5" TextWrapping="Wrap" Text="(*) Bản Quyền Thuộc Về:" Canvas.Top="400" FontSize="10.5" BorderBrush="{x:Null}" Background="{x:Null}" Canvas.Left="-3" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0,0,0,2"/>
-                <Label x:Name="LabelRemoveAll" Content="Xóa Bỏ Toàn Bộ Office:" FontWeight="Bold" Canvas.Left="612" Canvas.Top="330" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White"/>
-                <Button x:Name="buttonRemoveAll" Content="Gỡ Cài Đặt" Background="#FFE23B15" FontFamily="Roboto" FontSize="10" Foreground="White" Height="27" Width="73" UseLayoutRounding="True" BorderBrush="{x:Null}" HorizontalAlignment="Left" Canvas.Left="758" Canvas.Top="354" VerticalAlignment="Top"/>
-                <Image x:Name="image" Height="81" Width="78" Canvas.Left="40" Canvas.Top="136" Source="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
-                <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Top="20" HorizontalAlignment="Left" Canvas.Left="156" VerticalAlignment="Top"/>
-                <Label x:Name="Label2024" Content="Office 2024" FontWeight="Bold" Background="#FFE2820E" Foreground="White" Padding="8,4,8,4" Canvas.Left="170" HorizontalAlignment="Left" Canvas.Top="8" VerticalAlignment="Top"/>
-                <RadioButton VerticalContentAlignment="Center" x:Name="radioButton2024Pro" Content="Professional" Canvas.Top="39" Canvas.Left="170" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton VerticalContentAlignment="Center" Padding="5,5,5,5" x:Name="radioButton2024Std" IsChecked="False" Content="Standard" Canvas.Top="53" Canvas.Left="170" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton VerticalContentAlignment="Center" Padding="5,5,5,5" x:Name="radioButton2024ProjectPro" IsChecked="False" Content="Project Pro" Canvas.Top="74" Canvas.Left="170" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton VerticalContentAlignment="Center" Padding="5,5,5,5" x:Name="radioButton2024ProjectStd" IsChecked="False" Content="Project Standard" Canvas.Top="92" Canvas.Left="170" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024VisioPro" Content="Visio Pro" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="112" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <RadioButton x:Name="radioButton2024VisioStd" Content="Visio Standard" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="132" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024Word" Content="Word" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="152" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024Excel" Content="Excel" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="172" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024PowerPoint" Content="PowerPoint" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="192" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024Outlook" Content="Outlook" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="212" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton x:Name="radioButton2024Access" Content="Access" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="232" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <RadioButton x:Name="radioButton2024Publisher" Content="Publisher" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="252" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <RadioButton x:Name="radioButton2024HomeStudent" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="272" Content="HomeStudent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <RadioButton x:Name="radioButton2024HomeBusiness" VerticalContentAlignment="Center" IsChecked="False" Padding="5,5,5,5" Canvas.Left="170" Canvas.Top="295" Content="HomeBusiness" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Canvas>
-        </GroupBox>
-        <GroupBox x:Name="groupBoxArch" Header="Kiến Trúc:" Margin="10,10,0,0" BorderBrush="#FF0D4261" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" FontSize="11" Width="104">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                <RadioButton x:Name="radioButtonArch64" Content="x64 (64-bit)" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0" VerticalContentAlignment="Center" IsChecked="True"/>
-                <RadioButton x:Name="radioButtonArch32" Content="x86 (32-bit)" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,5" VerticalContentAlignment="Center"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox x:Name="groupBoxLicenseType" Header="Loại Giấy Phép:" Margin="10,87,0,0" BorderBrush="#FF0D4261" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" FontSize="11" Width="104" Height="65">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                <RadioButton x:Name="radioButtonVolume" Content="Volume" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" IsChecked="True" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonRetail" Content="Retail" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="5,6,0,0"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox x:Name="groupBoxMode" Header="Chế Độ:" Margin="10,161,0,0" BorderBrush="#FF0D4261" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" FontSize="11" Width="104" Height="70" ToolTip="Chọn chế độ cài đặt hoặc tải về">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                <RadioButton x:Name="radioButtonInstall" Content="Cài Đặt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0" VerticalContentAlignment="Center" IsChecked="True"/>
-                <RadioButton x:Name="radioButtonDownload" Content="Tải Về" VerticalContentAlignment="Center" Margin="5,6,0,0"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox x:Name="groupBoxLanguage" Header="Ngôn Ngữ:" Margin="10,241,0,0" BorderBrush="#FF0D4261" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Roboto" FontSize="11" Width="104" Height="213">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                <RadioButton x:Name="radioButtonEnglish" Content="Tiếng Anh" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,8,0,0"/>
-                <RadioButton x:Name="radioButtonJapanese" Content="Tiếng Nhật" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonKorean" Content="Tiếng Hàn" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonChinese" Content="Tiếng Trung" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonFrench" Content="Tiếng Pháp" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonSpanish" Content="Tây Ban Nha" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonHindi" Content="Tiếng Hindi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonGerman" Content="Tiếng Đức" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-                <RadioButton x:Name="radioButtonVietnamese" Content="Tiếng Việt" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,6,0,0"/>
-            </StackPanel>
-        </GroupBox>
-        <Button x:Name="buttonSubmit" Content="Bắt Đầu" HorizontalAlignment="Left" Margin="147,227,0,0" VerticalAlignment="Top" Width="118" Height="28" Background="#FF168E12" Foreground="White" FontFamily="Roboto" FontSize="13" FontWeight="Bold" UseLayoutRounding="True" BorderBrush="#FF168E12"/>
-        <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="10" Margin="147,266,0,0" VerticalAlignment="Top" Width="118" IsEnabled="False" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="textbox" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,288,0,0" FontFamily="Roboto" FontSize="11" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsUndoEnabled="False"/>
-        <Label x:Name="Link1" HorizontalAlignment="Left" Margin="242,420,0,0" VerticalAlignment="Top" Width="120" FontSize='10.5' ToolTip='Truy cập website' FontFamily="Roboto" Padding="5,5,5,2">
-            <Hyperlink NavigateUri="https://msedu.vn">https://msedu.vn</Hyperlink>
-        </Label>
+        Title="Huỳnh Dương Developer - Ultimate Office Tool" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize"
+        Width="1200" Height="700"
+        Background="#1E1E2E"
+        Icon="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png">
+    
+    <Window.Resources>
+        <!-- COLORS & BRUSHES -->
+        <LinearGradientBrush x:Key="MainBackground" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1a1c2c" Offset="0.0"/>
+            <GradientStop Color="#4a192c" Offset="1.0"/>
+        </LinearGradientBrush>
 
+        <LinearGradientBrush x:Key="CardBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#2C2F48" Offset="0"/>
+            <GradientStop Color="#23263A" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ButtonGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#00C9FF" Offset="0"/>
+            <GradientStop Color="#92FE9D" Offset="1"/>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#B0B5C1"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#00C9FF"/>
+
+        <!-- STYLES -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#444960"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.RowSpan="2" CornerRadius="10" Background="#25283D" BorderBrush="#444960" BorderThickness="1">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="3" Opacity="0.4"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border Grid.Row="0" Background="Transparent" Padding="10,5,0,0">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
+                            </Border>
+                            <Border Grid.Row="1" Padding="10">
+                                <ContentPresenter/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ModernButton">
+            <Setter Property="Foreground" Value="#1a1c2c"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="20" Background="{StaticResource ButtonGradient}" BorderThickness="0">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#00C9FF" BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+         <Style TargetType="Button" x:Key="DangerButton">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="8" Background="#FF4B4B" BorderThickness="0">
+                             <Border.Effect>
+                                <DropShadowEffect Color="Red" BlurRadius="10" ShadowDepth="2" Opacity="0.3"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF6B6B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Custom Tab Item Style -->
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="Border" Padding="15,10" Margin="0,0,5,0" CornerRadius="5,5,0,0" Background="#2C2F48">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource ButtonGradient}"/>
+                                <Setter Property="Foreground" Value="#1a1c2c"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- MAIN LAYOUT -->
+    <Grid Background="{StaticResource MainBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header -->
+            <RowDefinition Height="*"/>    <!-- Content -->
+            <RowDefinition Height="Auto"/> <!-- Footer -->
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Padding="20" Background="#151725">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                 <!-- Logo Placeholder -->
+                <Border Width="40" Height="40" CornerRadius="10" Background="{StaticResource ButtonGradient}" Margin="0,0,15,0">
+                    <TextBlock Text="HD" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="ExtraBold" FontSize="20" Foreground="#1a1c2c"/>
+                </Border>
+                <StackPanel>
+                    <TextBlock Text="HUỲNH DƯƠNG DEVELOPER PRO" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Segoe UI">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#00C9FF" BlurRadius="10" ShadowDepth="0" Opacity="0.6"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="Ultimate Office Deployment Tool - Phiên bản Việt Hóa" Foreground="#B0B5C1" FontSize="12"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- BODY CONTENT -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"/> <!-- Left Sidebar (Settings) -->
+                <ColumnDefinition Width="*"/>   <!-- Right Main (Office Select) -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT SIDEBAR: Settings -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <!-- Architecture -->
+                <GroupBox x:Name="groupBoxArch" Header="Kiến Trúc (Bit)">
+                    <StackPanel>
+                        <RadioButton x:Name="radioButtonArch64" Content="x64 (64-bit) - Khuyên dùng" IsChecked="True"/>
+                        <RadioButton x:Name="radioButtonArch32" Content="x86 (32-bit)"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- License -->
+                <GroupBox x:Name="groupBoxLicenseType" Header="Loại Giấy Phép">
+                    <StackPanel>
+                        <RadioButton x:Name="radioButtonVolume" Content="Volume (Doanh nghiệp)" IsChecked="True"/>
+                        <RadioButton x:Name="radioButtonRetail" Content="Retail (Bán lẻ)"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Mode -->
+                <GroupBox x:Name="groupBoxMode" Header="Chế Độ Hoạt Động">
+                    <StackPanel>
+                        <RadioButton x:Name="radioButtonInstall" Content="Cài Đặt (Install)" IsChecked="True"/>
+                        <RadioButton x:Name="radioButtonDownload" Content="Chỉ Tải Về (Download)"/>
+                        <TextBlock Text="(*) File tải về sẽ nằm ở Desktop" Foreground="#666" FontSize="10" Margin="20,2,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+                
+                <!-- Language -->
+                <GroupBox x:Name="groupBoxLanguage" Header="Ngôn Ngữ" Height="200">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <RadioButton x:Name="radioButtonEnglish" Content="Tiếng Anh (English)" IsChecked="True"/>
+                            <RadioButton x:Name="radioButtonVietnamese" Content="Tiếng Việt (Vietnamese)" Foreground="#00C9FF" FontWeight="Bold"/>
+                            <RadioButton x:Name="radioButtonJapanese" Content="Tiếng Nhật"/>
+                            <RadioButton x:Name="radioButtonKorean" Content="Tiếng Hàn"/>
+                            <RadioButton x:Name="radioButtonChinese" Content="Tiếng Trung"/>
+                            <RadioButton x:Name="radioButtonFrench" Content="Tiếng Pháp"/>
+                            <RadioButton x:Name="radioButtonSpanish" Content="Tây Ban Nha"/>
+                            <RadioButton x:Name="radioButtonGerman" Content="Tiếng Đức"/>
+                            <RadioButton x:Name="radioButtonHindi" Content="Tiếng Hindi"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+            </StackPanel>
+
+            <!-- RIGHT MAIN: Office Versions (Tabs) -->
+            <Border Grid.Column="1" Background="#23263A" CornerRadius="10" Padding="10">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="5" Opacity="0.3"/>
+                </Border.Effect>
+                
+                <TabControl Background="Transparent" BorderThickness="0">
+                    
+                    <!-- TAB 1: NEWEST (2024 - 2021 - 365) -->
+                    <TabItem Header="Mới Nhất (2021 - 2024 - 365)">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="10">
+                                <!-- Office 2024 -->
+                                <GroupBox x:Name="groupBoxMicrosoftOffice" Header="Office 2024 LTSC (Mới nhất)" BorderBrush="#FFE2820E">
+                                    <WrapPanel>
+                                        <RadioButton x:Name="radioButton2024Pro" Content="Professional Plus" Width="140"/>
+                                        <RadioButton x:Name="radioButton2024Std" Content="Standard" Width="140"/>
+                                        <RadioButton x:Name="radioButton2024ProjectPro" Content="Project Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2024VisioPro" Content="Visio Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2024Word" Content="Word Only" Width="100"/>
+                                        <RadioButton x:Name="radioButton2024Excel" Content="Excel Only" Width="100"/>
+                                        <RadioButton x:Name="radioButton2024PowerPoint" Content="PowerPoint" Width="100"/>
+                                        <RadioButton x:Name="radioButton2024ProjectStd" Content="Project Std" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024VisioStd" Content="Visio Std" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024Outlook" Content="Outlook" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024Access" Content="Access" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024Publisher" Content="Publisher" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024HomeStudent" Content="HomeStudent" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2024HomeBusiness" Content="HomeBusiness" Visibility="Collapsed"/>
+                                    </WrapPanel>
+                                </GroupBox>
+
+                                <!-- Office 2021 -->
+                                <GroupBox Header="Office 2021 LTSC" BorderBrush="#FF3C10DE">
+                                    <WrapPanel>
+                                        <RadioButton x:Name="radioButton2021Pro" Content="Professional Plus" Width="140"/>
+                                        <RadioButton x:Name="radioButton2021Std" Content="Standard" Width="140"/>
+                                        <RadioButton x:Name="radioButton2021ProjectPro" Content="Project Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2021VisioPro" Content="Visio Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2021Word" Content="Word Only" Width="100"/>
+                                        <RadioButton x:Name="radioButton2021Excel" Content="Excel Only" Width="100"/>
+                                        <RadioButton x:Name="radioButton2021PowerPoint" Content="PowerPoint" Width="100"/>
+                                        <!-- Hidden logic mapping -->
+                                        <RadioButton x:Name="radioButton2021ProjectStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021VisioStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021Outlook" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021Access" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021Publisher" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021HomeStudent" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2021HomeBusiness" Visibility="Collapsed"/>
+                                    </WrapPanel>
+                                </GroupBox>
+
+                                <!-- Office 365 -->
+                                <GroupBox Header="Microsoft 365 (O365)" BorderBrush="#FFDA2323">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="radioButton365Home" Content="Home (Cá nhân)" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="radioButton365Business" Content="Business (Kinh doanh)" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="radioButton365Enterprise" Content="Enterprise (Doanh nghiệp)"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- TAB 2: OLDER VERSIONS -->
+                    <TabItem Header="Phiên Bản Cũ (2019 - 2013)">
+                        <ScrollViewer>
+                            <StackPanel Margin="10">
+                                <!-- 2019 -->
+                                <GroupBox Header="Office 2019" BorderBrush="#FF0F8E40">
+                                    <WrapPanel>
+                                        <RadioButton x:Name="radioButton2019Pro" Content="Professional Plus" Width="140"/>
+                                        <RadioButton x:Name="radioButton2019Std" Content="Standard" Width="140"/>
+                                        <RadioButton x:Name="radioButton2019ProjectPro" Content="Project Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2019VisioPro" Content="Visio Pro" Width="140"/>
+                                        <RadioButton x:Name="radioButton2019Word" Content="Word" Width="80"/>
+                                        <RadioButton x:Name="radioButton2019Excel" Content="Excel" Width="80"/>
+                                        <!-- Hidden logic mapping -->
+                                        <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019PowerPoint" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019Access" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019Publisher" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019HomeStudent" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2019HomeBusiness" Visibility="Collapsed"/>
+                                    </WrapPanel>
+                                </GroupBox>
+
+                                <!-- 2016 -->
+                                <GroupBox Header="Office 2016" BorderBrush="#FFA28210">
+                                    <WrapPanel>
+                                        <RadioButton x:Name="radioButton2016Pro" Content="Professional Plus" Width="140"/>
+                                        <RadioButton x:Name="radioButton2016Std" Content="Standard" Width="140"/>
+                                        <RadioButton x:Name="radioButton2016VisioPro" Content="Visio Pro" Width="140"/>
+                                        <!-- Hidden logic mapping -->
+                                        <RadioButton x:Name="radioButton2016ProjectPro" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016Excel" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016PowerPoint" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016Outlook" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016Access" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016Publisher" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2016OneNote" Visibility="Collapsed"/>
+                                    </WrapPanel>
+                                </GroupBox>
+
+                                <!-- 2013 -->
+                                <GroupBox Header="Office 2013" BorderBrush="#FF1B0F0F">
+                                    <WrapPanel>
+                                        <RadioButton x:Name="radioButton2013Pro" Content="Professional Plus" Width="140"/>
+                                        <RadioButton x:Name="radioButton2013Std" Content="Standard" Width="140"/>
+                                        <!-- Hidden logic mapping -->
+                                        <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013VisioStd" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013Word" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013Excel" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013PowerPoint" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013Outlook" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013Access" Visibility="Collapsed"/>
+                                        <RadioButton x:Name="radioButton2013Publisher" Visibility="Collapsed"/>
+                                    </WrapPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- TAB 3: TOOLS & UNINSTALL -->
+                    <TabItem Header="Công Cụ &amp; Gỡ Cài Đặt">
+                        <StackPanel Margin="20">
+                            <GroupBox Header="Xóa Bỏ Hoàn Toàn Office (Clean Uninstall)" BorderBrush="Red">
+                                <StackPanel>
+                                    <TextBlock Text="(*) Chức năng này sẽ quét sạch mọi phiên bản Office trên máy." Foreground="#FF6B6B" Margin="0,0,0,10" FontStyle="Italic"/>
+                                    
+                                    <CheckBox x:Name="radioButtonRemoveAllApp" Content="Tôi hiểu rủi ro và đồng ý xóa" Foreground="White" Margin="0,0,0,10"/>
+                                    
+                                    <Button x:Name="buttonRemoveAll" Content="GỠ CÀI ĐẶT NGAY" Style="{StaticResource DangerButton}" Width="150" Height="40" HorizontalAlignment="Left"/>
+                                    
+                                    <!-- Elements required by backend logic but kept hidden or structured -->
+                                    <TextBlock x:Name="textBoxRemoveAll" Visibility="Collapsed"/>
+                                    <Label x:Name="LabelRemoveAll" Visibility="Collapsed"/>
+                                    <Rectangle x:Name="RemoveAll" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </GroupBox>
+                            
+                             <!-- Info hidden -->
+                            <TextBox x:Name="textBox1" Visibility="Collapsed"/>
+                            <TextBox x:Name="textBox2" Visibility="Collapsed"/>
+                            <TextBox x:Name="textBox3" Visibility="Collapsed"/>
+                            <TextBox x:Name="textBox5" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+
+        <!-- FOOTER & STATUS -->
+        <Border Grid.Row="2" Background="#151725" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="Trạng thái xử lý:" Foreground="#B0B5C1" FontSize="11" Margin="0,0,0,5"/>
+                    <Grid>
+                        <ProgressBar x:Name="progressbar" Height="15" Background="#2C2F48" BorderThickness="0" Foreground="{StaticResource AccentColor}"/>
+                        <TextBox x:Name="textbox" Background="Transparent" BorderThickness="0" Foreground="White" 
+                                 FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" 
+                                 Text="Sẵn sàng" IsReadOnly="True" IsHitTestVisible="False"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
+                    <Image x:Name="image" Width="30" Height="30" Margin="0,0,15,0" Source="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Visibility="Hidden"/>
+                    <Button x:Name="buttonSubmit" Content="BẮT ĐẦU" Style="{StaticResource ModernButton}" Width="150" Height="45"/>
+                    <Label x:Name="Link1" Visibility="Collapsed"/> <!-- Hidden logic link -->
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
 '@
@@ -170,7 +446,12 @@ $xamlInput = @'
         Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)
     }
 
-    $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
+    # Custom logic for Hyperlink since we hid the label
+    # We can add a click event to the logo area or similar if needed, 
+    # but strictly keeping original logic requires the variable $Link1 to exist.
+    if ($Link1) {
+        $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
+    }
 
 # Download links
     $uri            = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
@@ -231,8 +512,8 @@ $xamlInput = @'
         # Bring back our Button, set the Label and ProgressBar, we're done..
             $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'Bắt Đầu' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất thành công!' })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
     }
@@ -382,7 +663,7 @@ $xamlInput = @'
             } else {
                 $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Foreground = "Red" })
                 $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.FontWeight = "Bold" })
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Vui lòng chọn phiên bản Office!" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Vui lòng chọn 1 phiên bản Office!" })
             } 
         }
     )
@@ -425,8 +706,8 @@ $xamlInput = @'
 
         $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'Bắt Đầu' })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất gỡ cài đặt' })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
 
@@ -435,19 +716,22 @@ $xamlInput = @'
         Remove-Item ClickToRunU -Recurse -Force
     }
 
-    $buttonRemoveAll.Add_Click({
+    if ($buttonRemoveAll) {
+        $buttonRemoveAll.Add_Click({
+            if ($radioButtonRemoveAllApp.IsChecked) {
+                $workingDir = New-Item -Path $env:temp\ClickToRunU -ItemType Directory -Force
+                Set-Location $workingDir
+                $sync.workingDir = $workingDir
+                $sync.uri = $uri
+                $sync.removeAllXML = $removeAllXML
 
-        if ($radioButtonRemoveAllApp.IsChecked) {
-            $workingDir = New-Item -Path $env:temp\ClickToRunU -ItemType Directory -Force
-            Set-Location $workingDir
-            $sync.workingDir = $workingDir
-            $sync.uri = $uri
-            $sync.removeAllXML = $removeAllXML
-
-            $PSIinstance = [powershell]::Create().AddScript($UninstallOffice)
-            $PSIinstance.Runspace = $runspace
-            $PSIinstance.BeginInvoke()
-        }
-    })
+                $PSIinstance = [powershell]::Create().AddScript($UninstallOffice)
+                $PSIinstance.Runspace = $runspace
+                $PSIinstance.BeginInvoke()
+            } else {
+                 $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Bạn chưa tích vào ô đồng ý!" })
+            }
+        })
+    }
 
 $null = $Form.ShowDialog()
