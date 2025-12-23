@@ -20,7 +20,7 @@ $xamlInput = @'
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:install"
         mc:Ignorable="d"
-        Title="Huỳnh Dương Developer Pro" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Width="1140" Height="522">
+        Title="Huỳnh Dương Developer Full Office Free - By VuDuy" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Width="1140" Height="522">
     <Grid Margin="0,0,0,-6">
         <GroupBox x:Name="groupBoxMicrosoftOffice" Header="Lựa Chọn Phiên Bản Office:" BorderBrush="#FF164A69" Margin="125,10,0,0" Height="444" Width="986" FontFamily="Roboto" FontSize="11" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Canvas HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -28,7 +28,7 @@ $xamlInput = @'
                 <Label x:Name="Label365" Content="Microsoft 365" FontWeight="Bold" Canvas.Left="19" Background="#FFDA2323" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="8" Foreground="White" Padding="8,4,8,4"/>
                 <RadioButton x:Name="radioButton365Home" Content="Home (Cá nhân)" Canvas.Left="19" Canvas.Top="35" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
                 <RadioButton x:Name="radioButton365Business" Content="Business (Kinh doanh)" Canvas.Left="19" Canvas.Top="54" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
-                <RadioButton x:Name="radioButton365Enterprise" Content="Enterprise (Doanh nghiệp)" Canvas.Left="19" Canvas.Top="73" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
+                <RadioButton x:Name="radioButton365Enterprise" Content="Enterprise (DN)" Canvas.Left="19" Canvas.Top="73" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,5,0,0"/>
                 <Rectangle Height="306" Stroke="#FF1B0F0F" Width="150" UseLayoutRounding="True" RadiusX="5" RadiusY="5" Canvas.Left="159" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="160,0,0,0"/>
                 <Label x:Name="Label2021" Content="Office 2021" FontWeight="Bold" Canvas.Left="167" Canvas.Top="8" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" UseLayoutRounding="True" Padding="8,4,8,4" ScrollViewer.CanContentScroll="True" Background="#FF3C10DE" Margin="160,0,0,0"/>
                 <RadioButton x:Name="radioButton2021Pro" Content="Professional" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="172" Canvas.Top="35" Margin="160,5,0,0"/>
