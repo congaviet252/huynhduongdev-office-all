@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
-    if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] ('{0}{1}{2}{3}{4}' -f 'Adm','ini','st','rat','or'))) {
-        Write-Warning 'Вạn сần quуền Аdmіnіstrаtоr để сhạу sсrірt nàу!`nVuі lòng сhạу lạі sсrірt dướі quуền Аdmіn (Run аs Аdmіnіstrаtоr)!'
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList $($k1142='=NDVV<wMOit';$b=[byte[]](0x54,0x3C,0x29,0x76,0x3E,0x48,0x03,0x3D,0x3C,0x53,0x5B,0x12,0x3C,0x25,0x21,0x78,0x5B,0x1E,0x39,0x27,0x1C,0x16,0x48,0x3D,0x21,0x24,0x35,0x53,0x19,0x39,0x2A,0x07,0x00,0x13,0x2D,0x2B,0x3B,0x79,0x5F,0x18,0x23,0x28,0x08,0x02,0x54,0x2B,0x30,0x64,0x63,0x0E,0x58,0x25,0x3A,0x10,0x1A,0x55,0x2A,0x31,0x39,0x38,0x5B,0x13,0x28,0x39,0x44,0x1B,0x5B,0x28,0x2D,0x35,0x33,0x11,0x16,0x21,0x23,0x46,0x06,0x58,0x28,0x37,0x79,0x3E,0x59,0x16,0x29,0x3C,0x46,0x19,0x5C,0x27,0x2A,0x79,0x39,0x5A,0x11,0x24,0x2C,0x0C,0x5A,0x4D,0x3D,0x75,0x76,0x2A,0x1C,0x1E,0x28,0x37);$kb=[System.Text.Encoding]::UTF8.GetBytes($k1142);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])}))
+    if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+        Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1 | iex"
         break
     }
 
@@ -10,26 +10,346 @@
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
 # GIAO DIỆN XAML MỚI (MODERN DARK THEME)
-$xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(('PFdpbmRv'+'dyB'+'4Ok'+'N'+'sYXNz'+'PSJp'+'bnN0Y'+'Wx'+'sLk1haW5'+'XaW5kb3'+'ci'+'DQogIC'+'AgICAg'+'IHh'+'tbG5z'+'PSJodHRw'+'Oi8vc'+'2NoZW1hc'+'y5taWNyb'+'3Nv'+'Z'+'nQuY29'+'tL3dp'+'bmZ4LzIw'+'MDYveGF'+'t'+'bC9wcmVz'+'Z'+'W50YXRp'+'b2'+'4iDQogI'+'CAgIC'+'AgIHht'+'bG5'+'zOng9Imh'+'0'+'dHA'+'6Ly9zY'+'2hlb'+'WFzLm1pY'+'3'+'J'+'vc'+'29'+'mdC5jb20'+'v'+'d2l'+'uZn'+'gvMjA'+'wNi9'+'4YW1sIg0'+'K'+'IC'+'AgICA'+'gICB4bW'+'xuczpk'+'PSJo'+'dHRwOi'+'8'+'vc2N'+'o'+'ZW1'+'hc'+'y'+'5taWNyb3'+'N'+'v'+'Zn'+'QuY29tL2'+'V4c'+'HJ'+'lc3N'+'pb2'+'4vYm'+'xlbm'+'QvMj'+'AwOCINC'+'iAgICAgI'+'CAg'+'eG1'+'sbnM6bW'+'M9Imh'+'0dH'+'A'+'6Ly9'+'zY2hl'+'bWFz'+'Lm9w'+'ZW54bWx'+'mb'+'3Jt'+'Y'+'XRzL'+'m9yZ'+'y9tY'+'XJrdXA'+'tY29tc'+'GF0aW'+'JpbGl0eS'+'8yMDA2I'+'g0KICA'+'gICAgI'+'CB4bWxuc'+'zpsb2Nhb'+'D0iY2'+'xyLW5h'+'bWVzc'+'GFjZTp'+'pb'+'nN0YW'+'xsIg0'+'KIC'+'AgICAgI'+'CBtYzpJ'+'Z25vc'+'m'+'FibG'+'U9ImQiDQ'+'og'+'ICAgICAg'+'IFRp'+'dGxlPSJ'+'Id'+'eG7'+'s25o'+'IETGsM'+'a'+'hbmcgRGV'+'2Z'+'Wx'+'vcGV'+'yIC'+'0'+'gT'+'2'+'ZmaW'+'N'+'lIElu'+'c'+'3RhbGxlc'+'iIgD'+'Qo'+'gI'+'CAgICAgI'+'EhlaWdo'+'dD0iNj'+'UwIiBXaW'+'R0aD0iM'+'TEwMC'+'IgDQogIC'+'AgIC'+'AgIFdpb'+'mRvd'+'1N0Y'+'X'+'J0dX'+'BMb'+'2NhdGlvb'+'j0iQ2Vud'+'GVy'+'U2NyZWV'+'u'+'IiA'+'NCiA'+'gICAg'+'I'+'CAgUmVz'+'aXpl'+'TW9kZT0'+'i'+'Q2FuTWl'+'uaW1'+'pe'+'mUiD'+'QogI'+'CAgI'+'CAg'+'IEJhY2t'+'ncm91bmQ'+'9IiMxRTF'+'FMUUi'+'DQogIC'+'AgI'+'C'+'A'+'gIEZvcm'+'Vncm'+'9'+'1bmQ9I'+'i'+'NGRkZ'+'GRkY'+'iDQo'+'gIC'+'A'+'gICAgIE'+'Zvb'+'nRGYW1'+'pbHk9I'+'lNlZ'+'29lIFVJI'+'j4NC'+'g0KICAgI'+'DxXaW5k'+'b3'+'cu'+'UmVzb3Vy'+'Y2VzPg0K'+'IC'+'AgICA'+'gICA'+'8'+'IS0tIFN'+'0'+'eWxlI'+'GNoby'+'B'+'Hcm'+'91cEJveC'+'AtLT4NC'+'iAgICAg'+'ICA'+'gP'+'FN0eWxlI'+'FRhc'+'md'+'ldF'+'R'+'5cGU9'+'Ik'+'dyb3Vw'+'Qm94'+'Ij4N'+'CiAg'+'ICAgIC'+'A'+'gICAgIDx'+'TZXR0'+'ZXIg'+'UHJvcGVy'+'dHk9Ik1h'+'cmdp'+'biIgVmFs'+'dWU9Ij'+'As'+'MCwwLDEw'+'I'+'i8+D'+'QogICAg'+'ICAgIC'+'AgICA8U'+'2V0d'+'GVyIFB'+'y'+'b3Blc'+'nR5PSJ'+'Cb3JkZ'+'XJCc'+'nV'+'zaCIg'+'V'+'m'+'FsdWU9I'+'iMzRTN'+'FNDIiL'+'z4NCiA'+'gICA'+'gICAgI'+'CAgIDxT'+'ZXR0ZX'+'IgUH'+'JvcGVy'+'dHk9IkZ'+'v'+'cmVncm'+'9'+'1bmQiI'+'FZhbHVlP'+'SIjMDA3'+'Q'+'UND'+'Ii8+DQ'+'ogIC'+'AgICA'+'gIC'+'Ag'+'ICA8U2V'+'0dGVyIF'+'Byb3B'+'lcn'+'R'+'5PS'+'JGb250V'+'2VpZ2h'+'0IiBW'+'YWx1ZT0i'+'Qm9s'+'ZCIv'+'Pg0K'+'ICAgICA'+'g'+'ICA'+'gI'+'CAgPFN'+'ldHRlci'+'BQcm9'+'wZX'+'J'+'0eT0iRm'+'9udFNp'+'e'+'mUiIFZ'+'hbHVlPSI'+'xNCIvPg0'+'KICAg'+'ICAg'+'ICAgICA'+'gPFNldH'+'RlciBQc'+'m9wZ'+'XJ'+'0eT0i'+'VGVt'+'cGxhdG'+'UiPg'+'0KICAg'+'ICAgI'+'CAgI'+'CAgICAg'+'IDxTZ'+'XR0ZXIu'+'VmF'+'sdWU+D'+'Qog'+'ICAgIC'+'AgICA'+'gICAgIC'+'Ag'+'ICAgIDx'+'Db2'+'50cm9'+'sVGV'+'tc'+'GxhdG'+'U'+'gVGF'+'yZ'+'2V0V'+'Hlw'+'ZT0iR3Jv'+'dXBC'+'b3gi'+'Pg0KIC'+'AgICAgIC'+'AgIC'+'AgI'+'CAgICAgI'+'CAgIC'+'AgPEdya'+'W'+'Q+DQogI'+'CAgICAg'+'ICAgI'+'CAgIC'+'AgICA'+'gIC'+'AgICAg'+'ICA'+'gPEdy'+'aW'+'QuUm93R'+'G'+'VmaW5'+'pdGlvb'+'nM+DQ'+'ogI'+'CAgICAgI'+'CAgIC'+'Ag'+'ICAgIC'+'AgICAgI'+'CAgICA'+'gICAgI'+'DxSb3d'+'E'+'Z'+'WZpb'+'ml0aW9u'+'IEhl'+'aWd'+'odD0iQ'+'X'+'V0b'+'yI'+'vP'+'g0'+'KICA'+'g'+'ICAgI'+'CAgICA'+'gI'+'CAgICAg'+'ICAgICA'+'gICAgI'+'CAgI'+'CA8U'+'m93R'+'GV'+'maW'+'5pdGlvbi'+'BIZW'+'lnaHQ9I'+'ioiL'+'z4N'+'CiAgIC'+'A'+'gICAgI'+'C'+'AgICAg'+'ICAgI'+'CAgICAg'+'ICAg'+'IC'+'A8L0dya'+'W'+'QuUm9'+'3RGVma'+'W5pdGlv'+'bnM+D'+'QogICAgI'+'CAgIC'+'AgICA'+'gICAgICA'+'gICA'+'gICAg'+'I'+'CA'+'gPE'+'J'+'vcmRlci'+'BHcm'+'lkLlJvdz'+'0iMC'+'Ig'+'Qm9'+'yZGVyV'+'Ghp'+'Y2tuZ'+'XNzP'+'SIwLDAs'+'MCw'+'xIiB'+'Cb'+'3JkZ'+'XJCc'+'nVza'+'D0iIzAwN'+'0'+'FDQyIgTW'+'FyZ2lu'+'PS'+'IwLDA'+'sMCw1Ij4'+'NCiA'+'gICAgI'+'CAgICAg'+'ICAgICAg'+'ICAgICA'+'gI'+'CA'+'gICAgICA'+'gPENvbn'+'RlbnRQcm'+'VzZW50ZX'+'Ig'+'TWFyZ2lu'+'P'+'SI1I'+'i'+'BDb250Z'+'W'+'50U2'+'91cmNlP'+'SJIZ'+'W'+'FkZXIiIF'+'JlY'+'29nbml6'+'ZXNBY2'+'Nlc3NLZX'+'k9IlRyd'+'WUiLz4N'+'Ci'+'AgI'+'CAg'+'ICAgICA'+'gICA'+'gICA'+'gICAgICA'+'gICAgI'+'CA8L'+'0Jvcm'+'R'+'lcj4N'+'Ci'+'AgIC'+'AgIC'+'AgICAg'+'ICA'+'gICA'+'gICAg'+'ICAgIC'+'A'+'gICA8Qm9'+'y'+'ZGVyIEd'+'yaWQuUm'+'93PSIx'+'IiBCb'+'3JkZX'+'J'+'UaG'+'lja25lc'+'3M9I'+'jEiIEJvc'+'mRlckJ'+'ydXNoPSI'+'jM'+'0UzRTQyI'+'iB'+'Db3JuZX'+'JSYWR'+'pdXM9I'+'j'+'M'+'iIEJhY'+'2tn'+'cm'+'91bm'+'Q'+'9'+'IiMy'+'NTI1MjY'+'iP'+'g0KICAg'+'ICAg'+'IC'+'AgIC'+'Ag'+'ICA'+'gICAg'+'ICAgICA'+'g'+'ICA'+'gI'+'CAgICA8Q'+'2'+'9udGVudF'+'ByZ'+'XNlbnRlc'+'iB'+'NYXJn'+'a'+'W49Ij'+'EwIiAvP'+'g0K'+'ICAgI'+'CAgIC'+'Ag'+'IC'+'AgIC'+'AgICAgI'+'CAgICAg'+'ICA'+'g'+'IDwvQm9y'+'ZGV'+'yPg0KIC'+'AgIC'+'AgIC'+'AgICAgIC'+'AgIC'+'AgICAgI'+'CAgP'+'C9Hcmlk'+'Pg0K'+'ICAgIC'+'AgICAg'+'ICA'+'gICAgICA'+'gICA8L'+'0NvbnRyb'+'2xUZW1w'+'bGF0ZT4N'+'CiAgI'+'CAgI'+'C'+'AgI'+'CA'+'g'+'ICAg'+'ICA8L'+'1NldHRl'+'ci5'+'WYWx1ZT4'+'N'+'CiAg'+'ICAgI'+'CAgI'+'CAgIDwvU'+'2V0dGV'+'yPg0'+'KIC'+'AgICAgI'+'CA8L1N0e'+'WxlPg'+'0KDQo'+'gICAgICA'+'gIDwhLS0'+'gU3'+'R5'+'b'+'GUgY2h'+'vIFJ'+'hZGl'+'vQnV0dG9'+'uIChQc'+'m9kdWN0'+'KSAtL'+'T4NC'+'iAgICAgI'+'CAgP'+'FN0eWxlI'+'Hg6S2V5'+'PSJQcm9k'+'dWN0UmF'+'kaW8iI'+'FRhcmd'+'ldFR5cG'+'U9Il'+'JhZ'+'GlvQ'+'nV0dG9u'+'Ij4NC'+'iAgIC'+'AgI'+'CAgI'+'CAgIDxT'+'ZXR0ZXI'+'gU'+'HJvc'+'GVydHk9'+'IkZv'+'c'+'mVnc'+'m9'+'1bm'+'QiIFZhbH'+'VlPSIjQ0'+'NDQ0NDIi'+'8+'+'DQogIC'+'AgICAg'+'ICAg'+'ICA8U2'+'V0dG'+'VyI'+'FBy'+'b3Blcn'+'R5PSJNYX'+'Jna'+'W4'+'iIFZ'+'hb'+'HVl'+'PSIwL'+'DUsMTAsN'+'SIvPg0KI'+'CAg'+'ICAgI'+'C'+'AgI'+'CAgPF'+'NldHRl'+'ciBQcm9'+'wZXJ'+'0eT0iRm9'+'udFNp'+'e'+'mUiI'+'FZhb'+'HVlPSIx'+'M'+'yIv'+'Pg0KIC'+'AgICAgIC'+'AgICAg'+'PFNldHR'+'l'+'ciBQcm'+'9wZXJ'+'0eT0i'+'Rm9udF'+'dlaW'+'dodCIgVm'+'FsdWU9I'+'k5v'+'cm1h'+'bCIvP'+'g0KICAgI'+'CAg'+'ICAgI'+'CAgP'+'F'+'Nld'+'HRlciB'+'Qcm9w'+'ZXJ0eT0i'+'R3J'+'vd'+'XBOYW1'+'lIiBWYWx'+'1ZT0'+'iT'+'2Z'+'maW'+'NlVmVy'+'c2lvbiIv'+'Pi'+'A'+'8IS0tIFF'+'1YW4gdH'+'Lh'+'u41uZzo'+'gR3JvdXA'+'gY2'+'h1bmcgx'+'JHhu4Mg'+'Y2jhu4k'+'gY2jhu4'+'1uIDEgLS'+'0+DQog'+'ICAgICA'+'gICAgI'+'CA8U2V0'+'dG'+'VyIFB'+'yb3'+'BlcnR5'+'PSJDd'+'XJ'+'zb3IiIF'+'ZhbHVlPS'+'JIYW5kI'+'i8'+'+DQogICA'+'g'+'IC'+'A'+'gICAgICA'+'8U3R'+'5'+'bGUuVHJp'+'Z2dlcnM+'+'DQog'+'ICAgICA'+'gICAg'+'IC'+'A'+'gICAgPF'+'RyaWdnZX'+'IgUHJ'+'vcGVydH'+'k9I'+'kl'+'z'+'Q2hlY2'+'tl'+'ZCIg'+'V'+'mF'+'sdWU9Il'+'Ry'+'dW'+'UiPg0K'+'IC'+'AgICA'+'gICA'+'gICAgIC'+'AgI'+'CA'+'gICA'+'8U2V0dGV'+'y'+'IFBy'+'b3Blcn'+'R5PSJG'+'b3J'+'lZ'+'3JvdW5kI'+'iBWYW'+'x'+'1ZT'+'0iIzAwQT'+'RFRiIvPg'+'0KI'+'CAgICAg'+'ICAgICA'+'gIC'+'AgICA'+'gICA'+'8U2V0dGV'+'yI'+'FByb3Bl'+'c'+'nR'+'5PS'+'JGb2'+'50V2VpZ2'+'h0IiBW'+'YW'+'x1ZT'+'0iQm'+'9sZCIvP'+'g0K'+'ICAgI'+'CAg'+'ICAgICA'+'gI'+'C'+'AgIDwv'+'V'+'HJpZ2d'+'lcj4NCiA'+'g'+'ICAgI'+'CAgICA'+'gICAgIC'+'A8'+'VHJpZ2'+'dlc'+'iBQcm9wZ'+'XJ'+'0eT0iS'+'XNNb'+'3VzZU92Z'+'XIiIFZhb'+'HVl'+'PSJUc'+'nVlIj'+'4NCiA'+'g'+'ICAgI'+'C'+'Ag'+'ICAgICAg'+'ICAgICA'+'gPF'+'NldHRl'+'ciB'+'Qcm9wZ'+'XJ0eT'+'0iR'+'m9'+'yZ'+'Wd'+'yb3'+'VuZCI'+'gVm'+'FsdWU'+'9'+'IiN'+'G'+'RkZGRkY'+'iL'+'z'+'4NCi'+'AgICAgI'+'CA'+'gICAgI'+'CAgICA8L'+'1R'+'yaWdnZXI'+'+'+'DQogICA'+'gICAgIC'+'AgIC'+'A8L'+'1N0eW'+'xlLl'+'RyaW'+'dn'+'ZX'+'J'+'z'+'Pg0'+'KICAgIC'+'AgIC'+'A8L1N0'+'eWxl'+'Pg0'+'KDQog'+'ICAgICAg'+'IDwhLS'+'0gU3R'+'5bGU'+'gY2'+'hvIFJhZ'+'Gl'+'vQn'+'V0dG9uIC'+'hPcHRpb'+'24gbm'+'j'+'h'+'u'+'48g'+'Y'+'sOqbiB0'+'csOh'+'aSkgLS0'+'+DQog'+'ICAgICA'+'gIDxTdHl'+'sZS'+'B4Ok'+'t'+'leT0iT'+'3'+'B0aW9uU'+'mFka'+'W'+'8iI'+'FRhc'+'md'+'ldFR'+'5cGU9'+'I'+'lJhZG'+'lvQ'+'nV0d'+'G9'+'uI'+'j4NC'+'iAgICAgI'+'CAgICAgI'+'DxTZXR'+'0ZXIgUH'+'J'+'vcGVydH'+'k9IkZ'+'vcmVncm'+'91bmQiIF'+'Zhb'+'HVlPSIjR'+'ERERERE'+'Ii8+DQog'+'ICAgICAg'+'ICAgI'+'CA8U2'+'V0'+'dGV'+'yIF'+'B'+'y'+'b3'+'BlcnR5'+'PSJNYXJ'+'naW4iIFZ'+'hb'+'HVlPSI'+'wLDMsM'+'CwzIi8+D'+'QogICAg'+'ICA'+'gIC'+'AgIC'+'A8U2V0'+'dGVy'+'IFByb3'+'BlcnR'+'5PSJ'+'Gb2'+'50U2l'+'6Z'+'SIgVmFsd'+'WU9I'+'jE'+'yIi8+D'+'Q'+'ogICAgIC'+'AgICAgI'+'C'+'A8U2V'+'0dGVyIFB'+'yb3Bl'+'cnR5P'+'SJDdXJz'+'b3I'+'iIFZ'+'hbHV'+'lPSJIYW'+'5kIi8+'+'DQogIC'+'AgIC'+'A'+'gIDwvU3R'+'5bGU+'+'D'+'QoNCiAgI'+'C'+'AgICAg'+'PCEtL'+'SBTdHl'+'sZS'+'BjaG8g'+'QnV0dG9'+'uIENow61'+'uaCAtLT4'+'NCiAgICA'+'g'+'ICAgPF'+'N'+'0eWxlIF'+'Rhcm'+'dldFR5cG'+'U9IkJ1dH'+'RvbiI+DQ'+'ogICAgIC'+'AgIC'+'AgICA8'+'U2V0d'+'GVyIFB'+'yb3BlcnR'+'5PSJCY'+'W'+'Nr'+'Z'+'3J'+'vdW5'+'kI'+'i'+'BWYWx1ZT'+'0iIzA'+'wN0FDQ'+'yIvPg0K'+'I'+'CA'+'gICAgIC'+'AgIC'+'AgPFNldH'+'RlciBQ'+'cm9wZX'+'J0eT0iR'+'m9yZWdy'+'b3VuZC'+'IgVmF'+'sdWU9Ild'+'oaXR'+'lIi8+DQ'+'o'+'g'+'ICAgICAg'+'IC'+'Ag'+'ICA8U2V0'+'dG'+'VyI'+'FByb'+'3'+'Blcn'+'R5PSJ'+'Gb250V2V'+'pZ2h0Ii'+'BWYWx1'+'ZT0i'+'Qm9sZCI'+'vPg0'+'KICAgI'+'CA'+'gICAgICA'+'gPFN'+'ldHRlci'+'BQcm9w'+'ZXJ0'+'eT0iRm9u'+'d'+'FNpemUiI'+'FZ'+'hbHVl'+'PSIxNCI'+'vPg0'+'KIC'+'AgICAgI'+'CAgI'+'CAgP'+'FN'+'ld'+'HR'+'lciBQcm9'+'wZXJ0eT'+'0iUGFkZ'+'GluZyIgV'+'mFsdWU9I'+'jEwLDU'+'i'+'L'+'z4NCi'+'AgIC'+'AgI'+'CA'+'gICAgI'+'DxT'+'ZXR0ZXIg'+'UH'+'Jvc'+'GVydHk9'+'IkJvcm'+'R'+'lclRoa'+'WNrbmV'+'zcyI'+'gV'+'mF'+'s'+'d'+'WU9Ij'+'Ai'+'L'+'z4'+'N'+'CiAgICAg'+'I'+'CAgICAgI'+'D'+'xTZX'+'R'+'0ZXI'+'gUHJvcGV'+'ydHk'+'9IlRlbXB'+'sYX'+'RlIj4'+'NCiAgI'+'C'+'A'+'g'+'ICAgIC'+'AgICA'+'g'+'IC'+'A8'+'U2V0d'+'GVyLlZh'+'bHVlPg0'+'KICAgICA'+'gICAgIC'+'AgICAgI'+'CAgICA'+'8Q29udH'+'J'+'vbFRlbXB'+'sYXRlIF'+'Rhcmdld'+'FR5cG'+'U9IkJ1d'+'HRvbiI+'+'DQo'+'gICA'+'gICAgI'+'CAgICA'+'g'+'ICAgIC'+'AgI'+'CAg'+'ICA8'+'Qm9yZG'+'VyIEJ'+'hY'+'2tncm91'+'bm'+'Q9I'+'ntUZW1w'+'bGF'+'0ZUJpbm'+'R'+'pbmcgQ'+'mFja2d'+'yb'+'3VuZH0iI'+'ENv'+'cm5lclJ'+'hZGl1'+'cz0iNCI+'+'DQo'+'gICAgI'+'CAgI'+'CAgICAg'+'ICAgIC'+'AgICAg'+'ICAgI'+'CA'+'gPENvbn'+'RlbnRQ'+'cmV'+'zZW'+'50ZX'+'IgS'+'G9yaXpvb'+'nRhbEFs'+'a'+'WdubW'+'VudD0i'+'Q2'+'VudGVyI'+'iBWZX'+'J0aWNh'+'bEF'+'saWdubW'+'V'+'udD0i'+'Q2VudGVy'+'Ii8+DQo'+'gICA'+'gIC'+'AgICAgI'+'CAgI'+'C'+'AgIC'+'AgIC'+'AgI'+'CA'+'8L0J'+'vcmRlcj4'+'NCiA'+'gICAgI'+'CAgICAg'+'ICAgICAg'+'ICAgP'+'C9Db25'+'0cm'+'9s'+'VG'+'VtcGxh'+'dGU+DQ'+'o'+'gICAgI'+'CAgI'+'CAgICAgI'+'CAgPC9'+'TZX'+'R0'+'Z'+'XIuVmFs'+'dWU+DQog'+'IC'+'AgICAgIC'+'AgIC'+'A8L'+'1Nl'+'dHRlcj4'+'NCiAgI'+'CAgI'+'CAgICAg'+'IDx'+'TdHlsZS'+'5'+'UcmlnZ'+'2Vy'+'cz4NCi'+'AgICAgIC'+'AgI'+'CAgICAgI'+'CA8VHJ'+'pZ2dl'+'ciBQc'+'m9wZX'+'J0eT0i'+'SXNNb'+'3VzZU9'+'2ZX'+'IiIF'+'ZhbH'+'VlP'+'SJUcnV'+'l'+'Ij'+'4NCiAgIC'+'AgICAg'+'ICAgICAg'+'I'+'CAg'+'ICAgPF'+'NldHRlci'+'BQcm9'+'w'+'Z'+'XJ0'+'eT0iQmFj'+'a2'+'d'+'yb3VuZC'+'I'+'gVmFsd'+'WU9'+'IiM'+'wMD'+'k3RkIiLz'+'4NCiAgIC'+'AgICA'+'g'+'ICAgIC'+'AgICAgIC'+'AgPFN'+'ldHRlciB'+'Qcm9wZXJ'+'0e'+'T0iQ3Vy'+'c29yIiB'+'WYWx1ZT'+'0iS'+'G'+'FuZCIvPg'+'0KICAg'+'ICAg'+'ICAgICAg'+'ICAgI'+'DwvVHJpZ'+'2dlcj4N'+'CiAgICAg'+'IC'+'AgICAgI'+'CAgICA'+'8VHJ'+'pZ2dl'+'ciBQcm9'+'wZXJ'+'0eT0'+'iSXNF'+'bmFib'+'GVkIiBWY'+'Wx1'+'ZT0iRmFs'+'c2UiPg'+'0KICA'+'gI'+'C'+'AgIC'+'AgIC'+'AgIC'+'A'+'gICAgI'+'C'+'A8U2'+'V0dGV'+'yIFByb3B'+'lcnR5P'+'SJCYWN'+'r'+'Z3'+'Jvd'+'W5kIiB'+'W'+'YWx1'+'ZT0iI'+'zU1NTU1'+'NS'+'IvPg0KIC'+'AgICA'+'gICAgICA'+'gIC'+'AgICAgI'+'CA8U2V0'+'d'+'G'+'V'+'yI'+'FByb3B'+'lcnR'+'5P'+'SJGb3'+'JlZ3Jvd'+'W5kIiBW'+'YWx'+'1ZT0i'+'I0FBQUF'+'BQSIv'+'Pg0KIC'+'Ag'+'ICAg'+'ICAgICA'+'g'+'ICAgIDw'+'vVHJpZ2d'+'lcj4'+'NCiA'+'g'+'ICAgIC'+'AgI'+'CAgID'+'wvU3R5'+'bGUu'+'V'+'HJpZ2d'+'lcnM+DQ'+'ogICAgIC'+'AgID'+'wvU3R'+'5bGU+DQ'+'ogICAgPC'+'9Xa'+'W5kb3cu'+'U'+'mVzb3'+'VyY2'+'VzPg'+'0KDQ'+'ogIC'+'AgPEdy'+'aWQgTWF'+'yZ2lu'+'PSIxNSI'+'+DQogICA'+'gI'+'C'+'AgID'+'xH'+'cmlkLkNv'+'bHV'+'tbkRlZ'+'ml'+'ua'+'XRpb25zP'+'g0K'+'ICAgICA'+'gICA'+'gICAgP'+'ENvbHVtb'+'kRlZmlu'+'aXRpb2'+'4gV2lk'+'dGg9Ij'+'I2'+'MCI'+'vPiA8IS0'+'tIEPh'+'u5l0I'+'E1l'+'bnUgVH'+'LDoWkgLS'+'0+'+'DQogIC'+'Ag'+'ICAgICA'+'gICA8Q29'+'sd'+'W1'+'uRGVmaW5'+'p'+'dGlvb'+'i'+'BX'+'aWR'+'0aD0iM'+'j'+'AiLz4gID'+'whLS0'+'gS2'+'hv4b'+'qjbmcgY8'+'OhY2ggLS'+'0+DQog'+'ICA'+'g'+'IC'+'AgI'+'CAgICA8'+'Q29'+'sd'+'W1u'+'RGVmaW5'+'pdG'+'l'+'vb'+'iBXa'+'WR0aD0'+'iKiIvPiA'+'gIDwhLS'+'0g'+'Q+'+'G'+'7mXQgTu'+'G'+'7mWkgRHV'+'u'+'ZyBQ'+'a'+'OG6o'+'2kgLS0+D'+'QogI'+'C'+'AgICAg'+'IDwvR3'+'Jp'+'ZC5Db2x1'+'bW5EZ'+'WZpbml'+'0aW9ucz4'+'NCg0KIC'+'Ag'+'ICAgICA'+'8IS0t'+'ID09P'+'SBD4bu'+'YVCBU'+'UsOBS'+'To'+'gQ+G6pF'+'UgSMOMTk'+'ggPT09I'+'C0tPg0K'+'ICAg'+'I'+'CAgICA8U'+'3RhY2t'+'Q'+'YW'+'5lb'+'CBHcml'+'kL'+'kNv'+'bHVt'+'bj0iM'+'CI+DQog'+'IC'+'AgICAg'+'ICA'+'gI'+'CA'+'8IS'+'0tI'+'ExvZ28'+'gLyB'+'UacO'+'qdSDEk'+'eG7gS'+'AtLT4N'+'CiAgIC'+'AgICAg'+'ICAgI'+'DxCb3'+'JkZ'+'XIgQmFja'+'2dyb'+'3VuZD'+'0iIzJE'+'MkQzMCI'+'gQ2'+'9yb'+'mVyUmFk'+'a'+'X'+'VzP'+'SI1IiBQ'+'YWRk'+'a'+'W5nPSI'+'xMCIg'+'T'+'WFyZ2'+'luPSIwL'+'DAsMCwx'+'NS'+'I+DQog'+'ICAgI'+'CAgIC'+'AgICAgIC'+'AgPFN0YW'+'Nr'+'U'+'GFuZWw'+'+'+'DQ'+'ogICA'+'gICAg'+'ICAgIC'+'AgI'+'CA'+'gICAg'+'ID'+'xUZXh0Q'+'mx'+'v'+'Y2sgV'+'GV4'+'dD'+'0iSFX'+'hu7'+'JOSCBE'+'xq/GoE5'+'H'+'IiB'+'Gb3J'+'lZ3'+'JvdW'+'5kPSIj'+'MDBB'+'NEVGIi'+'BGb250V2'+'VpZ2h0'+'PSJCb2'+'xkI'+'iBGb25'+'0U2l6ZT'+'0iMT'+'giIEhvc'+'ml6b250Y'+'WxBbGlnb'+'m1lb'+'nQ9IkNlb'+'nRlci'+'Iv'+'P'+'g'+'0KICAgI'+'CAgI'+'CA'+'gICAgIC'+'AgIC'+'AgICA'+'8VGV'+'4dEJs'+'b2NrIFR'+'leHQ'+'9IkR'+'FVkVMT1'+'BFU'+'iIgRm9y'+'Z'+'Wd'+'yb'+'3VuZD'+'0iV2hp'+'dGUiIEZv'+'bnRXZWl'+'naHQ9Ik'+'xpZ'+'2h0IiBG'+'b2'+'50U'+'2l6ZT'+'0i'+'MTQ'+'iIEhvcml'+'6b250'+'YW'+'xBb'+'Glnbm'+'1lb'+'nQ9IkNlb'+'nRl'+'ciIgTWFy'+'Z2luPSI'+'wL'+'C0y'+'LDAsMC'+'I'+'vPg0KI'+'CAgICAg'+'I'+'CAg'+'IC'+'AgICA'+'gICAgIC'+'A8SW'+'1hZ2Ug'+'eD'+'p'+'OYW1lPS'+'J'+'pbWFnZS'+'I'+'g'+'SGVpZ2'+'h0PS'+'I2MC'+'IgV2'+'lkdGg'+'9IjYwI'+'iBTb3VyY'+'2U9Imh0'+'d'+'HBzOi8v'+'aW1hZ'+'2VzNS5'+'hbH'+'BoYWN'+'vZGVycy'+'5jb'+'20v'+'MT'+'M2L3R'+'odW1iL'+'TE5MjA'+'tMTM2O'+'TMyN'+'C5wbmc'+'iIE1hcm'+'dpbj0'+'iM'+'CwxMC'+'wwLDAiIF'+'Zpc2l'+'iaWxpdHk'+'9IkhpZG'+'RlbiIv'+'Pg0K'+'I'+'C'+'A'+'gIC'+'A'+'g'+'ICAgIC'+'A'+'gICAg'+'IDwvU3'+'RhY'+'2tQYW5'+'lbD4N'+'CiAgI'+'CAgIC'+'Ag'+'ICAgI'+'DwvQm9yZ'+'GVyPg'+'0KDQo'+'gICA'+'gIC'+'AgICAg'+'ICA8IS0t'+'I'+'Etp4bq/b'+'iB0csO6Y'+'yAtLT4NC'+'iAgIC'+'AgICAgI'+'CAg'+'IDxHcm'+'91cEJv'+'eCB4O'+'k5hb'+'WU9I'+'mdyb3'+'VwQm9'+'4QXJja'+'C'+'IgS'+'GVhZGVyP'+'SIx'+'LiBLaeG6'+'v24gVHLD'+'umMgKE'+'Fy'+'Y2'+'hpdG'+'V'+'jdH'+'VyZS'+'kiPg'+'0KICAgI'+'CAgI'+'CAgI'+'CAgICA'+'gIDxTdGF'+'ja1Bhbm'+'Vs'+'Pg0KICAg'+'ICAgI'+'CAg'+'I'+'CAgIC'+'AgICA'+'gI'+'CA8U'+'mFkaW9'+'CdX'+'R'+'0b2'+'4geDpOY'+'W1l'+'P'+'SJyY'+'WRpb'+'0J1dHRvb'+'kFyY2g2N'+'CIg'+'U3R5bGU9'+'Int'+'Td'+'GF0a'+'WNSZXNv'+'dX'+'JjZSBP'+'cHRpb'+'25SYWR'+'pb30'+'iIEN'+'vbn'+'RlbnQ9'+'In'+'g2N'+'CAoNj'+'QtYml0KS'+'A'+'t'+'IEtodX'+'nDqm4g'+'ZMO5bmci'+'IElzQ'+'2'+'hlY'+'2tlZ'+'D0iVHJ'+'1ZS'+'IvPg0'+'KICAgI'+'CA'+'gIC'+'AgICAg'+'ICA'+'g'+'ICAgICA'+'8Um'+'FkaW9Cd'+'XR0b24ge'+'DpOY'+'W1'+'lPSJyYW'+'R'+'pb0J1dHR'+'vb'+'kFyY2gz'+'M'+'iIgU'+'3R5bGU'+'9I'+'ntT'+'dG'+'F0aWNSZX'+'Nv'+'dXJjZSBP'+'cH'+'Rpb25SY'+'WRpb3'+'0'+'iIEN'+'vbnR'+'lbnQ9'+'Ing'+'4NiA'+'o'+'MzItYml'+'0KS'+'IvPg'+'0KICAg'+'ICAgICA'+'gICAgICA'+'gIDw'+'vU3RhY2'+'tQYW'+'5'+'lbD4NCi'+'AgI'+'CAgIC'+'AgICA'+'gIDwvR'+'3JvdXBCb'+'3g+D'+'QoNCiAg'+'ICAg'+'IC'+'A'+'g'+'IC'+'AgIDwhL'+'S0gT'+'G/huqFpI'+'Edp4bq'+'l'+'eSB'+'QaMO'+'pcCAtLT'+'4NCiA'+'g'+'ICAgICAg'+'ICAgIDx'+'Hc'+'m'+'91'+'cEJ'+'veCB4O'+'k'+'5hbWU'+'9Imdy'+'b3Vw'+'Qm94TG'+'ljZW'+'5zZV'+'R5cG'+'UiIE'+'hlYWRlcj'+'0iMi4gTG'+'/hu'+'qFpI'+'Edp4b'+'q'+'le'+'S'+'BQaMO'+'p'+'cC'+'AoTG'+'ljZW5z'+'ZSkiPg'+'0KICAg'+'ICAgIC'+'AgIC'+'AgI'+'CA'+'gIDx'+'TdGFja1B'+'hb'+'mVsPg0'+'KICAgIC'+'AgICAgI'+'CA'+'gICAgIC'+'AgICA8'+'UmF'+'kaW9CdX'+'R0b2'+'4geDpOYW'+'1l'+'PSJ'+'y'+'Y'+'WRpb0J1'+'dHRvblZ'+'v'+'bHV'+'t'+'ZSIg'+'U3R5bGU9'+'IntTdGF0'+'aWNS'+'ZXNvdXJ'+'jZSBPcHR'+'pb25SYW'+'Rpb30iIE'+'Nv'+'bnRlbnQ9'+'IlZvb'+'HVtZSAoV'+'kwpIiBJ'+'c0No'+'ZW'+'NrZW'+'Q9IlRydW'+'UiLz'+'4NC'+'iAgICAg'+'ICAgI'+'CAgICA'+'gICAgICA'+'g'+'P'+'FJh'+'ZG'+'lvQnV'+'0'+'dG9uI'+'H'+'g6TmFtZT'+'0icmFk'+'aW9'+'CdXR0b2'+'5S'+'ZXR'+'ha'+'Ww'+'iIFN0'+'eWxlPSJ7'+'U3RhdG'+'ljUmVz'+'b3'+'VyY2U'+'gT'+'3B0a'+'W9uUmFka'+'W99IiBDb'+'250ZW50P'+'SJSZ'+'XRhaWwgK'+'EL'+'DoW4gbOG'+'6uyk'+'iL'+'z4NC'+'iAgI'+'CA'+'gI'+'CAgI'+'CAgIC'+'AgICA'+'8L1N0'+'Y'+'WNrUGF'+'uZWw+DQo'+'gICAgICA'+'gICAgICA'+'8L'+'0dy'+'b3VwQ'+'m94'+'P'+'g0'+'KD'+'QogIC'+'AgICAgIC'+'AgICA8I'+'S'+'0tIEN'+'o4bq/IM'+'SQ'+'4buZ'+'I'+'C0'+'t'+'P'+'g0K'+'ICAgICAg'+'ICAgIC'+'AgPEd'+'yb3Vw'+'Qm'+'94'+'IHg6TmF'+'t'+'ZT'+'0iZ3J'+'vdXBCb'+'3hNb'+'2RlIiB'+'IZWFkZXI'+'9IjMuIE'+'No4b'+'q/IMSQ4b'+'uZIC'+'hNb'+'2R'+'lKS'+'I+DQogIC'+'AgIC'+'AgICA'+'g'+'ICAgIC'+'AgP'+'FN0YW'+'NrUGF'+'uZ'+'Ww+D'+'QogI'+'CAgI'+'CAgICAgI'+'CAg'+'ICAgIC'+'AgIDxS'+'YWRpb0J1'+'dHRvbiB'+'4Ok5hbWU'+'9In'+'JhZGlvQn'+'V0dG9u'+'SW5zdGF'+'sbC'+'IgU'+'3R5bG'+'U9'+'Int'+'TdG'+'F0'+'aWNS'+'ZX'+'NvdX'+'J'+'jZSBPc'+'HR'+'pb25'+'SY'+'WRp'+'b30iI'+'ENvbnRl'+'bnQ'+'9Ikl'+'u'+'c3RhbG'+'wgKEP'+'D'+'oGkgxJHh'+'urd0IG'+'5'+'nYXk'+'pI'+'iBJc0No'+'ZWNrZ'+'WQ'+'9IlRydWU'+'iLz4NC'+'iAgICAgI'+'CAgI'+'CAgIC'+'AgICAgIC'+'AgPFJh'+'ZG'+'l'+'vQnV0dG9'+'uIHg6T'+'m'+'FtZT0ic'+'mFkaW9C'+'dXR0'+'b25Eb3d'+'ub'+'G9hZ'+'CIgU3R5b'+'G'+'U9IntT'+'dGF0aWN'+'SZX'+'Nv'+'dXJjZSB'+'PcHRpb'+'25SYW'+'Rpb30i'+'IENvbn'+'Rlb'+'nQ9IkR'+'vd25sb2'+'FkI'+'ChU4bqj'+'aSBi4buZ'+'I'+'GPDoGk'+'pIi'+'8+DQogIC'+'Ag'+'IC'+'AgICAgIC'+'AgICAgP'+'C9TdGF'+'ja1Bh'+'b'+'mVs'+'Pg'+'0KICAgI'+'CAgICAgI'+'CAg'+'PC'+'9'+'Hcm91c'+'EJveD'+'4NCg0KIC'+'A'+'gICAgICA'+'gICA'+'gPCEt'+'LSB'+'O'+'Z'+'8O'+'0'+'biBOZ'+'+'+'G7ryAtL'+'T4NCiA'+'gIC'+'A'+'gICAgIC'+'AgIDx'+'Hc'+'m91c'+'EJveCB4'+'Ok5hbW'+'U9Imdyb3'+'VwQ'+'m'+'9'+'4TG'+'Fu'+'Z3VhZ'+'2UiIEh'+'l'+'Y'+'WR'+'l'+'cj0iN'+'C4'+'gTmf'+'DtG4g'+'Tmfhu6'+'8gKEx'+'hbm'+'d1YWdl'+'KSI+DQ'+'o'+'gICAgI'+'CAgICA'+'gI'+'C'+'Ag'+'ICA'+'gPFVu'+'aWZvcm1'+'HcmlkI'+'ENv'+'bHVt'+'bn'+'M9IjI'+'iPg'+'0KICAgIC'+'AgICAgIC'+'AgIC'+'AgICAgI'+'CA8Um'+'FkaW9CdX'+'R0b'+'2'+'4geD'+'pOYW1l'+'PSJyY'+'WRpb0J1'+'dHR'+'vbkV'+'uZ2xpc2g'+'iIFN0e'+'WxlPS'+'J7U'+'3'+'Rh'+'dGljU'+'mVzb3Vy'+'Y2Ug'+'T3B0a'+'W9u'+'UmFka'+'W99IiBDb'+'250ZW'+'50P'+'SJFbmdsa'+'XNoI'+'iBJc0No'+'ZW'+'NrZWQ9I'+'lRydWUiL'+'z4NC'+'iAgICA'+'gICAgICA'+'gI'+'CA'+'gICAgICA'+'gP'+'FJhZ'+'Glv'+'QnV0dG'+'9uIH'+'g6TmFtZT'+'0icm'+'FkaW9Cd'+'XR0b'+'2'+'5WaW'+'V0bm'+'F'+'tZX'+'NlIi'+'BTdHlsZT'+'0i'+'e1N'+'0YXRpY'+'1Jl'+'c291cmN'+'lIE9w'+'dGlv'+'blJhZG'+'lvfS'+'IgQ2'+'9u'+'dGVu'+'dD0'+'iVGn'+'hur9uZ'+'yBWaeG7h'+'3QiLz4N'+'C'+'iAgICAg'+'ICAgIC'+'AgICAgI'+'CAg'+'ICAgPFJh'+'ZGlvQnV0'+'dG9uI'+'H'+'g'+'6T'+'mFtZ'+'T0icmF'+'ka'+'W9C'+'dXR0b'+'2'+'5KYX'+'BhbmVzZS'+'IgU'+'3R5bGU9I'+'n'+'tTdGF0'+'aWNSZXN'+'vdX'+'JjZS'+'BPcHRpb2'+'5SYWRp'+'b30iI'+'ENvbnRlb'+'nQ9Ikph'+'cGF'+'u'+'Z'+'XNlIi8+'+'DQ'+'og'+'IC'+'AgICA'+'gI'+'CAg'+'IC'+'AgICAg'+'IC'+'AgIDxSY'+'WRpb0J'+'1dHRvbiB'+'4'+'Ok5hbWU'+'9I'+'nJhZGl'+'vQnV0dG'+'9u'+'S29yZ'+'W'+'FuIiBTdH'+'lsZT0ie1'+'N0YX'+'RpY'+'1Jlc2'+'91'+'cm'+'NlIE9w'+'d'+'G'+'lvblJhZG'+'lvfS'+'Ig'+'Q29ud'+'GVudD0'+'iS29y'+'ZWFuIi'+'8+DQogIC'+'AgICAg'+'I'+'C'+'AgICAg'+'ICAgI'+'CAgIDxSY'+'WRpb0J'+'1dHR'+'vb'+'i'+'B4'+'O'+'k5hbWU'+'9In'+'Jh'+'ZGl'+'vQn'+'V0'+'dG9uQ2h'+'pb'+'mVzZSIg'+'U'+'3R5b'+'GU9Int'+'TdG'+'F0aWNSZ'+'XNv'+'dXJjZSBP'+'cHRpb25S'+'YWRp'+'b30iIEN'+'vbnR'+'lbn'+'Q9Ik'+'NoaW'+'5lc'+'2'+'UiLz4NC'+'iAgICAgI'+'CA'+'gICAgICA'+'gICAgI'+'CAgPFJhZ'+'GlvQnV0d'+'G9uIHg'+'6TmF'+'tZT0icmF'+'kaW9CdX'+'R0b25'+'GcmVuY2'+'giIFN0eW'+'x'+'l'+'PSJ7U3'+'RhdGljU'+'mVzb3VyY'+'2UgT'+'3B0aW9uU'+'m'+'F'+'kaW99I'+'iBDb250'+'ZW'+'50'+'PSJ'+'GcmVuY2'+'g'+'iLz4NC'+'iAgICAg'+'ICAg'+'I'+'CAgICAg'+'ICAgI'+'CAgPFJhZ'+'GlvQnV'+'0dG9uIH'+'g'+'6TmF'+'t'+'ZT0'+'icmFk'+'aW9CdXR'+'0b25TcGF'+'uaX'+'No'+'IiBTdHl'+'sZT0i'+'e1N0YX'+'RpY1Jlc2'+'91cmNlIE'+'9wd'+'GlvblJ'+'hZGl'+'v'+'fSI'+'gQ29ud'+'GVud'+'D0iU3Bh'+'bmlzaCI'+'vPg0K'+'ICAgI'+'CAgICA'+'gIC'+'AgICAg'+'ICAgICA'+'8UmFka'+'W9CdX'+'R0b24g'+'eDpOYW1'+'lPS'+'J'+'yYWRpb'+'0J1dHRvb'+'k'+'dlcm1hb'+'iIgU3R5b'+'GU'+'9Int'+'TdGF0aWN'+'S'+'ZXNv'+'dX'+'Jj'+'ZSBPcHR'+'p'+'b25SYWR'+'pb'+'30iIEN'+'v'+'bnRlbnQ9'+'I'+'kdlcm'+'1hbiIv'+'Pg0KIC'+'AgICA'+'gICAgIC'+'AgI'+'CAgICAgI'+'CA8UmF'+'kaW9Cd'+'XR0b24g'+'eDp'+'OY'+'W1'+'lP'+'SJyYWR'+'pb0J1'+'dHR'+'vbkhpb'+'mRpIiBT'+'dHlsZT0i'+'e1N0YXRp'+'Y'+'1Jlc29'+'1cmNl'+'IE9w'+'d'+'Gl'+'vblJhZ'+'GlvfSIgQ'+'29'+'udGVud'+'D0iSGlu'+'ZGki'+'Lz4'+'NCi'+'AgICAg'+'ICA'+'gI'+'CAgICAg'+'ICA'+'8L1Vu'+'aWZvcm1H'+'cm'+'lkPg0'+'KICA'+'gICAgI'+'CAgICAg'+'PC9Hc'+'m'+'91cEJ'+'ve'+'D4NCg0'+'KICAgI'+'CA'+'gICAg'+'ICA'+'gPCE'+'tL'+'SBOw7p0I'+'EjDoG5o'+'IMSQ4b'+'u'+'Zbmc'+'g'+'L'+'S0+DQog'+'ICAgICAg'+'ICAgI'+'CA8QnV0'+'d'+'G9uI'+'Hg6'+'TmF'+'tZT0iY'+'nV0dG9u'+'U3V'+'ibWl0IiB'+'Db250ZW5'+'0PSJC4bq'+'uVCDEkO'+'G6plUg'+'VEjh'+'u7BD'+'I'+'EhJ4b'+'uGT'+'iIg'+'SGVpZ2'+'h0P'+'SI0MC'+'IgTWFy'+'Z2lu'+'PSIwLDE'+'wLDAsMCI'+'gQmFja2'+'dyb3VuZ'+'D0'+'iIzEwN'+'0'+'Mx'+'MCIv'+'Pg0KICAg'+'ICAgICAg'+'ICAgDQog'+'ICAgICA'+'gICAgICA'+'8UHJvZ3'+'Jlc3NCY'+'XIgeDpOY'+'W1lPSJwc'+'m9n'+'cmVzc2'+'Jhci'+'IgSGV'+'pZ2h'+'0PSI'+'1IiBNY'+'XJnaW4'+'9Ij'+'As'+'MTA'+'sM'+'CwwIiBCY'+'W'+'NrZ3'+'J'+'vd'+'W5'+'kPSIjMzM'+'zMzMzIiB'+'C'+'b3JkZXJU'+'aG'+'lja25l'+'c3M9I'+'jAiIEZv'+'cmV'+'ncm91'+'bmQ9IiM'+'wME'+'E0R'+'UYi'+'Lz4N'+'CiAg'+'ICAgICA'+'gIC'+'AgIDxUZ'+'Xh0Qm9'+'4IHg6'+'TmFtZT0'+'idGV4dGJ'+'v'+'eCIgV'+'GV4dD0i'+'U+G6'+'tW4'+'gc8Og'+'bmcuLi4'+'iI'+'E'+'JhY'+'2tncm91'+'b'+'mQ9IlR'+'yYW5zc'+'G'+'FyZW50'+'Ii'+'BGb3JlZ'+'3J'+'vdW5'+'kPSIjQUF'+'BQ'+'UFBIiB'+'Cb'+'3Jk'+'ZXJU'+'aGlja25l'+'c3M9I'+'jA'+'iIFRleH'+'RX'+'c'+'mF'+'wcGluZz0'+'iV3Jh'+'cCIg'+'TWFyZ2'+'luPSI'+'w'+'LDUsMC'+'ww'+'IiBI'+'b'+'3Jpem'+'9udGFsQ2'+'9udGV'+'udEFsa'+'Wdu'+'bWVu'+'dD0iQ2V'+'udGV'+'yIiBJc'+'1J'+'l'+'YWRPbm'+'x5PS'+'JUcnVlIi'+'8+DQo'+'gICA'+'g'+'ICAgICAg'+'IC'+'ANC'+'iAgICA'+'gICAg'+'ICAg'+'IDxMYWJl'+'b'+'C'+'B4'+'Ok5hbWU'+'9Ikxpbms'+'xIiBIb'+'3Jpem'+'9'+'udGFsQ'+'W'+'xpZ2'+'5tZW5'+'0'+'PSJDZW50'+'ZXIiIE1h'+'cmdpbj0i'+'MCwxMCww'+'LDAiIE'+'N1cnNvc'+'j0iSG'+'F'+'uZCI+DQo'+'gICAg'+'ICAgICA'+'gIC'+'AgICA'+'g'+'PEh'+'5cGVybG'+'l'+'uay'+'BOYXZpZ'+'2'+'F'+'0ZVVya'+'T'+'0iaHR0c'+'HM6Ly9'+'ubGFjY'+'y5zaXRl'+'IiBGb3J'+'lZ3J'+'v'+'d'+'W5'+'kPSI'+'jMDBBN'+'EVGIiBU'+'ZXh'+'0RGVjb3'+'JhdGlvb'+'nM'+'9Ik5v'+'bmUiPg0K'+'IC'+'AgICA'+'gICAgIC'+'A'+'gI'+'CA'+'gICAgICA'+'8VGV4'+'dEJsb'+'2NrIFRl'+'eHQ9I'+'vC'+'fjJAg'+'bmxh'+'Y2Muc'+'2l0ZS'+'Iv'+'Pg0KICAg'+'I'+'CAgI'+'CA'+'gICA'+'gI'+'CAgID'+'wvS'+'HlwZ'+'XJsaW5r'+'Pg0KIC'+'AgICAg'+'ICAgICAg'+'P'+'C9MYWJl'+'b'+'D4NCiAgI'+'CAgICAgP'+'C9TdGFja'+'1Bhb'+'mV'+'s'+'Pg0KDQ'+'ogICAgI'+'C'+'AgID'+'whLS0gPT'+'09I'+'EPhu5hU'+'IFBI4'+'bqiS'+'TogREF'+'OSCBTw4'+'F'+'DS'+'CBPRkZJQ'+'0'+'UgPT09I'+'C'+'0t'+'Pg'+'0KICAgI'+'CAgIC'+'A8Qm9yZ'+'GV'+'yI'+'EdyaWQuQ'+'2'+'9'+'sdW'+'1uP'+'SIyIiBC'+'YWNrZ3J'+'vdW5kPS'+'IjMjU'+'yNTI2Ii'+'BDb3J'+'uZXJSY'+'WRpdX'+'M9IjUiI'+'EJvcm'+'Rl'+'ck'+'JydXNo'+'PSIjM0U'+'zRTQyIiB'+'Cb3J'+'kZXJUa'+'Glja25'+'lc3M9I'+'jEi'+'Pg0K'+'IC'+'AgICAgI'+'CAgI'+'C'+'AgP'+'Edya'+'WQ+DQogI'+'CAgICA'+'gICAgICA'+'gICA'+'gPEdyaWQ'+'uUm93RGV'+'maW5pd'+'Gl'+'vbnM+DQo'+'gICA'+'gICAgICA'+'gICAgIC'+'Ag'+'ICAgI'+'Dx'+'Sb3dE'+'ZWZpbml0'+'aW'+'9uI'+'E'+'hlaWdodD'+'0i'+'QXV0byIv'+'P'+'g0KI'+'CAgIC'+'AgIC'+'AgICA'+'gICAg'+'ICA'+'gICA8Um9'+'3'+'RGVm'+'aW'+'5pdGlvbi'+'BIZ'+'Wlna'+'HQ9IioiL'+'z4NCi'+'AgI'+'CAgI'+'CA'+'gICAgICA'+'gICAgICA'+'g'+'PFJ'+'vd0RlZ'+'mluaXRpb'+'24gSGVpZ'+'2h0P'+'SJ'+'B'+'dXRvIi'+'8+DQogIC'+'AgICAgIC'+'A'+'gICAg'+'ICAgPC9H'+'cmlkLlJv'+'d0RlZml'+'uaXRp'+'b2'+'5zPg0K'+'DQogIC'+'AgI'+'CAgICAg'+'ICAg'+'ICAgPC'+'E'+'tLSBI'+'ZWF'+'kZXIgU'+'Gjhu'+'q'+'NpIC'+'0tPg0KIC'+'A'+'gICAgIC'+'A'+'gICAgIC'+'Ag'+'IDxCb3J'+'kZX'+'IgQm'+'Fja2dyb'+'3VuZ'+'D0iIzJE'+'MkQz'+'MCIgUGFk'+'ZGl'+'uZz0i'+'MTUs'+'MTAiIEN'+'v'+'cm'+'5lclJ'+'hZGl1'+'cz0iNSw'+'1LDAs'+'MCI+DQ'+'ogICA'+'gI'+'CAgICAgI'+'CAgIC'+'AgIC'+'AgIDxUZ'+'Xh0'+'Qmx'+'vY2sgVG'+'V4dD0iQ0'+'jhu4'+'xOIFBI'+'S'+'cO'+'KT'+'iBC4b'+'qiTiBPRk'+'ZJQ0UgQ'+'+G6pk4gQ'+'8OASSDE'+'k'+'O'+'G6t'+'lQi'+'IEZv'+'bnRXZ'+'Wl'+'naHQ'+'9IkJvbG'+'QiIEZvb'+'nRTaXplP'+'S'+'IxN'+'SIgRm9y'+'ZWdyb3V'+'uZD0iI0Z'+'GRkZGRi'+'I'+'v'+'Pg0KICA'+'gICAg'+'ICAgICAg'+'I'+'CAg'+'IDw'+'vQ'+'m9'+'yZGVy'+'Pg0KDQo'+'gICAgICA'+'gICAgICA'+'gIC'+'AgPCEt'+'LSBEY'+'W5oIHP'+'DoWN'+'oI'+'GN14buZb'+'i'+'AtLT4N'+'CiAgICA'+'gICAgICA'+'gICAg'+'IC'+'A8'+'U2Nyb2x'+'sVm'+'lld2VyI'+'Edya'+'WQuUm'+'93'+'PSIxIiBW'+'ZXJ0'+'aWNh'+'bFN'+'jcm9sb'+'EJh'+'clZpc'+'2li'+'aWxpdHk'+'9IkF1'+'dG8'+'iIF'+'BhZ'+'GRpbmc9I'+'jE'+'1I'+'j4NCiA'+'gICA'+'g'+'IC'+'AgI'+'CAgI'+'C'+'AgICAgI'+'CAgPF'+'N0YWNr'+'U'+'GFu'+'ZWw+DQo'+'gIC'+'AgI'+'CAg'+'ICA'+'gI'+'CAgICAgI'+'CAgI'+'CAg'+'ICANC'+'i'+'AgI'+'CAgICAgI'+'CAg'+'ICAgIC'+'AgICA'+'gICA'+'gID'+'whLS0gT'+'W'+'ljcm9z'+'b2Z0'+'IDM2N'+'SAtLT'+'4NCiAg'+'ICA'+'gICAg'+'I'+'CAgI'+'CAg'+'ICAgICAg'+'ICAgIDx'+'Hcm91c'+'EJveCBIZ'+'WFkZX'+'I9I'+'k1pY3Jvc'+'29mdCA'+'zNjUgKE9'+'mZmlj'+'ZSAz'+'N'+'jUpIi'+'B'+'C'+'b3J'+'kZ'+'XJCcn'+'VzaD0i'+'I0ZGR'+'E'+'EyMzIz'+'IiBG'+'b3JlZ3J'+'vdW5k'+'PSIjRkY1'+'RT'+'VFIj4NC'+'iAgICAg'+'ICAgI'+'CAgICA'+'gICAgI'+'CAgICAg'+'I'+'CA'+'gICA8V3J'+'hcFBhbm'+'VsP'+'g0KICAgI'+'CAgICAg'+'IC'+'AgI'+'CAgICAgI'+'CAgI'+'CAgIC'+'Ag'+'ICAg'+'ICA8'+'U'+'mFka'+'W9Cd'+'XR'+'0b'+'24geD'+'p'+'OYW1'+'lPSJy'+'YWRpb0J1'+'dHR'+'vbjM2N'+'UhvbWUiI'+'FN0eWxlP'+'SJ7U3'+'RhdGl'+'jUmV'+'zb3Vy'+'Y2Ug'+'UHJ'+'vZHV'+'jdFJh'+'ZGlvfSI'+'gQ29u'+'dG'+'V'+'u'+'dD0'+'i'+'SG9'+'tZSA'+'oQ8OhIG5'+'ow6'+'J'+'uKS'+'IvP'+'g0KI'+'CAgI'+'C'+'Ag'+'ICAgICAg'+'ICA'+'gI'+'CAg'+'ICAg'+'IC'+'A'+'gICAgI'+'CAg'+'I'+'CA8UmF'+'ka'+'W9CdX'+'R'+'0b24g'+'eDpOY'+'W1lPS'+'JyYWRp'+'b0'+'J1dHRvb'+'jM2NUJ'+'1c2'+'l'+'uZXN'+'zIi'+'BTdHl'+'sZT0ie1'+'N0YXRpY1'+'Jlc2'+'91cm'+'NlI'+'FBy'+'b2R'+'1Y3RSYW'+'Rpb30i'+'IENvbn'+'RlbnQ9'+'IkJ1'+'c2l'+'uZXNzI'+'ChEb2Fua'+'CB'+'uZ2h'+'p4buHcCB'+'u'+'aOG'+'7jykiLz'+'4NCiA'+'gI'+'CAgICAgI'+'CAgICA'+'gICA'+'gIC'+'AgICAgIC'+'AgIC'+'AgICAgP'+'FJhZGlv'+'QnV0dG9u'+'IHg6TmFt'+'ZT0'+'icmFkaW'+'9'+'Cd'+'XR'+'0b'+'24zNjV'+'Fb'+'nRl'+'cnB'+'y'+'aXNlI'+'iBTdH'+'lsZT'+'0ie1N'+'0YXR'+'p'+'Y1Jlc29'+'1cm'+'NlIFB'+'yb2R1Y3R'+'SYWRpb30'+'iI'+'ENvbnRlb'+'nQ9IkV'+'udGVycH'+'J'+'pc'+'2UgKERvY'+'W5oIG5na'+'Gnhu4'+'dwIG'+'zhu5'+'tuKSI'+'vPg'+'0K'+'ICAgICAg'+'ICAgICAg'+'ICAgICA'+'gICAgIC'+'AgIC'+'AgI'+'DwvV3J'+'hcF'+'BhbmVsP'+'g0'+'KICAgICA'+'gICAgIC'+'AgIC'+'A'+'gICA'+'gICAgI'+'C'+'AgP'+'C9Hcm91'+'c'+'EJve'+'D4NCg'+'0K'+'IC'+'A'+'g'+'I'+'CAgIC'+'AgICA'+'gICA'+'gICA'+'gICAg'+'ICAgP'+'CE'+'tLSB'+'PZ'+'mZ'+'pY2'+'UgMjAyNC'+'AtLT4N'+'Ci'+'AgICAg'+'ICAgICA'+'gI'+'CA'+'gICAgIC'+'AgICA'+'gID'+'xHcm91'+'cEJveCB'+'IZWF'+'kZXI'+'9Ik9mZ'+'mljZS'+'AyMDI0IE'+'x'+'U'+'U0Mg'+'KE3hu5tp'+'IG5o4b'+'q'+'ldCki'+'IEJvcm'+'RlckJ'+'ydXNoP'+'SIjR'+'kZ'+'F'+'Mjg'+'yMEUiIEZ'+'v'+'c'+'mVncm91b'+'mQ9Ii'+'NGR'+'kE1MDA'+'iP'+'g0KIC'+'AgI'+'CAg'+'ICAgI'+'CAgICAg'+'ICAgIC'+'AgICAgIC'+'Ag'+'IDxXcmF'+'wUGFuZ'+'Ww+DQog'+'ICA'+'gICAgIC'+'AgICAgI'+'CAgIC'+'AgI'+'CAgI'+'CAgICAg'+'ICA'+'gIDxSYW'+'Rpb0'+'J1dH'+'RvbiB'+'4Ok5h'+'bWU9In'+'JhZG'+'lvQnV0'+'dG9'+'uMjAy'+'NFB'+'y'+'byIgU'+'3R5bGU9I'+'ntTdGF'+'0aW'+'NSZXNv'+'dXJjZSB'+'Qcm'+'9k'+'dWN'+'0UmFk'+'aW99'+'Ii'+'BDb250ZW'+'50P'+'SJQ'+'cm9mZX'+'NzaW9u'+'YWwgUGx1'+'cyI'+'vPg0'+'KICA'+'gIC'+'Ag'+'ICA'+'gIC'+'AgICAg'+'ICAgI'+'CA'+'gICA'+'gICAgI'+'CAgICA'+'8UmFk'+'aW9CdXR0'+'b24ge'+'Dp'+'OYW'+'1lPSJyY'+'WRpb0J1'+'dHRvbjIw'+'MjRTdGQi'+'I'+'FN0'+'eWxlP'+'S'+'J7U3RhdG'+'ljUmVzb3'+'VyY2UgUH'+'JvZHVj'+'dFJhZGlv'+'fSIgQ2'+'9u'+'dGVudD'+'0iU3Rhbm'+'Rhc'+'mQiLz4N'+'CiAgICAg'+'I'+'CAgIC'+'AgICAgIC'+'Ag'+'IC'+'AgIC'+'AgICAgIC'+'AgI'+'CAgP'+'FJhZGl'+'vQn'+'V'+'0dG9uI'+'Hg6TmFt'+'ZT0icmFk'+'aW9C'+'dXR0'+'b24yMDI'+'0SG9tZU'+'J1c2luZX'+'NzIiBTdH'+'lsZT0ie'+'1N0Y'+'XR'+'p'+'Y1Jl'+'c2'+'91c'+'mNl'+'IFByb2R1'+'Y3R'+'SY'+'WR'+'pb30iIEN'+'vbnRlb'+'nQ9Ik'+'hvbWUgJm'+'FtcDsgQn'+'VzaW5lc'+'3MiLz4NC'+'iA'+'gICAgI'+'CAgI'+'CAgI'+'CAgICAgI'+'CAgICAgI'+'CAgICA'+'gICAgPF'+'JhZG'+'lvQnV0d'+'G9'+'uIHg'+'6TmF'+'tZT0'+'i'+'cmF'+'kaW9CdX'+'R0b2'+'4yMDI'+'0SG'+'9t'+'ZVN0dWRl'+'bnQiIF'+'N0e'+'WxlPSJ7U'+'3'+'RhdGljUm'+'Vzb3VyY2'+'UgUHJ'+'vZH'+'VjdFJhZ'+'Glv'+'fSIgQ29u'+'dGVu'+'dD0iSG9'+'tZS'+'AmYW'+'1wOyB'+'TdHV'+'kZW50Ii8'+'+'+'DQogICA'+'gICA'+'gI'+'CAgIC'+'Ag'+'ICAgICA'+'gICAgI'+'CAg'+'ICAg'+'ICAgI'+'DxSYW'+'Rpb'+'0J1dH'+'R'+'vbiB'+'4Ok5'+'h'+'bWU9InJh'+'ZGlv'+'QnV0dG'+'9uMjA'+'yNFByb'+'2plY3RQ'+'cm8i'+'IFN'+'0eWx'+'lPSJ7U'+'3RhdGlj'+'U'+'mVzb3VyY'+'2UgUHJ'+'vZ'+'H'+'Vjd'+'FJh'+'ZGlv'+'fSIgQ29u'+'dGVudD0i'+'UH'+'JvamVjd'+'CBQc'+'m8i'+'Lz4NCiAg'+'ICAg'+'ICAgICAg'+'I'+'C'+'A'+'gI'+'CAgIC'+'AgICAgIC'+'AgICAg'+'ICA'+'gP'+'FJhZGl'+'vQnV'+'0dG9uIHg'+'6TmFtZ'+'T0'+'icmFka'+'W9Cd'+'XR0'+'b'+'24yMDI0'+'VmlzaW9Q'+'cm8iIFN0'+'eWxlPS'+'J'+'7U3Rh'+'d'+'G'+'l'+'j'+'UmVz'+'b3VyY'+'2UgUHJvZ'+'HVjdFJhZ'+'GlvfS'+'I'+'gQ29udGV'+'u'+'dD0iVml'+'zaW8gUH'+'JvIi8+D'+'Qog'+'ICAgICA'+'gIC'+'AgICAgIC'+'Ag'+'ICAg'+'ICAgICAg'+'ICAg'+'ICA'+'gIDxS'+'YWRp'+'b'+'0J1dH'+'Rvbi'+'B4Ok5'+'hbWU9I'+'nJhZGlv'+'Qn'+'V'+'0dG9uMjA'+'yNFdvcmQ'+'i'+'IFN0eW'+'xlPSJ7U'+'3'+'RhdGljU'+'mVz'+'b3VyY'+'2UgU'+'HJvZ'+'HVjdF'+'JhZGlvf'+'S'+'Ig'+'Q29udGVu'+'dD0i'+'V'+'29yZCIv'+'Pg0K'+'ICAgICA'+'gICAgIC'+'AgICA'+'gICAgI'+'CAgICA'+'gICAg'+'IC'+'AgIC'+'A'+'8'+'UmFkaW9'+'CdXR0'+'b24ge'+'Dp'+'OYW1'+'l'+'PSJyYWR'+'pb0J1dHR'+'vbjI'+'wMjR'+'Fe'+'GNlbCI'+'gU3R5bGU'+'9'+'IntTdGF0'+'aW'+'NSZX'+'Nv'+'dXJ'+'j'+'ZSBQcm9k'+'dWN0Um'+'Fk'+'aW99'+'Ii'+'BDb2'+'50ZW50'+'PSJ'+'FeGN'+'l'+'bCIvP'+'g0KI'+'CAg'+'ICAgICAg'+'IC'+'AgIC'+'AgI'+'CAgICA'+'gICAgIC'+'AgICA'+'gICA8UmF'+'kaW9'+'CdXR0'+'b'+'24g'+'eD'+'pOY'+'W1lPSJ'+'yYW'+'Rp'+'b0J1dH'+'RvbjI'+'wMjRQ'+'b3dl'+'clBvaW50'+'IiBTd'+'HlsZT0'+'ie1N0YXR'+'pY'+'1Jlc'+'2'+'91cmNlIF'+'B'+'yb'+'2R1Y3RSY'+'WRpb'+'30iIEN'+'vbnRl'+'bnQ9'+'IlBvd2Vy'+'UG9pbn'+'Qi'+'Lz4N'+'CiAgICA'+'gI'+'C'+'AgICAgI'+'CAg'+'ICAgIC'+'AgICAgI'+'CAgICA'+'8'+'L1dyYXB'+'QYW'+'5'+'lbD'+'4NCi'+'A'+'gICAgIC'+'AgICAgIC'+'A'+'gICAg'+'ICA'+'gIC'+'AgID'+'w'+'vR3'+'J'+'vdXBC'+'b3g+DQ'+'oN'+'C'+'iAgICA'+'gICAgICA'+'gICAgICA'+'gI'+'CAgI'+'CAgIDwh'+'LS0gT2'+'ZmaWNl'+'IDI'+'wMjE'+'gL'+'S0+DQo'+'gI'+'CAgI'+'CAgICA'+'gICAgIC'+'A'+'gI'+'CAgICAgI'+'CA8R'+'3J'+'vdX'+'BC'+'b3ggSG'+'VhZ'+'GVyPSJP'+'ZmZpY2U'+'gMjAyM'+'SBMVFN'+'DIi'+'BC'+'b3J'+'kZ'+'XJCcnVz'+'aD0iI'+'0ZGM'+'0Mx'+'MERF'+'IiBG'+'b3'+'J'+'lZ3J'+'vdW5'+'kP'+'SIj'+'OEE3NUZ'+'GIj'+'4NCiAgI'+'CA'+'gICA'+'gICAg'+'ICAgICAg'+'ICAg'+'ICA'+'gICAg'+'ICA8V3'+'Jhc'+'FBhbmV'+'sP'+'g'+'0KICA'+'gIC'+'AgIC'+'AgICAgIC'+'Ag'+'I'+'CA'+'gICAgIC'+'AgICAgI'+'CAg'+'IC'+'A8U'+'mF'+'kaW9CdX'+'R0'+'b24geDpO'+'YW1lPS'+'JyYWRp'+'b0J1'+'dHRvb'+'jIwMj'+'FQ'+'c'+'m8i'+'IFN0eW'+'xlPSJ7U'+'3RhdGlj'+'UmVz'+'b3VyY2Ug'+'UH'+'J'+'vZHV'+'jdFJhZG'+'lvfSIg'+'Q29udGVu'+'dD0iU'+'HJvZm'+'Vzc2lvb'+'mFsIFB'+'sdXMiLz4'+'NCiAgIC'+'AgICAg'+'ICAgIC'+'A'+'gIC'+'AgICAg'+'ICAgICAg'+'ICAgI'+'CAg'+'PFJh'+'ZGl'+'vQ'+'n'+'V'+'0dG9u'+'IHg6'+'T'+'mFtZT0ic'+'m'+'FkaW'+'9'+'C'+'dXR0b'+'24yMD'+'IxU3R'+'k'+'IiBT'+'d'+'HlsZT0i'+'e'+'1N'+'0Y'+'XRpY1'+'Jl'+'c2'+'9'+'1cmNlIFB'+'yb'+'2R1Y3R'+'SYW'+'Rpb30iI'+'ENvb'+'nR'+'l'+'bnQ9IlN0'+'Y'+'W5'+'kY'+'XJ'+'kIi8+DQ'+'ogIC'+'Ag'+'ICAgI'+'CA'+'gICAgIC'+'AgICAgIC'+'AgICA'+'gICAgI'+'CAgI'+'DxS'+'YWRpb0J1'+'dHR'+'vbiB'+'4Ok5hb'+'WU9InJ'+'hZGlv'+'QnV0dG'+'9'+'uM'+'jAyMVB'+'y'+'b2p'+'lY3R'+'Qc'+'m'+'8'+'iIFN0eWx'+'l'+'PSJ'+'7U3RhdG'+'ljUmVzb'+'3VyY2UgU'+'HJvZHVjd'+'F'+'JhZ'+'GlvfSIgQ'+'29udGV'+'udD'+'0iUH'+'Jva'+'mVjdCBQc'+'m8'+'iLz4NCiA'+'gICAgIC'+'AgICA'+'gICAgI'+'CAg'+'ICA'+'gICAgICA'+'gI'+'C'+'Ag'+'ICAgPFJ'+'hZGlvQn'+'V0dG9'+'uIHg6T'+'m'+'Ft'+'ZT0icmFk'+'aW9Cd'+'XR0b24yM'+'DI'+'xVmlzaW'+'9Qcm8'+'iIFN0e'+'WxlPSJ7'+'U3RhdG'+'ljUmV'+'z'+'b3Vy'+'Y2UgU'+'HJ'+'vZHVj'+'dFJhZGl'+'vfS'+'IgQ29udG'+'VudD0iV'+'mlzaW8gU'+'HJvIi8+'+'DQog'+'ICAgI'+'C'+'AgIC'+'AgI'+'CAgICA'+'gICA'+'gI'+'CAgI'+'C'+'AgI'+'CAg'+'ICAgI'+'DxSY'+'WRpb0J1'+'dHRvbi'+'B4Ok5hb'+'WU9InJ'+'hZG'+'lvQn'+'V0d'+'G9uMjA'+'yMVdv'+'cmQiIF'+'N0eWx'+'lPSJ7U'+'3RhdGl'+'jUmVzb'+'3Vy'+'Y2UgUHJv'+'ZHVjd'+'FJ'+'hZGlvfS'+'IgQ2'+'9udG'+'VudD0iV'+'29yZCIv'+'Pg0KI'+'CAgICA'+'gICAgI'+'CAgICAgI'+'CAgICAg'+'ICA'+'gICAg'+'I'+'C'+'AgIC'+'A8U'+'mFkaW9'+'CdXR0b'+'24geDpOY'+'W1lPSJyY'+'WRpb'+'0'+'J1dHRvb'+'jIwMjF'+'FeGNl'+'bC'+'IgU3R'+'5'+'bGU9In'+'t'+'TdGF0aWN'+'SZXNvdXJ'+'jZS'+'BQ'+'cm'+'9'+'kdWN0U'+'mFkaW'+'99IiBDb2'+'50'+'ZW'+'50PS'+'JF'+'eGNlbC'+'IvPg0K'+'ICAgIC'+'AgICA'+'gI'+'CAg'+'ICAgICA'+'gICAgI'+'CAg'+'I'+'CAgIC'+'AgIC'+'A8UmFk'+'aW9CdXR0'+'b'+'24geDp'+'OYW1lPS'+'JyYWRpb0'+'J1dHRv'+'bjIwM'+'jFQb3dl'+'clBvaW50'+'Ii'+'BTdHlsZ'+'T'+'0'+'i'+'e1N'+'0YX'+'R'+'pY'+'1Jlc'+'2'+'91'+'cmN'+'lIFByb2'+'R1Y3RSYW'+'Rpb30iI'+'EN'+'vbnRlbn'+'Q9'+'IlBvd2Vy'+'UG9pbnQi'+'Lz'+'4NCiAg'+'ICAgICAg'+'ICAgIC'+'AgICAg'+'ICAg'+'ICA'+'gICAgIC'+'A'+'gICAgPFJ'+'hZ'+'GlvQn'+'V0dG9uIH'+'g6'+'TmFtZT0i'+'cmFkaW'+'9Cd'+'XR0b24'+'yMD'+'IxQWNjZX'+'N'+'zIiBT'+'dHlsZT'+'0ie1N0Y'+'XRpY'+'1'+'Jlc29'+'1'+'cmNlI'+'FByb'+'2R'+'1Y3R'+'SYWR'+'p'+'b30iIENv'+'bnRlbnQ'+'9IkFjY2'+'VzcyIvPg'+'0KI'+'C'+'Ag'+'ICAgI'+'C'+'AgI'+'C'+'Ag'+'ICAgI'+'C'+'AgI'+'CAg'+'ICAgICA'+'g'+'I'+'CA'+'gI'+'CA8'+'UmFkaW'+'9CdX'+'R0'+'b24geDpO'+'YW1l'+'PSJyYWR'+'pb0J1dH'+'RvbjIw'+'Mj'+'FP'+'dX'+'R'+'s'+'b29'+'rI'+'iBT'+'dHlsZT0i'+'e1N0YXR'+'pY1Jl'+'c29'+'1cmNlI'+'FByb2R1'+'Y3RSYWR'+'pb30iIE'+'NvbnRlbn'+'Q9Ik91d'+'Gxvb2s'+'iLz4'+'NCiA'+'gICA'+'gICAgICA'+'gIC'+'Ag'+'I'+'CAg'+'ICAgIC'+'AgICAgI'+'CAgICA'+'gPCEtLS'+'DhuqhuIG'+'Lhu5t0'+'IGPDoW'+'MgYuG6o2'+'4gw610IG'+'TD'+'uW5nI'+'MSR4buD'+'IGfhu'+'41uLCBu4'+'b'+'q/dS'+'Bj4b'+'qnbi'+'Bjw7MgdG'+'jh'+'u4MgdGjD'+'qm0gbOG6'+'oWkgbm'+'jGsCBjb'+'2R'+'l'+'IGPFq'+'SA'+'tLT4N'+'CiAgIC'+'AgICAg'+'ICAg'+'ICA'+'gICAgICA'+'g'+'ICA'+'g'+'ICAg'+'ICAgICA'+'g'+'PFJhZ'+'GlvQnV0d'+'G9uIHg6T'+'mFtZT0i'+'c'+'mFk'+'aW9'+'CdXR0b2'+'4yM'+'DIxUHJva'+'mVjd'+'F'+'N0'+'ZCIgU3'+'R5'+'bGU9IntT'+'dGF0aWN'+'S'+'ZXNv'+'dXJj'+'ZS'+'BQc'+'m'+'9k'+'dWN0Um'+'FkaW99Ii'+'BDb2'+'50Z'+'W50PS'+'JQ'+'cm'+'9qZWN'+'0IFN0Z'+'CIgVml'+'zaWJ'+'pbGl0eT'+'0iQ29'+'sbGF'+'wc2VkI'+'i8'+'+D'+'QogI'+'CAgICAgI'+'C'+'AgICAg'+'ICAgIC'+'AgICAgIC'+'AgICAg'+'I'+'CAgI'+'DxS'+'YWRpb0J'+'1dHRv'+'biB4O'+'k5hbWU9I'+'nJhZGlvQ'+'nV0'+'dG9uMjA'+'yMV'+'Zp'+'c'+'2lv'+'U3RkIiB'+'TdHl'+'s'+'ZT0ie1N0'+'Y'+'XRp'+'Y1Jlc291'+'cmNlIF'+'Byb2R1Y'+'3RSYW'+'R'+'pb30'+'iIENvb'+'nR'+'lbnQ9IlZ'+'pc2l'+'v'+'I'+'FN0ZC'+'I'+'gVmlz'+'aWJpb'+'Gl0eT0iQ'+'29s'+'bG'+'Fw'+'c2VkI'+'i8+DQog'+'ICA'+'g'+'ICAgIC'+'Ag'+'ICAgICAg'+'ICAgIC'+'AgICAgIC'+'AgICAgI'+'DxSYW'+'R'+'pb'+'0J1'+'dHRvbiB'+'4Ok5'+'hbWU'+'9InJhZGl'+'vQnV0dG'+'9uMj'+'AyMUhv'+'bWV'+'TdHVkZ'+'W50I'+'iBT'+'dHlsZ'+'T'+'0ie'+'1N0YXRp'+'Y1Jlc'+'291cmN'+'l'+'IFByb2'+'R1Y3RS'+'Y'+'WRp'+'b30i'+'IENvb'+'n'+'RlbnQ9Ik'+'hv'+'bW'+'UgU3'+'R1ZGVud'+'CIg'+'VmlzaWJ'+'pbGl0e'+'T0iQ'+'29sb'+'GFwc2Vk'+'Ii8+DQ'+'ogI'+'CAg'+'ICA'+'gICAgIC'+'Ag'+'ICAg'+'ICA'+'gICA'+'gI'+'CAg'+'ICAgICAg'+'IDx'+'SYWRpb0J'+'1dHRvbi'+'B'+'4Ok'+'5'+'hb'+'WU9In'+'Jh'+'ZG'+'lvQnV0d'+'G'+'9uMjAyM'+'UhvbWVCd'+'XNpbmV'+'zcyI'+'gU3R5b'+'GU9Int'+'TdGF0aW'+'NSZXN'+'vdX'+'JjZ'+'SBQcm'+'9kd'+'WN0UmF'+'ka'+'W'+'99Ii'+'BDb250'+'ZW50PSJI'+'b21'+'lIEJ1c2l'+'uZX'+'NzI'+'iB'+'WaXNp'+'Y'+'mlsa'+'XR5P'+'SJDb2xs'+'Y'+'XBzZWQi'+'Lz4NCiA'+'gICAgI'+'CAgI'+'CAgICAgI'+'CAg'+'I'+'C'+'AgICAgIC'+'AgICAg'+'ICAgPF'+'JhZ'+'Gl'+'vQnV0dG'+'9uIHg6T'+'mFtZT'+'0i'+'cmFkaW9C'+'dXR0b2'+'4yM'+'DIxUHVib'+'GlzaGVyI'+'iB'+'TdHl'+'s'+'ZT0i'+'e'+'1N'+'0YX'+'RpY1'+'Jlc29'+'1cmNlI'+'F'+'Byb2R1Y3'+'RSY'+'WRpb30iI'+'ENv'+'bnR'+'lbnQ'+'9'+'IlB1Y'+'mxpc2'+'hl'+'c'+'iIgVmlz'+'aW'+'Jpb'+'Gl0eT'+'0i'+'Q29sbG'+'Fwc2VkIi'+'8+DQogI'+'CAgI'+'CAgICA'+'gICAgICA'+'g'+'ICAgIC'+'AgIC'+'A'+'g'+'ICAgPC9'+'XcmFwUGF'+'uZWw+DQo'+'g'+'I'+'CAg'+'ICAg'+'I'+'CAgICAgI'+'CAgICAgI'+'CAgICA8L'+'0dyb3VwQ'+'m94Pg0KD'+'QogICAgI'+'CAgICA'+'gICAgIC'+'AgICAgI'+'CAgICA8'+'IS0tIE9'+'mZmljZS'+'AyMDE5IC'+'0t'+'Pg0K'+'ICA'+'gICAg'+'ICAgI'+'CAgIC'+'AgIC'+'A'+'gICAgICA'+'gPEdyb'+'3VwQ'+'m94'+'I'+'Eh'+'lYWRlcj0'+'i'+'T2'+'ZmaW'+'N'+'lIDIwM'+'TkiIEJv'+'cmRlckJy'+'dXNoPS'+'IjRkYwR'+'jhFNDA'+'iIEZvcm'+'Vncm91bm'+'Q9Ii'+'M0Q0FGN'+'TA'+'iPg0KICA'+'g'+'I'+'CAgIC'+'AgICA'+'gICAgICA'+'gIC'+'A'+'gIC'+'AgIC'+'AgIDxXcm'+'FwUGFu'+'ZWw+DQog'+'I'+'CAgICAgI'+'CAgIC'+'Ag'+'ICAgI'+'CA'+'gICAgI'+'CAgICAg'+'ICA'+'gIDx'+'SYWRpb0J'+'1d'+'HRvbiB4O'+'k5hbWU'+'9InJh'+'Z'+'GlvQ'+'nV0d'+'G'+'9uM'+'j'+'AxOVB'+'yb'+'yIgU'+'3R5bGU'+'9I'+'ntTd'+'G'+'F0aWNS'+'ZXNvdXJ'+'jZSBQcm'+'9kdWN0U'+'mFkaW9'+'9'+'IiBD'+'b250ZW50'+'P'+'SJQcm'+'9mZ'+'XNzaW'+'9uY'+'WwgU'+'Gx1cy'+'IvPg0KIC'+'AgICA'+'gIC'+'Ag'+'ICAgICAg'+'IC'+'Ag'+'ICAgICAg'+'ICAg'+'ICAgICA'+'8U'+'mF'+'kaW'+'9CdXR0b'+'24g'+'eDpOY'+'W'+'1'+'lPSJ'+'yYWRp'+'b0J1dHR'+'vb'+'jIwMTlT'+'dGQiIF'+'N0'+'eWxlP'+'S'+'J7U3Rhd'+'GljU'+'mV'+'zb3VyY'+'2UgUHJ'+'vZHVj'+'dFJhZ'+'GlvfSI'+'g'+'Q29udGV'+'udD0iU3'+'RhbmRh'+'cm'+'QiLz4'+'NCiAg'+'ICAgIC'+'AgICAg'+'ICAg'+'IC'+'AgICAgI'+'CA'+'gICAgICA'+'gI'+'C'+'AgPFJh'+'ZGlvQnV'+'0dG9'+'uIHg6TmF'+'tZT0'+'icmF'+'kaW9C'+'dX'+'R'+'0b24'+'y'+'MDE5UHJv'+'a'+'mVjdFByb'+'yIgU3'+'R5bG'+'U9Int'+'TdGF'+'0a'+'WNSZ'+'XNv'+'dXJjZS'+'B'+'Qcm9'+'kdWN'+'0UmF'+'ka'+'W99IiBD'+'b250ZW5'+'0PSJQcm'+'9'+'qZWN0'+'IFBybyIv'+'Pg0KIC'+'Ag'+'ICAgI'+'CA'+'gICA'+'gICAgICA'+'g'+'I'+'CAgICA'+'g'+'ICAgI'+'C'+'AgIC'+'A8UmFka'+'W9CdXR0b'+'24geD'+'p'+'O'+'YW1lPSJ'+'yYWRpb0'+'J1'+'dH'+'Rv'+'bjIwMT'+'lWaXNpb'+'1Byby'+'Ig'+'U3R5'+'bGU'+'9IntTdGF'+'0aWNS'+'ZXNvdXJj'+'ZSBQc'+'m9kdWN'+'0UmFka'+'W99'+'IiBDb2'+'5'+'0Z'+'W50PS'+'JWaXNpb'+'yBQc'+'m8iLz4N'+'CiAgIC'+'AgICAgI'+'CAgICAgI'+'CAgICA'+'gICAgICA'+'gICAg'+'ICAgPF'+'JhZGlv'+'QnV0dG'+'9u'+'IH'+'g'+'6'+'TmFt'+'ZT'+'0icm'+'FkaW9'+'CdXR0b24'+'yMDE5'+'V29'+'yZCIgU3R'+'5bGU9I'+'ntTdGF0'+'aWNSZX'+'Nvd'+'XJjZS'+'B'+'Q'+'cm'+'9kdWN0U'+'mFkaW9'+'9IiBDb2'+'50ZW'+'50'+'PSJXb3'+'JkIi8'+'+DQo'+'gIC'+'AgICAg'+'I'+'CAgIC'+'AgIC'+'AgIC'+'AgI'+'CAgICA'+'g'+'ICAgI'+'CAgIDx'+'SYW'+'Rpb0J'+'1d'+'H'+'RvbiB4Ok'+'5hbW'+'U9In'+'Jh'+'ZGlv'+'QnV0d'+'G9'+'uM'+'jAxOUV4'+'Y2V'+'sIiB'+'TdHls'+'ZT'+'0ie1N'+'0YXRpY1J'+'lc'+'291cmNl'+'IFByb2'+'R1Y3RSY'+'W'+'Rpb30i'+'IENvbnRl'+'bnQ'+'9IkV4Y2'+'VsIi8'+'+DQogI'+'CAgICAg'+'ICAg'+'I'+'CAgI'+'CAg'+'ICAgIC'+'AgI'+'CA'+'gIC'+'AgIC'+'AgI'+'D'+'xSYWRpb'+'0J1d'+'HR'+'vbiB4O'+'k5hbWU'+'9InJhZG'+'lvQn'+'V0d'+'G9uMjAxO'+'VBvd2Vy'+'UG9pbn'+'QiIFN0e'+'W'+'xlPS'+'J7U3RhdG'+'ljUmVzb'+'3VyY'+'2Ug'+'UHJ'+'v'+'ZHV'+'jdFJ'+'hZGlvfS'+'IgQ29'+'udGVudD0'+'iU'+'G93Z'+'X'+'JQb'+'2l'+'u'+'dCI'+'vPg0KICA'+'gIC'+'AgICAgIC'+'A'+'gICAgICA'+'gICAgIC'+'AgICAg'+'ICAgICA'+'NCiA'+'gICAgICA'+'g'+'ICAgICAg'+'IC'+'Ag'+'ICAgIC'+'AgICAgIC'+'AgICA'+'gP'+'C'+'EtLSB'+'IaWRk'+'ZW4g'+'TG9'+'naW'+'MgZm'+'llbGRzI'+'HRvIHByZ'+'XZl'+'bnQg'+'ZXJyb3'+'IgL'+'S0+DQo'+'g'+'ICAg'+'ICAgI'+'CAgI'+'CAg'+'ICAgIC'+'AgI'+'CAgICAg'+'ICAgIC'+'AgIDxS'+'YWRpb0J1'+'dHRv'+'biB'+'4Ok'+'5hbWU9I'+'nJh'+'ZGlv'+'QnV0dG9'+'uMjA'+'xOV'+'B'+'yb2'+'plY3RTdG'+'Qi'+'IFZpc2l'+'iaWxpd'+'Hk9'+'IkNvbGxh'+'cHNlZCIg'+'R3J'+'vdXBOYW'+'1lPSJPZm'+'ZpY2VWZ'+'XJz'+'aW'+'9uIi8+'+'DQogICA'+'gICAgICA'+'gICA'+'g'+'ICAgICAg'+'I'+'CAgICAgI'+'CAgICAg'+'IDxSYW'+'Rp'+'b'+'0J1dH'+'RvbiB4Ok'+'5hbWU9'+'InJhZ'+'Glv'+'QnV0'+'dG9'+'uMjAxO'+'V'+'Zpc2'+'lvU3'+'RkIiB'+'WaXNp'+'Ymlsa'+'XR5PSJD'+'b2'+'xs'+'YXBz'+'ZWQiIEdy'+'b3VwT'+'m'+'FtZT0iT'+'2ZmaWNlV'+'mVyc2lvb'+'iI'+'vPg0K'+'ICAgICAg'+'ICAgIC'+'AgICA'+'gICA'+'gICAgIC'+'A'+'g'+'ICAgIC'+'AgICA8'+'UmFkaW9'+'CdXR'+'0b24ge'+'DpOYW1'+'l'+'PSJ'+'yYWRpb0J'+'1dH'+'R'+'vbjIwMT'+'lPdXRsb2'+'9rIiBWa'+'XNpYm'+'lsa'+'XR5PSJ'+'Db'+'2xsY'+'XBzZWQi'+'IEdyb3Vw'+'TmFtZT0'+'i'+'T2'+'ZmaWNl'+'VmV'+'yc2lvbiI'+'vP'+'g0'+'KICAgI'+'C'+'AgICAg'+'ICAgIC'+'A'+'gICAgIC'+'AgI'+'CAgI'+'C'+'AgICAg'+'ICA8'+'U'+'mFkaW9Cd'+'XR0b24g'+'eDpOY'+'W1lPS'+'JyYWR'+'pb0'+'J'+'1d'+'HRvbjIwM'+'TlBY2Nl'+'c3Mi'+'IFZpc2l'+'iaW'+'xpd'+'Hk9IkN'+'v'+'bGxhc'+'HN'+'lZ'+'CIgR3Jv'+'dXBOYW1l'+'P'+'S'+'JPZm'+'Z'+'pY2V'+'WZXJz'+'aW9uIi8+'+'DQogICA'+'gICAgI'+'CA'+'gI'+'CAgICA'+'g'+'ICAgI'+'CAgI'+'CAgICAgI'+'CAgIDx'+'SYWR'+'pb0J1'+'dHRvbi'+'B'+'4Ok5hbWU'+'9InJhZGl'+'vQnV'+'0dG9uMjA'+'xOVB'+'1Ymxpc2'+'hlciIgV'+'m'+'lzaWJpbG'+'l0eT0i'+'Q29sb'+'GFwc2VkI'+'iBHcm'+'91cE5hbW'+'U9'+'Ik9mZm'+'ljZVZlc'+'nNpb24i'+'Lz4NCi'+'A'+'gICA'+'gICAgI'+'CAgICA'+'g'+'ICAg'+'ICAgICA'+'gIC'+'AgIC'+'AgICAgPF'+'JhZG'+'lvQ'+'n'+'V'+'0dG9uIHg'+'6'+'TmFtZT0i'+'cmFk'+'aW9CdXR'+'0b24yMDE'+'5SG'+'9tZVN0d'+'W'+'RlbnQi'+'IFZpc2l'+'iaWxpdHk'+'9IkNvbG'+'x'+'hcHNlZC'+'I'+'gR3JvdXB'+'OYW1l'+'PSJP'+'ZmZpY2V'+'WZX'+'J'+'zaW9uI'+'i8+DQo'+'gICAgI'+'CAgICAgI'+'CAgICAgI'+'CAgICAg'+'I'+'CAgICA'+'g'+'ICAgI'+'DxSYW'+'Rpb'+'0J1dHRvb'+'iB4Ok5hb'+'W'+'U9'+'InJhZGl'+'vQ'+'nV0'+'dG9uMjAx'+'OU'+'hvbWVCdX'+'NpbmV'+'zcyI'+'gVml'+'z'+'aWJpbGl'+'0eT'+'0iQ29sbG'+'Fwc2VkIi'+'BHcm9'+'1cE5hbWU'+'9Ik9'+'mZmljZV'+'ZlcnNpb2'+'4iLz4NCi'+'AgI'+'CAgICAgI'+'CAgICAg'+'ICAgICA'+'gI'+'CAgI'+'CA'+'gIC'+'A'+'8L1dyYX'+'BQY'+'W5lbD4N'+'CiAg'+'ICAg'+'I'+'CAgIC'+'AgICA'+'gICAgICA'+'gIC'+'AgID'+'wv'+'R3Jv'+'dXBCb'+'3g+DQo'+'gICAgICA'+'gICA'+'gICA'+'gI'+'CAg'+'I'+'CA'+'gICAgICA'+'NCiAg'+'ICAg'+'ICAgICAg'+'IC'+'AgICA'+'gI'+'CA'+'gI'+'CA'+'gID'+'w'+'hLS'+'0gT2Zma'+'WNl'+'I'+'DIwM'+'TYgLS0+'+'DQogICAg'+'ICAgICA'+'g'+'ICAgICA'+'gICAg'+'I'+'CAg'+'ICAgPEd'+'yb3'+'VwQm94'+'I'+'E'+'hlYWRlc'+'j0iT2Z'+'maW'+'NlIDIwM'+'T'+'YiIEJvcm'+'Rlck'+'Jy'+'dXNoPSIj'+'RkZBMjg'+'yMTAiIE'+'ZvcmVncm'+'91bmQ'+'9IiNGRkQ'+'3MDAi'+'Pg0KICAg'+'ICA'+'gICAgIC'+'AgICAg'+'ICAgIC'+'AgI'+'CAgICAg'+'I'+'Dx'+'Xcm'+'F'+'wUGFuZWw'+'+DQo'+'gIC'+'AgICAgIC'+'AgICAgI'+'C'+'AgIC'+'AgICAgIC'+'A'+'g'+'IC'+'Ag'+'ICAgIDxS'+'YWRp'+'b'+'0J1d'+'HRvbiB4'+'Ok5hb'+'WU9InJh'+'ZGlvQn'+'V0dG'+'9u'+'MjA'+'xN'+'lBybyIg'+'U3R5bGU9'+'IntTdG'+'F0a'+'WNSZXNvd'+'XJjZSBQ'+'cm9kdWN'+'0UmFkaW'+'99IiB'+'Db2'+'50'+'ZW'+'50PS'+'JQcm9'+'m'+'ZXNzaW'+'9uYWwgU'+'Gx1cyI'+'v'+'Pg0K'+'ICAg'+'ICAgICA'+'g'+'ICAgICA'+'g'+'I'+'CA'+'gICAgIC'+'AgICAg'+'ICAgIC'+'A8UmFka'+'W'+'9CdXR'+'0b24ge'+'DpOYW1l'+'PSJ'+'yYW'+'R'+'pb0J1d'+'HRvbjIwM'+'TZT'+'d'+'GQiIF'+'N0eWxl'+'PSJ7'+'U3Rh'+'dGl'+'jUmVz'+'b3VyY2U'+'gUH'+'JvZHVjdF'+'JhZGlvfS'+'IgQ'+'29udGVud'+'D0iU3R'+'hbmRhc'+'m'+'Q'+'iLz4NCi'+'Ag'+'IC'+'AgICAg'+'ICAgIC'+'AgICA'+'g'+'ICAgI'+'CAgICA'+'g'+'IC'+'AgIC'+'AgPFJhZ'+'Gl'+'vQnV0'+'dG9uIHg'+'6TmFt'+'ZT0icm'+'FkaW9C'+'dXR0b2'+'4y'+'MD'+'E2UHJ'+'v'+'amVj'+'dFBy'+'byIgU3'+'R5bG'+'U9'+'IntTdGF0'+'aW'+'NSZXNv'+'dXJjZSB'+'Qcm9kdWN'+'0UmFkaW'+'99Ii'+'BDb250Z'+'W50PS'+'J'+'Qcm9qZ'+'WN0IFBy'+'b'+'yIvPg'+'0K'+'ICAgICA'+'gIC'+'AgI'+'CAgI'+'CA'+'gICAg'+'I'+'CA'+'gICAg'+'ICAgICAg'+'ICA8'+'UmF'+'kaW9'+'Cd'+'XR0b24ge'+'DpOY'+'W1lPS'+'JyYWRpb'+'0J1dHRvb'+'jI'+'wMTZ'+'WaXN'+'pb1B'+'y'+'byIg'+'U3R5'+'bGU9'+'In'+'t'+'TdGF0aWN'+'S'+'ZXNvdXJj'+'ZSBQ'+'cm9'+'kdW'+'N'+'0UmFk'+'aW99Ii'+'BDb2'+'50ZW'+'50PSJW'+'aX'+'Np'+'byBQ'+'cm8i'+'Lz4NCiA'+'gIC'+'Ag'+'ICAgIC'+'AgI'+'CAgI'+'CAgICAgI'+'C'+'AgICA'+'gICAgI'+'CAgDQog'+'ICAg'+'ICAgI'+'CAg'+'ICAgIC'+'AgICAgIC'+'Ag'+'ICAgIC'+'AgICA'+'gI'+'DwhLS'+'0gS'+'GlkZG'+'VuIExvZ'+'2l'+'j'+'IGZp'+'ZWxkcyA'+'tLT4NCiA'+'g'+'ICAg'+'ICAgI'+'CA'+'gI'+'CAg'+'ICA'+'gICAgI'+'CAg'+'ICAgI'+'C'+'AgICAgP'+'FJhZG'+'lv'+'QnV'+'0dG9uI'+'Hg6'+'TmFtZ'+'T0icmFka'+'W9'+'Cd'+'XR0b2'+'4yMDE2U'+'HJ'+'vamVjdFN'+'0Z'+'CIgVml'+'zaWJpbG'+'l0eT0i'+'Q29s'+'bGFwc2Vk'+'Ii'+'BH'+'cm91c'+'E5hbWU9'+'Ik9mZm'+'lj'+'ZVZlcnNp'+'b24iL'+'z4N'+'CiAg'+'IC'+'AgICAg'+'ICA'+'gICAgI'+'C'+'AgIC'+'AgICAgIC'+'A'+'gIC'+'Ag'+'ICAgP'+'FJ'+'hZGlvQn'+'V0dG9u'+'IHg6TmF'+'t'+'ZT0icmF'+'kaW'+'9CdXR'+'0b24y'+'MDE2V'+'ml'+'zaW9TdGQ'+'iIFZp'+'c'+'2'+'liaWxp'+'d'+'Hk9'+'I'+'kNvb'+'Gx'+'h'+'cHNlZCIg'+'R3Jv'+'dXB'+'OY'+'W1lPS'+'JPZmZpY2'+'V'+'WZXJz'+'aW9u'+'Ii8+'+'DQog'+'ICAgI'+'CAgI'+'CAgI'+'CAgICA'+'gICA'+'gICA'+'gI'+'CAgIC'+'AgIC'+'AgID'+'xSYW'+'Rp'+'b0J1d'+'HRvbiB4O'+'k5hbWU9'+'InJhZGlv'+'QnV'+'0dG9uMj'+'AxNld'+'v'+'cmQiIFZ'+'pc2l'+'iaW'+'xp'+'dHk9IkNv'+'bGxhcH'+'Nl'+'ZCI'+'g'+'R3JvdXBO'+'YW'+'1lPSJPZm'+'ZpY2VWZ'+'XJzaW'+'9uIi8'+'+DQ'+'ogICAgIC'+'AgICAgIC'+'AgICAgI'+'CAgICAg'+'ICAgIC'+'Ag'+'I'+'CAgIDx'+'SYWR'+'p'+'b0J1dHR'+'vbiB4'+'Ok'+'5hbW'+'U9InJhZ'+'GlvQn'+'V0'+'dG9uM'+'jAxN'+'kV'+'4Y2V'+'sIiBWaX'+'NpYmlsaX'+'R5PSJ'+'Db2'+'xsYXBzZW'+'QiIEdyb3'+'VwTmFtZT'+'0iT2Zma'+'WNlV'+'mVyc2lv'+'biIvPg0K'+'IC'+'AgICA'+'gIC'+'AgICAgIC'+'Ag'+'IC'+'AgICA'+'gICAgIC'+'AgIC'+'A'+'gIC'+'A8UmF'+'ka'+'W'+'9C'+'dX'+'R0b'+'24geDp'+'OY'+'W1lPS'+'JyYWRp'+'b'+'0J1dHRvb'+'jIwMT'+'Z'+'Q'+'b'+'3dl'+'clBvaW5'+'0IiB'+'WaXNpY'+'mlsaX'+'R5PSJD'+'b2xs'+'Y'+'X'+'BzZWQiIE'+'dyb3'+'VwTmF'+'tZ'+'T0iT2'+'ZmaWNlVm'+'Vyc2lvb'+'iIvPg0KI'+'CAgICA'+'gIC'+'A'+'gICAg'+'IC'+'AgICAg'+'I'+'CAgICAgI'+'CA'+'gICAgI'+'CA8'+'UmFkaW9'+'Cd'+'XR0'+'b24geD'+'pOYW1lP'+'SJyY'+'W'+'Rpb'+'0J1dH'+'RvbjIw'+'MTZPdX'+'Rsb'+'29rIiBW'+'a'+'XNpYm'+'lsaXR5'+'PSJDb2x'+'sYXBzZ'+'WQiIEdyb'+'3Vw'+'TmFtZT'+'0iT2'+'ZmaWNl'+'VmVyc2l'+'vbiI'+'vPg0K'+'ICAgICAg'+'ICAgI'+'CAgICA'+'g'+'ICAgICAg'+'ICA'+'gI'+'CAgICA'+'gICA8UmF'+'kaW9Cd'+'XR0'+'b24geDpO'+'YW1lPS'+'JyY'+'WRpb0J1'+'dHRvb'+'jIwMTZBY'+'2Nlc3Mi'+'IF'+'Zpc2l'+'iaWxpdHk'+'9IkNvb'+'G'+'xh'+'cHN'+'lZCIgR3'+'JvdXB'+'OYW1lP'+'SJPZ'+'mZpY'+'2VWZX'+'JzaW9'+'uIi8+DQ'+'ogICAg'+'ICA'+'gICAgI'+'CA'+'gICAgI'+'CAgIC'+'AgICAg'+'I'+'CAgICAgI'+'DxS'+'YWRpb'+'0J'+'1dH'+'R'+'vbi'+'B4Ok5'+'hbWU9I'+'nJhZG'+'lv'+'QnV0dG9'+'uMjAx'+'NlB1Ymxp'+'c2'+'hlciI'+'g'+'VmlzaWJ'+'pbGl'+'0'+'eT0iQ'+'29'+'sbG'+'Fw'+'c'+'2VkI'+'iBHc'+'m91c'+'E5hb'+'WU9Ik9mZ'+'mljZVZl'+'cn'+'Npb24i'+'Lz4N'+'CiA'+'gICAgIC'+'Ag'+'ICAgI'+'CAgIC'+'Ag'+'ICA'+'gICAgICA'+'gI'+'CAgI'+'CAgPF'+'JhZGl'+'vQn'+'V0dG9u'+'IHg'+'6TmF'+'tZT0ic'+'m'+'FkaW9Cd'+'XR0b2'+'4yMDE'+'2T25'+'lTm'+'90ZSIgVm'+'lzaWJp'+'bGl'+'0eT0iQ2'+'9s'+'bGFwc'+'2V'+'kI'+'iBHcm'+'91cE'+'5hbW'+'U9Ik'+'9mZmljZV'+'Zl'+'cnN'+'pb24'+'iLz4NCi'+'Ag'+'ICAgICA'+'gI'+'CAgICAgI'+'CA'+'gIC'+'Ag'+'ICAg'+'I'+'CAgICA8L'+'1d'+'yYXBQYW5'+'lbD4NCiA'+'gICAgICA'+'gICAg'+'ICAg'+'ICAgIC'+'AgIC'+'AgIDwvR'+'3Jv'+'dXBC'+'b3g+DQ'+'oNCiAg'+'IC'+'AgICA'+'gICAgICA'+'gICA'+'gICA'+'gI'+'CA'+'gIDwhLS'+'0gT2Zm'+'aWNlID'+'IwM'+'TMgL'+'S0+DQo'+'gICA'+'gICAgIC'+'AgIC'+'AgICA'+'gICAgICA'+'gIC'+'AgPE'+'dy'+'b3VwQm9'+'4IEh'+'lYW'+'Rlcj0i'+'T2ZmaWNl'+'IDIwMT'+'MiI'+'EJvc'+'mR'+'l'+'ckJyd'+'XNo'+'PSIjN'+'zc3Nz'+'c3'+'IiB'+'Gb3JlZ3J'+'vd'+'W5kPSIj'+'QU'+'FBQ'+'UFBI'+'j'+'4N'+'CiAgICA'+'gI'+'CAgICAg'+'ICAgICAg'+'ICAgI'+'CAgIC'+'AgICA'+'8V3JhcFB'+'hbm'+'VsPg0KI'+'CAgIC'+'AgICAgI'+'CA'+'g'+'ICAgICA'+'gICAgI'+'C'+'AgI'+'CAgIC'+'Ag'+'ICA8Um'+'FkaW9Cd'+'XR'+'0b'+'2'+'4g'+'eDpOYW'+'1lPSJ'+'yYWRpb0'+'J1dHRvb'+'j'+'IwMTNQc'+'m8iIFN'+'0e'+'WxlPSJ7U'+'3RhdGljU'+'mVzb3VyY'+'2UgUH'+'JvZHVjdF'+'J'+'hZ'+'Glvf'+'SIgQ'+'29udGVud'+'D0iUH'+'J'+'vZmVzc2'+'lvb'+'mF'+'sIFB'+'sdX'+'MiLz4'+'N'+'C'+'iA'+'gICAgI'+'CAgICAg'+'ICAgI'+'CAgICAg'+'ICAg'+'ICAgICAg'+'ICAgP'+'F'+'JhZGlv'+'QnV0dG9'+'uIHg6'+'TmFt'+'ZT0icm'+'Fka'+'W9'+'CdXR0b24'+'yMDEzU3R'+'kIiB'+'TdHlsZ'+'T0ie1'+'N0'+'YXRpY1Jl'+'c291'+'cmNlIFBy'+'b'+'2'+'R1Y3'+'RS'+'Y'+'WRp'+'b30'+'iIENvbnR'+'lbnQ9Il'+'N0YW'+'5kYXJ'+'k'+'Ii'+'8+DQo'+'gI'+'CAgICAg'+'ICA'+'gICA'+'gICAgI'+'CAgICAgI'+'CAg'+'ICA'+'gICAgIA0'+'KICA'+'gICAgICA'+'gICAgIC'+'AgICAg'+'ICAgICAg'+'ICAgICA'+'gICA'+'8IS0tI'+'EhpZGRlb'+'iBMb2d'+'pYyBma'+'WVsZHMgL'+'S0+DQo'+'gICA'+'g'+'IC'+'AgICAgIC'+'A'+'gICA'+'gICAgI'+'CAgIC'+'AgICAg'+'ICA'+'gIDxSYW'+'R'+'pb'+'0J1d'+'HRv'+'biB'+'4Ok5hbW'+'U9InJhZ'+'G'+'lvQ'+'nV0d'+'G9uMjAx'+'M1B'+'yb2plY3R'+'Qc'+'m8iIF'+'Zpc2l'+'ia'+'Wxp'+'dHk9IkNv'+'bGxhcHNl'+'ZCIgR3'+'JvdX'+'BOYW1'+'lPSJPZmZ'+'pY2'+'VWZXJzaW'+'9uIi8+'+'DQogICAg'+'ICAgICAg'+'I'+'CAgI'+'CAg'+'I'+'CAgICAgI'+'CAgICAgI'+'CAg'+'IDxSY'+'WRp'+'b0J'+'1dH'+'RvbiB4Ok'+'5hbWU9I'+'nJ'+'h'+'ZG'+'lvQnV0d'+'G9uMjAxM'+'1Byb2pl'+'Y3RTdGQ'+'iIFZp'+'c'+'2'+'liaWxpd'+'Hk9I'+'k'+'NvbG'+'xhcHNl'+'ZCIgR'+'3JvdX'+'B'+'OYW'+'1lPSJPZ'+'m'+'Zp'+'Y2VWZXJ'+'zaW9uIi'+'8+DQogI'+'CAg'+'IC'+'AgICAgIC'+'AgICAg'+'ICAgI'+'CAgIC'+'AgICAgIC'+'AgIDxSY'+'W'+'Rpb0J1dH'+'Rv'+'biB4O'+'k5h'+'bWU9I'+'nJhZGlv'+'Q'+'nV'+'0'+'dG9u'+'MjAxM1'+'Zpc2lv'+'UHJvIiB'+'Wa'+'X'+'NpYmls'+'aXR5'+'PSJDb'+'2xs'+'YX'+'BzZWQ'+'iIE'+'dyb3V'+'wT'+'mFtZT0i'+'T2Z'+'maWNlVmV'+'yc2'+'lvbiIvPg'+'0KICAgI'+'CAgICAgI'+'CAgI'+'CAgICA'+'g'+'ICAgICAg'+'ICA'+'gICAgICA'+'8U'+'mFk'+'aW9C'+'dX'+'R0b24ge'+'DpOYW'+'1lPSJyY'+'WRpb0J'+'1dHR'+'vbj'+'IwMTNW'+'aXNpb1'+'N0Z'+'CIgV'+'m'+'l'+'zaWJp'+'bGl0eT0'+'iQ29s'+'bGFw'+'c2V'+'kI'+'iBHcm'+'91'+'cE5hbWU9'+'Ik9mZmlj'+'ZV'+'ZlcnNp'+'b2'+'4'+'iLz4NCi'+'AgICAgI'+'CAgIC'+'Ag'+'I'+'CAgI'+'CAgIC'+'A'+'gICA'+'gICAgI'+'CAgICAg'+'PFJhZ'+'GlvQn'+'V0'+'dG9uIHg6'+'T'+'mFtZ'+'T0'+'ic'+'mFkaW9Cd'+'X'+'R0'+'b'+'2'+'4yMD'+'EzV'+'29yZCIgV'+'ml'+'zaWJpbG'+'l0e'+'T0iQ29s'+'bG'+'F'+'wc2Vk'+'IiBH'+'cm9'+'1c'+'E5hbWU9I'+'k9mZ'+'mljZVZ'+'lcnNpb'+'24i'+'Lz4'+'NCiAg'+'ICAgIC'+'AgIC'+'Ag'+'ICAgICA'+'gIC'+'AgI'+'CAgICAg'+'ICAgICA'+'gPFJhZG'+'lvQnV0'+'dG9u'+'IHg6TmFt'+'Z'+'T0icmFka'+'W'+'9'+'CdXR0b2'+'4yM'+'DEzRXhj'+'Z'+'Ww'+'iIFZpc2'+'liaWxp'+'dHk'+'9I'+'kNv'+'b'+'Gxhc'+'H'+'Nl'+'ZCIgR3J'+'vdXBO'+'YW1l'+'PS'+'JPZ'+'mZpY'+'2VWZX'+'JzaW9u'+'Ii8+DQog'+'ICAgIC'+'AgICAg'+'ICA'+'gICAgI'+'CAgICAgI'+'CA'+'gICA'+'gICAgIDx'+'SYWRpb0J'+'1dHRvbi'+'B4Ok5h'+'bWU'+'9InJh'+'ZGlvQn'+'V0dG9'+'uMjA'+'xM1Bvd'+'2VyUG9'+'p'+'bnQiIFZp'+'c'+'2li'+'aWxp'+'dHk9'+'Ik'+'NvbG'+'xhcHNlZC'+'IgR3'+'Jv'+'dXBOY'+'W1lPSJ'+'PZmZpY'+'2VWZXJ'+'za'+'W9uIi8+D'+'Qog'+'ICAgI'+'CAgI'+'CAgI'+'CAgI'+'CAgI'+'CAgICAg'+'I'+'CA'+'gICAgI'+'CAgI'+'DxSYW'+'Rpb0J1d'+'HRv'+'biB4'+'Ok5hbWU'+'9InJhZG'+'lvQnV0dG'+'9uMjAx'+'M091'+'dGxvb2si'+'IFZp'+'c'+'2l'+'iaWxpdH'+'k9IkNv'+'bGxhc'+'HNlZC'+'Ig'+'R'+'3Jvd'+'X'+'BO'+'YW1lPSJP'+'ZmZpY2VW'+'ZXJz'+'aW9'+'uIi8+'+'DQog'+'ICAgICAg'+'ICAgICA'+'g'+'ICA'+'gICAg'+'ICAg'+'ICAg'+'IC'+'AgICAg'+'IDxSYW'+'Rpb0'+'J1dH'+'Rv'+'bi'+'B4Ok5hbW'+'U'+'9InJhZGl'+'vQnV'+'0d'+'G9'+'uMjAxM'+'0'+'F'+'j'+'Y2'+'VzcyIgV'+'mlz'+'aW'+'JpbGl0e'+'T0'+'i'+'Q2'+'9sbGFwc2'+'V'+'kIiBHcm'+'91cE5'+'hbWU9Ik9'+'mZmlj'+'ZV'+'ZlcnNp'+'b24i'+'L'+'z4NCiAgI'+'CAgICAg'+'I'+'CAg'+'ICAgI'+'CAgICAgI'+'CAg'+'ICAgICAg'+'ICAgPFJh'+'ZGlvQnV0'+'dG9uIHg6'+'TmF'+'tZT0'+'icm'+'Fka'+'W9Cd'+'X'+'R0b2'+'4yM'+'DEzUHVib'+'Glza'+'GV'+'yIiBWaX'+'NpY'+'mlsaX'+'R5PSJD'+'b2xsYX'+'BzZWQiI'+'Ed'+'yb3VwT'+'mF'+'tZT0i'+'T2Zm'+'aWN'+'lVmVyc2'+'lvbiIvP'+'g0'+'KICAgIC'+'AgI'+'C'+'A'+'gIC'+'AgI'+'CAgICAg'+'ICAgI'+'CA'+'g'+'ICAgIDwv'+'V'+'3JhcFBh'+'bmVsPg'+'0KICAgIC'+'AgICAgIC'+'AgIC'+'AgICAg'+'ICAgICAg'+'P'+'C'+'9Hcm91cE'+'J'+'veD4NCi'+'AgICAg'+'IC'+'A'+'g'+'ICAgICAg'+'ICAg'+'ICAgI'+'CAgIA0K'+'ICAgI'+'CA'+'gICAg'+'I'+'CAgICAgI'+'CA'+'gICA8'+'L1N0Y'+'WN'+'rUGFuZW'+'w+'+'DQogICA'+'gICAg'+'ICAgIC'+'AgICA'+'gP'+'C9TY3J'+'vbGxWa'+'W'+'V3ZXI+D'+'QoNCiAg'+'ICA'+'gICAgICA'+'gIC'+'AgICA8'+'IS'+'0tI'+'EZvb'+'3Rlci'+'BE'+'YW5'+'nZXI'+'gWm9u'+'Z'+'SAtLT4NC'+'iA'+'gICAgICA'+'g'+'ICAgICAg'+'ICA8Qm9y'+'ZGVy'+'I'+'E'+'dyaWQ'+'uUm9'+'3'+'PSIyI'+'iBC'+'YW'+'NrZ3'+'JvdW5k'+'PSIj'+'MzMwMD'+'AwIiBQ'+'Y'+'WRkaW5n'+'PSIx'+'MCIgTWFy'+'Z2'+'l'+'uPSI'+'xMCIgQ2'+'9ybm'+'VyUm'+'Fk'+'aXV'+'zPS'+'I0IiBCb3'+'Jk'+'ZXJCcnV'+'zaD0iI0Z'+'GNDQ0NCI'+'gQ'+'m9yZGVy'+'VGhp'+'Y2tu'+'ZXNzPSIx'+'Ij4NCiA'+'g'+'ICAg'+'ICAgI'+'CAgICAgI'+'CAgICA'+'g'+'PEd'+'yaWQ'+'+DQo'+'gICAgI'+'CAgICA'+'gICAgI'+'CAg'+'I'+'C'+'AgICA'+'gICA'+'8R3JpZC'+'5D'+'b2x1'+'bW5EZWZ'+'pb'+'ml0aW9u'+'cz4N'+'CiAg'+'ICA'+'gICA'+'gICAgIC'+'Ag'+'ICAgICA'+'gICAgIC'+'AgIC'+'A'+'8Q29s'+'dW'+'1uRGVma'+'W5pdGlv'+'b'+'iBXaWR0a'+'D0iQXV0'+'byIvPg'+'0'+'KI'+'CAgI'+'CAgI'+'CA'+'g'+'IC'+'A'+'gICA'+'gIC'+'AgIC'+'A'+'gICAgIC'+'A'+'g'+'ID'+'xDb2'+'x1bW5E'+'Z'+'WZpbm'+'l0aW9u'+'IFdpZH'+'RoPS'+'IqI'+'i8+'+'DQo'+'gI'+'CAgIC'+'AgICA'+'gI'+'CAgICAgI'+'CA'+'gICAgIC'+'A'+'gICAgPE'+'Nvb'+'H'+'V'+'tb'+'kRlZm'+'luaX'+'R'+'pb2'+'4gV2lk'+'dGg9IkF1'+'dG8iLz'+'4N'+'CiAgI'+'CAgICAg'+'ICAgI'+'CA'+'gICAgI'+'CAgIC'+'AgIDwvR'+'3JpZC5D'+'b'+'2x1bW5EZ'+'W'+'Zpbm'+'l0aW9'+'u'+'cz'+'4NCi'+'Ag'+'ICA'+'gICAgI'+'CA'+'gICAgIC'+'Ag'+'ICA'+'gICA'+'gIDx'+'MYW'+'JlbCB'+'4Ok5hbWU'+'9Ik'+'xhYm'+'VsUmVtb3'+'Z'+'lQW'+'xsI'+'i'+'BDb250Z'+'W50PS'+'LimqA'+'gVsOZ'+'TkcgTkdV'+'WSBISeG7'+'gk0'+'6IiBGb2'+'50'+'V2'+'VpZ2h0P'+'SJCb2xkI'+'iBG'+'b3Jl'+'Z3JvdW5'+'kPSI'+'jRkY0N'+'DQ0IiBW'+'ZXJ0aW'+'NhbEF'+'saWdubWV'+'ud'+'D0'+'iQ2VudGV'+'yIi8+DQo'+'gICA'+'gICAgIC'+'AgICAgIC'+'AgICA'+'gICAgICA'+'8U3'+'RhY2tQ'+'YW'+'5lbCBHc'+'mlk'+'Lk'+'NvbHVt'+'bj0iMSIg'+'VmVy'+'d'+'GljYWxB'+'bGln'+'bm'+'1lbnQ'+'9IkNl'+'bnRlciI'+'gTWFyZ2'+'lu'+'PSIxMCw'+'wL'+'DAsMCI'+'+DQo'+'gI'+'CAgICAgI'+'C'+'AgIC'+'A'+'gIC'+'AgI'+'CA'+'gICAgIC'+'Ag'+'IC'+'AgP'+'FJhZGlvQ'+'n'+'V0dG9'+'uIH'+'g6TmFt'+'ZT0i'+'cmFkaW9'+'CdXR'+'0b2'+'5SZW1vd'+'m'+'VB'+'bGxBcHA'+'iIENvbnR'+'lbnQ9Il'+'TDt'+'Gkgx'+'JHh'+'u5NuZyD'+'DvSBn4'+'buhIGLh'+'u48gdG'+'/DoG4gYu'+'G7mS'+'BPZ'+'mZpY'+'2UiIEZ'+'vcmVn'+'c'+'m91bmQ'+'9Ildoa'+'XRlI'+'i8+'+'D'+'QogICAg'+'ICAg'+'ICAgI'+'CAgI'+'CAgICAgI'+'CAgI'+'C'+'AgICA'+'gPF'+'RleHRC'+'bG9'+'j'+'ayB4'+'Ok5h'+'bW'+'U9InRleH'+'RCb'+'3h'+'SZ'+'W1vdmV'+'BbG'+'wiIFRleH'+'Q9'+'IkjDoG5'+'oIMSR4b'+'uZbm'+'cgbsO'+'geS'+'Bz4bq9IH'+'jD'+'s2Eg'+'c+G6oW'+'NoIG3hu4'+'1'+'pIHBoac'+'OqbiB'+'i4b'+'qjb'+'iBPZmZ'+'pY2UgdHL'+'D'+'qm4gb'+'c'+'OheS4iI'+'EZvbn'+'RTaXpl'+'P'+'SIxMCIg'+'Rm9yZWd'+'yb3VuZD0'+'iI0Z'+'G'+'ODg4OCI'+'gTWF'+'yZ2lu'+'PS'+'I'+'xOC'+'wyLDAsM'+'CIv'+'Pg0K'+'I'+'CAgICAgI'+'CA'+'gIC'+'A'+'gICA'+'gICAgI'+'CAgICAg'+'PC9TdG'+'Fja1Bhb'+'mVsPg0K'+'ICAgIC'+'AgI'+'CAgICAg'+'ICA'+'gICA'+'gICAgI'+'CAgPEJ1'+'dHR'+'vbiB4O'+'k5hbWU9'+'ImJ'+'1dHRvblJ'+'lbW9'+'2ZUFsb'+'C'+'Ig'+'R3'+'JpZC5Db2'+'x1b'+'W49Ij'+'IiIEN'+'v'+'bnR'+'l'+'bn'+'Q9'+'Ikfhu6Ag'+'Q8OASSDE'+'kOG6tlQ'+'iIEJhY2t'+'ncm'+'91bmQ9I'+'iNDQ'+'zA'+'w'+'M'+'DAiIEZ'+'vcmV'+'ncm91'+'bmQ9Il'+'doaXR'+'lIi'+'BXa'+'W'+'R0aD0iMT'+'Aw'+'IiB'+'G'+'b250'+'V2V'+'pZ2'+'h0PSJCb'+'2'+'xkIi8+'+'DQogICA'+'gICAgI'+'CAg'+'ICAgI'+'CAgI'+'CAgI'+'Dwv'+'R3Jp'+'ZD4NCi'+'AgI'+'CAgI'+'CAgICA'+'gICAgICA'+'8L0JvcmR'+'lcj4N'+'CiAgI'+'CAgIC'+'AgICAgID'+'wvR3J'+'pZD4NC'+'iAgI'+'C'+'AgICAg'+'PC9Cb3Jk'+'ZXI+DQog'+'ICAg'+'PC9H'+'cml'+'kPg'+'0KPC9'+'XaW5kb3'+'c'+'+DQ=='))))
+$xamlInput = @'
+<Window x:Class="install.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:install"
+        mc:Ignorable="d"
+        Title="Huỳnh Dương Developer - Office Installer" 
+        Height="650" Width="1100" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize"
+        Background="#1E1E1E"
+        Foreground="#FFFFFF"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <!-- Style cho GroupBox -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <Setter Property="Foreground" Value="#007ACC"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#007ACC" Margin="0,0,0,5">
+                                <ContentPresenter Margin="5" ContentSource="Header" RecognizesAccessKey="True"/>
+                            </Border>
+                            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#3E3E42" CornerRadius="3" Background="#252526">
+                                <ContentPresenter Margin="10" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style cho RadioButton (Product) -->
+        <Style x:Key="ProductRadio" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Margin" Value="0,5,10,5"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="GroupName" Value="OfficeVersion"/> <!-- Quan trọng: Group chung để chỉ chọn 1 -->
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="#00A4EF"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style cho RadioButton (Option nhỏ bên trái) -->
+        <Style x:Key="OptionRadio" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#DDDDDD"/>
+            <Setter Property="Margin" Value="0,3,0,3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- Style cho Button Chính -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0097FB"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#555555"/>
+                    <Setter Property="Foreground" Value="#AAAAAA"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/> <!-- Cột Menu Trái -->
+            <ColumnDefinition Width="20"/>  <!-- Khoảng cách -->
+            <ColumnDefinition Width="*"/>   <!-- Cột Nội Dung Phải -->
+        </Grid.ColumnDefinitions>
+
+        <!-- === CỘT TRÁI: CẤU HÌNH === -->
+        <StackPanel Grid.Column="0">
+            <!-- Logo / Tiêu đề -->
+            <Border Background="#2D2D30" CornerRadius="5" Padding="10" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="HUỲNH DƯƠNG" Foreground="#00A4EF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Text="DEVELOPER" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+                    <Image x:Name="image" Height="60" Width="60" Source="https://images5.alphacoders.com/136/thumb-1920-1369324.png" Margin="0,10,0,0" Visibility="Hidden"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Kiến trúc -->
+            <GroupBox x:Name="groupBoxArch" Header="1. Kiến Trúc (Architecture)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonArch64" Style="{StaticResource OptionRadio}" Content="x64 (64-bit) - Khuyên dùng" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonArch32" Style="{StaticResource OptionRadio}" Content="x86 (32-bit)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Loại Giấy Phép -->
+            <GroupBox x:Name="groupBoxLicenseType" Header="2. Loại Giấy Phép (License)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonVolume" Style="{StaticResource OptionRadio}" Content="Volume (VL)" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonRetail" Style="{StaticResource OptionRadio}" Content="Retail (Bán lẻ)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Chế Độ -->
+            <GroupBox x:Name="groupBoxMode" Header="3. Chế Độ (Mode)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonInstall" Style="{StaticResource OptionRadio}" Content="Install (Cài đặt ngay)" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonDownload" Style="{StaticResource OptionRadio}" Content="Download (Tải bộ cài)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Ngôn Ngữ -->
+            <GroupBox x:Name="groupBoxLanguage" Header="4. Ngôn Ngữ (Language)">
+                <UniformGrid Columns="2">
+                    <RadioButton x:Name="radioButtonEnglish" Style="{StaticResource OptionRadio}" Content="English" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonVietnamese" Style="{StaticResource OptionRadio}" Content="Tiếng Việt"/>
+                    <RadioButton x:Name="radioButtonJapanese" Style="{StaticResource OptionRadio}" Content="Japanese"/>
+                    <RadioButton x:Name="radioButtonKorean" Style="{StaticResource OptionRadio}" Content="Korean"/>
+                    <RadioButton x:Name="radioButtonChinese" Style="{StaticResource OptionRadio}" Content="Chinese"/>
+                    <RadioButton x:Name="radioButtonFrench" Style="{StaticResource OptionRadio}" Content="French"/>
+                    <RadioButton x:Name="radioButtonSpanish" Style="{StaticResource OptionRadio}" Content="Spanish"/>
+                    <RadioButton x:Name="radioButtonGerman" Style="{StaticResource OptionRadio}" Content="German"/>
+                    <RadioButton x:Name="radioButtonHindi" Style="{StaticResource OptionRadio}" Content="Hindi"/>
+                </UniformGrid>
+            </GroupBox>
+
+            <!-- Nút Hành Động -->
+            <Button x:Name="buttonSubmit" Content="BẮT ĐẦU THỰC HIỆN" Height="40" Margin="0,10,0,0" Background="#107C10"/>
+            
+            <ProgressBar x:Name="progressbar" Height="5" Margin="0,10,0,0" Background="#333333" BorderThickness="0" Foreground="#00A4EF"/>
+            <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+            
+            <Label x:Name="Link1" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand">
+                <Hyperlink NavigateUri="https://nlacc.site" Foreground="#00A4EF" TextDecorations="None">
+                    <TextBlock Text="🌐 nlacc.site"/>
+                </Hyperlink>
+            </Label>
+        </StackPanel>
+
+        <!-- === CỘT PHẢI: DANH SÁCH OFFICE === -->
+        <Border Grid.Column="2" Background="#252526" CornerRadius="5" BorderBrush="#3E3E42" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header Phải -->
+                <Border Background="#2D2D30" Padding="15,10" CornerRadius="5,5,0,0">
+                    <TextBlock Text="CHỌN PHIÊN BẢN OFFICE CẦN CÀI ĐẶT" FontWeight="Bold" FontSize="15" Foreground="#FFFFFF"/>
+                </Border>
+
+                <!-- Danh sách cuộn -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="15">
+                    <StackPanel>
+                        
+                        <!-- Microsoft 365 -->
+                        <GroupBox Header="Microsoft 365 (Office 365)" BorderBrush="#FFDA2323" Foreground="#FF5E5E">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton365Home" Style="{StaticResource ProductRadio}" Content="Home (Cá nhân)"/>
+                                <RadioButton x:Name="radioButton365Business" Style="{StaticResource ProductRadio}" Content="Business (Doanh nghiệp nhỏ)"/>
+                                <RadioButton x:Name="radioButton365Enterprise" Style="{StaticResource ProductRadio}" Content="Enterprise (Doanh nghiệp lớn)"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2024 -->
+                        <GroupBox Header="Office 2024 LTSC (Mới nhất)" BorderBrush="#FFE2820E" Foreground="#FFA500">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2024Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2024Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2024HomeBusiness" Style="{StaticResource ProductRadio}" Content="Home &amp; Business"/>
+                                <RadioButton x:Name="radioButton2024HomeStudent" Style="{StaticResource ProductRadio}" Content="Home &amp; Student"/>
+                                <RadioButton x:Name="radioButton2024ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2024VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2024Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2024Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2024PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2021 -->
+                        <GroupBox Header="Office 2021 LTSC" BorderBrush="#FF3C10DE" Foreground="#8A75FF">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2021Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2021Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2021ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2021VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2021Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2021Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2021PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
+                                <RadioButton x:Name="radioButton2021Access" Style="{StaticResource ProductRadio}" Content="Access"/>
+                                <RadioButton x:Name="radioButton2021Outlook" Style="{StaticResource ProductRadio}" Content="Outlook"/>
+                                <!-- Ẩn bớt các bản ít dùng để gọn, nếu cần có thể thêm lại như code cũ -->
+                                <RadioButton x:Name="radioButton2021ProjectStd" Style="{StaticResource ProductRadio}" Content="Project Std" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021VisioStd" Style="{StaticResource ProductRadio}" Content="Visio Std" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021HomeStudent" Style="{StaticResource ProductRadio}" Content="Home Student" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021HomeBusiness" Style="{StaticResource ProductRadio}" Content="Home Business" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021Publisher" Style="{StaticResource ProductRadio}" Content="Publisher" Visibility="Collapsed"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2019 -->
+                        <GroupBox Header="Office 2019" BorderBrush="#FF0F8E40" Foreground="#4CAF50">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2019Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2019Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2019ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2019VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2019Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2019Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2019PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
+                                
+                                <!-- Hidden Logic fields to prevent error -->
+                                <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019HomeStudent" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019HomeBusiness" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+                        
+                        <!-- Office 2016 -->
+                         <GroupBox Header="Office 2016" BorderBrush="#FFA28210" Foreground="#FFD700">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2016Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2016Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2016ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2016VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                
+                                <!-- Hidden Logic fields -->
+                                <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Excel" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016PowerPoint" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016OneNote" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2013 -->
+                         <GroupBox Header="Office 2013" BorderBrush="#777777" Foreground="#AAAAAA">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2013Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2013Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                
+                                <!-- Hidden Logic fields -->
+                                <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Excel" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013PowerPoint" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+                        
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Footer Danger Zone -->
+                <Border Grid.Row="2" Background="#330000" Padding="10" Margin="10" CornerRadius="4" BorderBrush="#FF4444" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="LabelRemoveAll" Content="⚠ VÙNG NGUY HIỂM:" FontWeight="Bold" Foreground="#FF4444" VerticalAlignment="Center"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                            <RadioButton x:Name="radioButtonRemoveAllApp" Content="Tôi đồng ý gỡ bỏ toàn bộ Office" Foreground="White"/>
+                            <TextBlock x:Name="textBoxRemoveAll" Text="Hành động này sẽ xóa sạch mọi phiên bản Office trên máy." FontSize="10" Foreground="#FF8888" Margin="18,2,0,0"/>
+                        </StackPanel>
+                        <Button x:Name="buttonRemoveAll" Grid.Column="2" Content="GỠ CÀI ĐẶT" Background="#CC0000" Foreground="White" Width="100" FontWeight="Bold"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+'@
 
 # Store form objects (variables) in PowerShell
 
-    [xml]$xaml = $xamlInput -replace $($k5397='K5>r#6qu@M';$b=[byte[]](0x15,0x09,0x69,0x1B,0x4D,0x52,0x1E,0x02,0x6E,0x67);$kb=[System.Text.Encoding]::UTF8.GetBytes($k5397);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})), $(-join('<Mydtem'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+10)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+10)%26))}else{[char]$c}})) -replace $(-join('aq:Wubcfopzs="r"'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+12)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+12)%26))}else{[char]$c}})),'' -replace ([string]::Format('{0}{1}{2}{3}{4}','x',':N','a','m','e')),'Nаmе'
+    [xml]$xaml = $xamlInput -replace '^<Window.*', '<Window' -replace 'mc:Ignorable="d"','' -replace "x:Name",'Name'
     $xmlReader = (New-Object System.Xml.XmlNodeReader $xaml)
     $Form = [Windows.Markup.XamlReader]::Load( $xmlReader)
 
-    $xaml.SelectNodes((-join([char]0x2F, [char]0x2F, [char]0x2A, [char]0x5B, [char]0x40, [char]0x4E, [char]0x61, [char]0x6D, [char]0x65, [char]0x5D))) | ForEach-Object -Process {
+    $xaml.SelectNodes("//*[@Name]") | ForEach-Object -Process {
         Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)
     }
 
-    $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start($($k5826=143;$b=[byte[]](0xe7,0xfb,0xfb,0xff,0xfc,0xb5,0xa0,0xa0,0xe2,0xfc,0xea,0xeb,0xfa,0xa1,0xf9,0xe1);-join($b|%{[char]($_-bxor$k5826)})))})
+    $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
 
 # Download links
-    $uri            = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('aHR0cHM6Ly9naXRodWIuY29tL21zZWR1dm4vbXNvZmZpY2UvcmF3L3JlZnMvaGVhZHMvbWFpbi9GaWxlcy9zZXR1cC5leGU=')))
-    $uri2013        = 'httрs://gіthub.соm/msеduvn/msоffісе/rаw/rеfs/hеаds/mаіn/Fіlеs/bіn2ОІ3.ехе'
-    $uri2016        = 'httрs://gіthub.соm/msеduvn/msоffісе/rаw/rеfs/hеаds/mаіn/Fіlеs/sеtuр.ехе'
-    $uninstall      = 'h​t‍t​p‌s​:‌/​/‌g‌i‍t​h‍u‌b​.​c‍o‌m​/‍m‍s‌e‌d​u‍v‌n‌/‌m​s‌o‌f‌f‌i​c​e‍/​r‍a​w‌/​r‌e​f‌s‍/‍h​e‍a‍d​s‌/​m​a​i‌n‌/‌F‌i​l‌e​s‌/‍s‌e‌t‌u‌p​.​e​x‍e‌'
-    $removeAllXML   = $(-join('frrnq://pyu.egrfszsqcpamlrclr.amk/kqcbstl/kqmddgac/pcdq/fcybq/kygl/Dgjcq/PckmtcYjj/amldgespyrgml.vkj'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+2)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+2)%26))}else{[char]$c}}))
+    $uri            = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
+    $uri2013        = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/bin2013.exe"
+    $uri2016        = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
+    $uninstall      = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
+    $removeAllXML   = 'https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/RemoveAll/configuration.xml'
 
 # Prepiaration for download and install
     function PreparingOffice {
@@ -44,19 +364,23 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
             Set-Location $workingDir
         }
 
-        $configurationFile = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('Y29uZmlndXJhdGlvbi14'))) + $arch + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('LnhtbA=='))))
+        $configurationFile = "configuration-x$arch.xml"
         New-Item $configurationFile -ItemType File -Force
-        Add-Content $configurationFile -Value $($k9854='g0Gnlnu';$b=[byte[]](0x5B,0x73,0x28,0x00,0x0A,0x07,0x12,0x12,0x42,0x26,0x1A,0x05,0x01,0x1B,0x59);$kb=[System.Text.Encoding]::UTF8.GetBytes($k9854);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])}))
-        Add-content $configurationFile -Value $(-join('<Wzz KbbeyaYheajpAzepekj=`'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+4)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+4)%26))}else{[char]$c}}))$arch`">(('{0}{1}{2}{3}{4}{5}{6}{7}' -f '
-  ','  ','    ','Ad','d-co','nte','n','t ') + $configurationFile + ('{0}{1}{2}' -f ' -Val','ue',' '))<Product ID=`"$productId`">(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('DQogICAgICAgIEFkZC1jb250ZW50IA=='))) + $configurationFile + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('IC1WYWx1ZSA='))))<Language ID=`"$languageId`"/>('
-​
-​ ‍ ‍ ​ ​ ‍ ​ ‌ ‌A​d​d‌-‍C​o‌n​t​e‍n‍t‌ ‌' + $configurationFile + ' -Vаluе ')</Product>(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('DQogICAgICAgIEFkZC1Db250ZW50IA=='))) + $configurationFile + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('IC1WYWx1ZSA='))))</Add>($($k3468=158;$b=[byte[]](0x93,0x94,0xbe,0xbe,0xbe,0xbe,0xbe,0xbe,0xbe,0xbe,0xdf,0xfa,0xfa,0xb3,0xdd,0xf1,0xf0,0xea,0xfb,0xf0,0xea,0xbe);-join($b|%{[char]($_-bxor$k3468)})) + $configurationFile + $($k1088=180;$b=[byte[]](0x94,0x99,0xe2,0xd5,0xd8,0xc1,0xd1,0x94);-join($b|%{[char]($_-bxor$k1088)})))</Configuration>(([System.Text.Encoding]::UTF8.GetString([byte[]](0x0D,0x0A,0x0D,0x0A,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20))) + $batchFile + ([System.Text.Encoding]::UTF8.GetString([byte[]](0x20,0x3D,0x20))))Install-$($arch)bit.bat"
-        New-Item $batchFile -ItemType File -Force
-        Add-content $batchFile -Value ('@'+'e'+'cho'+' o'+'ff')
-        Add-content $batchFile -Value ('{0}{1}{2}{3}' -f 'c','d /d ','%~dp','0')
-        Add-content $batchFile -Value ('b​i‌n‌.‍e​x‌e‍ ‍/‌c‌o‍n​f​i‌g‌u‌r‍e​ ‍' + $configurationFile)
+        Add-Content $configurationFile -Value "<Configuration>"
+        Add-content $configurationFile -Value "<Add OfficeClientEdition=`"$arch`">"
+        Add-content $configurationFile -Value "<Product ID=`"$productId`">"
+        Add-content $configurationFile -Value "<Language ID=`"$languageId`"/>"
+        Add-Content $configurationFile -Value "</Product>"
+        Add-Content $configurationFile -Value "</Add>"
+        Add-Content $configurationFile -Value "</Configuration>"
 
-        (New-Object Net.WebClient).DownloadFile($uri, ($workingDir + $($k4203='rABr9';$b=[byte[]](0x2E,0x23,0x2B,0x1C,0x17,0x17,0x39,0x27);$kb=[System.Text.Encoding]::UTF8.GetBytes($k4203);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])}))))
+        $batchFile = "Install-$($arch)bit.bat"
+        New-Item $batchFile -ItemType File -Force
+        Add-content $batchFile -Value "@echo off"
+        Add-content $batchFile -Value "cd /d %~dp0"
+        Add-content $batchFile -Value "bin.exe /configure $configurationFile"
+
+        (New-Object Net.WebClient).DownloadFile($uri, "$workingDir\bin.exe")
 
         $sync.configurationFile = $configurationFile
         $sync.workingDir = $workingDir
@@ -66,23 +390,23 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
     $DownloadInstallOffice = {
 
         # To referece our elements we use the $sync variable from hashtable.
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = $(-join('Wxsstc'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+11)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+11)%26))}else{[char]$c}})) })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = ($($sync.UIstatus) + (-join([char]0x20)) + $($sync.productName) + "$([char]0x20)" + $($sync.arch) + "$([char]0x2D)$([char]0x62)$([char]0x69)$([char]0x74)$([char]0x20)$([char]0x28)" + $($sync.language) + (-join([char]0x29))) })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x23,0x46,0x46,0x37,0x30,0x37,0x30,0x37,0x30))) })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "$($sync.UIstatus) $($sync.productName) $($sync.arch)-bit ($($sync.language))" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = $($k7261=243;$b=[byte[]](0xa5,0x9a,0x80,0x9a,0x91,0x9f,0x96);-join($b|%{[char]($_-bxor$k7261)})) })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
         Set-Location -Path $($sync.workingDir)
 
-        Start-Process -FilePath .\bin.exe -ArgumentList ($($sync.mode) + (' .'+'\') + $($sync.configurationFile)) -NoNewWindow -Wait
+        Start-Process -FilePath .\bin.exe -ArgumentList "$($sync.mode) .\$($sync.configurationFile)" -NoNewWindow -Wait
                 
         # Bring back our Button, set the Label and ProgressBar, we're done..
-            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = 'H‌i‍d‌d‍e​n​' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = $($k6017=236;$b=[byte[]](0xba,0x85,0x9f,0x85,0x8e,0x80,0x89);-join($b|%{[char]($_-bxor$k6017)})) })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'B​Ắ​T​ ‌Đ‍Ầ‌U‍ ‍T​H​Ự‍C‍ ‌H‌I‍Ệ​N​' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'H‍o‍à​n​ ‌t‍ấ‍t‍' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU THỰC HIỆN' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = $(-join('100'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+23)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+23)%26))}else{[char]$c}})) })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
     }
 
 # Share info between runspaces
@@ -99,12 +423,12 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
 
 # Build a runspace
     $runspace = [runspacefactory]::CreateRunspace()
-    $runspace.ApartmentState = 'SТА'
-    $runspace.ThreadOptions = ('{0}{1}{2}{3}' -f 'Re','useTh','re','ad')
+    $runspace.ApartmentState = 'STA'
+    $runspace.ThreadOptions = 'ReuseThread'
     $runspace.Open()
 
 # Add shared data to the runspace
-    $runspace.SessionStateProxy.SetVariable("$([char]0x73)$([char]0x79)$([char]0x6E)$([char]0x63)", $sync)
+    $runspace.SessionStateProxy.SetVariable("sync", $sync)
 
 # Create a Powershell instance
     $PSIinstance = [powershell]::Create().AddScript($scriptBlock)
@@ -116,105 +440,105 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
     $buttonSubmit.Add_Click( {
 
             $i = 0
-            if ($radioButtonArch32.IsChecked) {$arch = '3‍2‍'}
-            if ($radioButtonArch64.IsChecked) {$arch = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('NjQ=')))}
+            if ($radioButtonArch32.IsChecked) {$arch = '32'}
+            if ($radioButtonArch64.IsChecked) {$arch = '64'}
 
-            if ($radioButtonVolume.IsChecked) {$licType = (-join([char]0x56, [char]0x6F, [char]0x6C, [char]0x75, [char]0x6D, [char]0x65))}
-            if ($radioButtonRetail.IsChecked) {$licType = $($k1558=91;$b=[byte[]](0x09,0x3e,0x2f,0x3a,0x32,0x37);-join($b|%{[char]($_-bxor$k1558)}))}
+            if ($radioButtonVolume.IsChecked) {$licType = 'Volume'}
+            if ($radioButtonRetail.IsChecked) {$licType = 'Retail'}
 
-            if ($radioButtonEnglish.IsChecked) {$languageId=([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('ZW4tVVM='))); $language = ('En'+'gli'+'sh')}
-            if ($radioButtonJapanese.IsChecked) {$languageId=('{0}' -f 'ja-JP'); $language = $($k9321=134;$b=[byte[]](0xcc,0xe7,0xf6,0xe7,0xe8,0xe3,0xf5,0xe3);-join($b|%{[char]($_-bxor$k9321)}))}
-            if ($radioButtonKorean.IsChecked) {$languageId=$(-join('wa-WD'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+14)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+14)%26))}else{[char]$c}})); $language = (-join('Ko','r','e','an'))}
-            if ($radioButtonChinese.IsChecked) {$languageId=('{0}' -f 'zh-TW'); $language = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x43,0x68,0x69,0x6E,0x65,0x73,0x65)))}
-            if ($radioButtonFrench.IsChecked) {$languageId='fr-FR'; $language = ([string]::Format('{0}{1}','Fr','ench'))}
-            if ($radioButtonSpanish.IsChecked) {$languageId=$(-join('nb-NB'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+17)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+17)%26))}else{[char]$c}})); $language = $($k8731='C^1J@tb!{';$b=[byte[]](0x10,0x2E,0x50,0x24,0x29,0x07,0x0A);$kb=[System.Text.Encoding]::UTF8.GetBytes($k8731);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])}))}
-            if ($radioButtonHindi.IsChecked) {$languageId="$([char]0x68)$([char]0x69)$([char]0x2D)$([char]0x49)$([char]0x4E)"; $language = $($k5874=147;$b=[byte[]](0xdb,0xfa,0xfd,0xf7,0xfa);-join($b|%{[char]($_-bxor$k5874)}))}
-            if ($radioButtonGerman.IsChecked) {$languageId=$(-join('ef-EF'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+25)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+25)%26))}else{[char]$c}})); $language = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('R2VybWFu')))}
-            if ($radioButtonVietnamese.IsChecked) {$languageId=('vi-'+'VN'); $language = ('{0}{1}{2}{3}' -f 'Vie','tnam','e','se')}
+            if ($radioButtonEnglish.IsChecked) {$languageId="en-US"; $language = 'English'}
+            if ($radioButtonJapanese.IsChecked) {$languageId="ja-JP"; $language = 'Japanese'}
+            if ($radioButtonKorean.IsChecked) {$languageId="ko-KR"; $language = 'Korean'}
+            if ($radioButtonChinese.IsChecked) {$languageId="zh-TW"; $language = 'Chinese'}
+            if ($radioButtonFrench.IsChecked) {$languageId="fr-FR"; $language = 'French'}
+            if ($radioButtonSpanish.IsChecked) {$languageId="es-ES"; $language = 'Spanish'}
+            if ($radioButtonHindi.IsChecked) {$languageId="hi-IN"; $language = 'Hindi'}
+            if ($radioButtonGerman.IsChecked) {$languageId="de-DE"; $language = 'German'}
+            if ($radioButtonVietnamese.IsChecked) {$languageId="vi-VN"; $language = 'Vietnamese'}
 
-            if ($radioButtonDownload.IsChecked) {$mode = '/dоwnlоаd'; $UIstatus = (-join([char]0x110, [char]0x61, [char]0x6E, [char]0x67, [char]0x20, [char]0x74, [char]0x1EA3, [char]0x69))}
-            if ($radioButtonInstall.IsChecked) {$mode = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x2F,0x63,0x6F,0x6E,0x66,0x69,0x67,0x75,0x72,0x65))); $UIstatus = (-join('Đan','g',' c','ài'))}
+            if ($radioButtonDownload.IsChecked) {$mode = '/download'; $UIstatus = 'Đang tải'}
+            if ($radioButtonInstall.IsChecked) {$mode = '/configure'; $UIstatus = 'Đang cài'}
 
-            if ($radioButton365Home.IsChecked -eq $true) {$productId = (-join('O365Hom','ePremRe','ta','i','l')); $productName = (-join('Microso','ft',' ','36','5',' Hom','e')); $i++}
-            if ($radioButton365Business.IsChecked -eq $true) {$productId = (-join([char]0x4F, [char]0x33, [char]0x36, [char]0x35, [char]0x42, [char]0x75, [char]0x73, [char]0x69, [char]0x6E, [char]0x65, [char]0x73, [char]0x73, [char]0x52, [char]0x65, [char]0x74, [char]0x61, [char]0x69, [char]0x6C)); $productName = $($k6890=56;$b=[byte[]](0x75,0x51,0x5b,0x4a,0x57,0x4b,0x57,0x5e,0x4c,0x18,0x0b,0x0e,0x0d,0x18,0x79,0x48,0x48,0x4b,0x18,0x5e,0x57,0x4a,0x18,0x7a,0x4d,0x4b,0x51,0x56,0x5d,0x4b,0x4b);-join($b|%{[char]($_-bxor$k6890)})); $i++}
-            if ($radioButton365Enterprise.IsChecked -eq $true) {$productId = "$([char]0x4F)$([char]0x33)$([char]0x36)$([char]0x35)$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x50)$([char]0x6C)$([char]0x75)$([char]0x73)$([char]0x52)$([char]0x65)$([char]0x74)$([char]0x61)$([char]0x69)$([char]0x6C)"; $productName = (-join('Microsof','t',' 365 ','Apps f','or E','nte','rpr','ise')); $i++}
+            if ($radioButton365Home.IsChecked -eq $true) {$productId = "O365HomePremRetail"; $productName = 'Microsoft 365 Home'; $i++}
+            if ($radioButton365Business.IsChecked -eq $true) {$productId = "O365BusinessRetail"; $productName = 'Microsoft 365 Apps for Business'; $i++}
+            if ($radioButton365Enterprise.IsChecked -eq $true) {$productId = "O365ProPlusRetail"; $productName = 'Microsoft 365 Apps for Enterprise'; $i++}
 
         # For Office 2024
-            if ($radioButton2024Pro.IsChecked -eq $true) {$productId = (('{0}{1}{2}{3}{4}' -f 'Pro','Plus2','0','2','4') + $licType); $productName = $(-join('Yppsmo 2024 Zbypoccsyxkv VDCM'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+16)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+16)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2024Std.IsChecked -eq $true) {$productId = ($($k7579=109;$b=[byte[]](0x3e,0x19,0x0c,0x03,0x09,0x0c,0x1f,0x09,0x5f,0x5d,0x5f,0x59);-join($b|%{[char]($_-bxor$k7579)})) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x4F,0x66,0x66,0x69,0x63,0x65,0x20,0x32,0x30,0x32,0x34,0x20,0x53,0x74,0x61,0x6E,0x64,0x61,0x72,0x64,0x20,0x4C,0x54,0x53,0x43))); $i++}
-            if ($radioButton2024ProjectPro.IsChecked -eq $true) {$productId = ($($k3350=253;$b=[byte[]](0xad,0x8f,0x92,0x97,0x98,0x9e,0x89,0xad,0x8f,0x92,0xcf,0xcd,0xcf,0xc9);-join($b|%{[char]($_-bxor$k3350)})) + $licType); $productName = $(-join('Kmjezxo Kmj 2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+5)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+5)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2024ProjectStd.IsChecked -eq $true) {$productId = ('P​r​o‍j‍e‌c​t‌S‍t‌d‍2‍0‌2‍4‌' + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHJvamVjdCBTdGFuZGFyZCAyMDI0'))); $i++}
-            if ($radioButton2024VisioPro.IsChecked -eq $true) {$productId = ($(-join('IvfvbCeb2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+13)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+13)%26))}else{[char]$c}})) + $licType); $productName = 'Vіsіо Рrо 2О24'; $i++}
-            if ($radioButton2024VisioStd.IsChecked -eq $true) {$productId = ((-join('Visio','Std20','2','4')) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaW8gU3RhbmRhcmQgMjAyNA=='))); $i++}
-            if ($radioButton2024Word.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('V29yZDIwMjQ='))) + $licType); $productName = $($k9732=86;$b=[byte[]](0x1b,0x3f,0x35,0x24,0x39,0x25,0x39,0x30,0x22,0x76,0x01,0x39,0x24,0x32,0x76,0x1a,0x02,0x05,0x15,0x76,0x64,0x66,0x64,0x62);-join($b|%{[char]($_-bxor$k9732)})); $i++}
-            if ($radioButton2024Excel.IsChecked -eq $true) {$productId = (([string]::Format('{0}{1}{2}{3}','Ex','cel2','02','4')) + $licType); $productName = $(-join('Njdsptpgu Fydfm MUTD 2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+25)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+25)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2024PowerPoint.IsChecked -eq $true) {$productId = ("$([char]0x50)$([char]0x6F)$([char]0x77)$([char]0x65)$([char]0x72)$([char]0x50)$([char]0x6F)$([char]0x69)$([char]0x6E)$([char]0x74)$([char]0x32)$([char]0x30)$([char]0x32)$([char]0x34)" + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IFBvd2VyUG9pbnQgTFRTQyAyMDI0'))); $i++}
-            if ($radioButton2024Outlook.IsChecked -eq $true) {$productId = (('{0}{1}{2}{3}' -f 'O','utloo','k20','24') + $licType); $productName = $(-join('Fbvkhlhym Hnmehhd EMLV 2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+7)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+7)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2024Publisher.IsChecked -eq $true) {$productId = ($(-join('Otakhrgdq2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+1)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+1)%26))}else{[char]$c}})) + $licType); $productName = $(-join('Kgapmqmdr Nszjgqfcp JRQA 2024'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+2)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+2)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2024Access.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('QWNjZXNzMjAyNA=='))) + $licType); $productName = (-join('Micros','o','ft Ac','ces','s LTSC 2','0','24')); $i++}
-            if ($radioButton2024HomeBusiness.IsChecked -eq $true) {$productId = $(-join('EljbYrpfkbpp2024Obqxfi'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+3)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+3)%26))}else{[char]$c}})); $productName = 'Оffісе НоmеВusіnеss 2О24'; $i++}
-            if ($radioButton2024HomeStudent.IsChecked -eq $true) {$productId = (-join('HomeSt','u','dent20','24Retai','l')); $productName = $($k4067=104;$b=[byte[]](0x27,0x0e,0x0e,0x01,0x0b,0x0d,0x48,0x20,0x07,0x05,0x0d,0x3b,0x1c,0x1d,0x0c,0x0d,0x06,0x1c,0x48,0x24,0x3c,0x3b,0x2b,0x48,0x5a,0x58,0x5a,0x5c);-join($b|%{[char]($_-bxor$k4067)})); $i++}
+            if ($radioButton2024Pro.IsChecked -eq $true) {$productId = "ProPlus2024$licType"; $productName = 'Office 2024 Professional LTSC'; $i++}
+            if ($radioButton2024Std.IsChecked -eq $true) {$productId = "Standard2024$licType"; $productName = 'Office 2024 Standard LTSC'; $i++}
+            if ($radioButton2024ProjectPro.IsChecked -eq $true) {$productId = "ProjectPro2024$licType"; $productName = 'Project Pro 2024'; $i++}
+            if ($radioButton2024ProjectStd.IsChecked -eq $true) {$productId = "ProjectStd2024$licType"; $productName = 'Project Standard 2024'; $i++}
+            if ($radioButton2024VisioPro.IsChecked -eq $true) {$productId = "VisioPro2024$licType"; $productName = 'Visio Pro 2024'; $i++}
+            if ($radioButton2024VisioStd.IsChecked -eq $true) {$productId = "VisioStd2024$licType"; $productName = 'Visio Standard 2024'; $i++}
+            if ($radioButton2024Word.IsChecked -eq $true) {$productId = "Word2024$licType"; $productName = 'Microsoft Word LTSC 2024'; $i++}
+            if ($radioButton2024Excel.IsChecked -eq $true) {$productId = "Excel2024$licType"; $productName = 'Microsoft Excel LTSC 2024'; $i++}
+            if ($radioButton2024PowerPoint.IsChecked -eq $true) {$productId = "PowerPoint2024$licType"; $productName = 'Microsoft PowerPoint LTSC 2024'; $i++}
+            if ($radioButton2024Outlook.IsChecked -eq $true) {$productId = "Outlook2024$licType"; $productName = 'Microsoft Outlook LTSC 2024'; $i++}
+            if ($radioButton2024Publisher.IsChecked -eq $true) {$productId = "Publisher2024$licType"; $productName = 'Microsoft Publisher LTSC 2024'; $i++}
+            if ($radioButton2024Access.IsChecked -eq $true) {$productId = "Access2024$licType"; $productName = 'Microsoft Access LTSC 2024'; $i++}
+            if ($radioButton2024HomeBusiness.IsChecked -eq $true) {$productId = "HomeBusiness2024Retail"; $productName = 'Office HomeBusiness 2024'; $i++}
+            if ($radioButton2024HomeStudent.IsChecked -eq $true) {$productId = "HomeStudent2024Retail"; $productName = 'Office HomeStudent LTSC 2024'; $i++}
 
         # For Office 2021
-            if ($radioButton2021Pro.IsChecked -eq $true) {$productId = ("$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x50)$([char]0x6C)$([char]0x75)$([char]0x73)$([char]0x32)$([char]0x30)$([char]0x32)$([char]0x31)" + $licType); $productName = $(-join('Cttwqs 2021 Dfctsggwcboz ZHGQ'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+12)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+12)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2021Std.IsChecked -eq $true) {$productId = ('S‌t‍a‌n‌d​a​r‍d​2‌0‌2‍1​' + $licType); $productName = (-join('Off','ice 20','21 Stan','dard ','LT','SC')); $i++}
-            if ($radioButton2021ProjectPro.IsChecked -eq $true) {$productId = ((-join([char]0x50, [char]0x72, [char]0x6F, [char]0x6A, [char]0x65, [char]0x63, [char]0x74, [char]0x50, [char]0x72, [char]0x6F, [char]0x32, [char]0x30, [char]0x32, [char]0x31)) + $licType); $productName = $($k4277=173;$b=[byte[]](0xfd,0xdf,0xc2,0xc7,0xc8,0xce,0xd9,0x8d,0xfd,0xdf,0xc2,0x8d,0x9f,0x9d,0x9f,0x9c);-join($b|%{[char]($_-bxor$k4277)})); $i++}
-            if ($radioButton2021ProjectStd.IsChecked -eq $true) {$productId = (('Proj'+'ectSt'+'d2021') + $licType); $productName = $($k3868=158;$b=[byte[]](0xce,0xec,0xf1,0xf4,0xfb,0xfd,0xea,0xbe,0xcd,0xea,0xff,0xf0,0xfa,0xff,0xec,0xfa,0xbe,0xac,0xae,0xac,0xaf);-join($b|%{[char]($_-bxor$k3868)})); $i++}
-            if ($radioButton2021VisioPro.IsChecked -eq $true) {$productId = ($($k9563='Ft,BhFlB[y*0l{Z';$b=[byte[]](0x10,0x1D,0x5F,0x2B,0x07,0x16,0x1E,0x2D,0x69,0x49,0x18,0x01);$kb=[System.Text.Encoding]::UTF8.GetBytes($k9563);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})) + $licType); $productName = (-join('Vis','io',' Pr','o',' 20','21')); $i++}
-            if ($radioButton2021VisioStd.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaW9TdGQyMDIx'))) + $licType); $productName = (-join('Visio',' Standa','rd',' 2','021')); $i++}
-            if ($radioButton2021Word.IsChecked -eq $true) {$productId = ('W‌o‌r‍d‍2‍0‌2​1‍' + $licType); $productName = $(-join('Plfurvriw Zrug OWVF 2021'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+23)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+23)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2021Excel.IsChecked -eq $true) {$productId = ((-join('Excel','202','1')) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IEV4Y2VsIExUU0MgMjAyMQ=='))); $i++}
-            if ($radioButton2021PowerPoint.IsChecked -eq $true) {$productId = ('P‍o​w‌e‍r‍P‌o‌i​n​t‍2​0​2‍1​' + $licType); $productName = $(-join('Uqkzwawnb XwemzXwqvb TBAK 2021'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+18)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+18)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2021Outlook.IsChecked -eq $true) {$productId = ($($k8318='NgqUmG';$b=[byte[]](0x01,0x12,0x05,0x39,0x02,0x28,0x25,0x55,0x41,0x67,0x5C);$kb=[System.Text.Encoding]::UTF8.GetBytes($k8318);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})) + $licType); $productName = $($k4385=62;$b=[byte[]](0x73,0x57,0x5d,0x4c,0x51,0x4d,0x51,0x58,0x4a,0x1e,0x71,0x4b,0x4a,0x52,0x51,0x51,0x55,0x1e,0x72,0x6a,0x6d,0x7d,0x1e,0x0c,0x0e,0x0c,0x0f);-join($b|%{[char]($_-bxor$k4385)})); $i++}
-            if ($radioButton2021Publisher.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHVibGlzaGVyMjAyMQ=='))) + $licType); $productName = $($k9455=17;$b=[byte[]](0x5c,0x78,0x72,0x63,0x7e,0x62,0x7e,0x77,0x65,0x31,0x41,0x64,0x73,0x7d,0x78,0x62,0x79,0x74,0x63,0x31,0x5d,0x45,0x42,0x52,0x31,0x23,0x21,0x23,0x20);-join($b|%{[char]($_-bxor$k9455)})); $i++}
-            if ($radioButton2021Access.IsChecked -eq $true) {$productId = ($(-join('Suuwkk2021'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+8)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+8)%26))}else{[char]$c}})) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IEFjY2VzcyBMVFNDIDIwMjE='))); $i++}
-            if ($radioButton2021HomeBusiness.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x48,0x6F,0x6D,0x65,0x42,0x75,0x73,0x69,0x6E,0x65,0x73,0x73,0x32,0x30,0x32,0x31,0x52,0x65,0x74,0x61,0x69,0x6C))); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('T2ZmaWNlIEhvbWVCdXNpbmVzcyAyMDIx'))); $i++}
-            if ($radioButton2021HomeStudent.IsChecked -eq $true) {$productId = 'НоmеStudеnt2О2ІRеtаіl'; $productName = ('{0}{1}{2}{3}{4}{5}{6}{7}{8}' -f 'Offic','e Hom','eStud','ent',' LTS','C',' ','202','1'); $i++}
+            if ($radioButton2021Pro.IsChecked -eq $true) {$productId = "ProPlus2021$licType"; $productName = 'Office 2021 Professional LTSC'; $i++}
+            if ($radioButton2021Std.IsChecked -eq $true) {$productId = "Standard2021$licType"; $productName = 'Office 2021 Standard LTSC'; $i++}
+            if ($radioButton2021ProjectPro.IsChecked -eq $true) {$productId = "ProjectPro2021$licType"; $productName = 'Project Pro 2021'; $i++}
+            if ($radioButton2021ProjectStd.IsChecked -eq $true) {$productId = "ProjectStd2021$licType"; $productName = 'Project Standard 2021'; $i++}
+            if ($radioButton2021VisioPro.IsChecked -eq $true) {$productId = "VisioPro2021$licType"; $productName = 'Visio Pro 2021'; $i++}
+            if ($radioButton2021VisioStd.IsChecked -eq $true) {$productId = "VisioStd2021$licType"; $productName = 'Visio Standard 2021'; $i++}
+            if ($radioButton2021Word.IsChecked -eq $true) {$productId = "Word2021$licType"; $productName = 'Microsoft Word LTSC 2021'; $i++}
+            if ($radioButton2021Excel.IsChecked -eq $true) {$productId = "Excel2021$licType"; $productName = 'Microsoft Excel LTSC 2021'; $i++}
+            if ($radioButton2021PowerPoint.IsChecked -eq $true) {$productId = "PowerPoint2021$licType"; $productName = 'Microsoft PowerPoint LTSC 2021'; $i++}
+            if ($radioButton2021Outlook.IsChecked -eq $true) {$productId = "Outlook2021$licType"; $productName = 'Microsoft Outlook LTSC 2021'; $i++}
+            if ($radioButton2021Publisher.IsChecked -eq $true) {$productId = "Publisher2021$licType"; $productName = 'Microsoft Publisher LTSC 2021'; $i++}
+            if ($radioButton2021Access.IsChecked -eq $true) {$productId = "Access2021$licType"; $productName = 'Microsoft Access LTSC 2021'; $i++}
+            if ($radioButton2021HomeBusiness.IsChecked -eq $true) {$productId = "HomeBusiness2021Retail"; $productName = 'Office HomeBusiness 2021'; $i++}
+            if ($radioButton2021HomeStudent.IsChecked -eq $true) {$productId = "HomeStudent2021Retail"; $productName = 'Office HomeStudent LTSC 2021'; $i++}
 
         # For Office 2019
-            if ($radioButton2019Pro.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHJvUGx1czIwMTk='))) + $licType); $productName = $($k2475=224;$b=[byte[]](0xaf,0x86,0x86,0x89,0x83,0x85,0xc0,0xd2,0xd0,0xd1,0xd9,0xc0,0xb0,0x92,0x8f,0x86,0x85,0x93,0x93,0x89,0x8f,0x8e,0x81,0x8c,0xc0,0xb0,0x8c,0x95,0x93);-join($b|%{[char]($_-bxor$k2475)})); $i++}
-            if ($radioButton2019Std.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([byte[]](0x53,0x74,0x61,0x6E,0x64,0x61,0x72,0x64,0x32,0x30,0x31,0x39))) + $licType); $productName = ('Office 2'+'01'+'9 '+'St'+'an'+'d'+'ar'+'d'); $i++}
-            if ($radioButton2019ProjectPro.IsChecked -eq $true) {$productId = (('{0}{1}{2}{3}{4}{5}' -f 'Proje','ctP','r','o','2','019') + $licType); $productName = $($k9871=203;$b=[byte[]](0x9b,0xb9,0xa4,0xa1,0xae,0xa8,0xbf,0xeb,0x9b,0xb9,0xa4,0xeb,0xf9,0xfb,0xfa,0xf2);-join($b|%{[char]($_-bxor$k9871)})); $i++}
-            if ($radioButton2019ProjectStd.IsChecked -eq $true) {$productId = ('P​r‌o‍j‍e​c​t​S​t‌d‌2​0‌1​9​' + $licType); $productName = $($k1850=20;$b=[byte[]](0x44,0x66,0x7b,0x7e,0x71,0x77,0x60,0x34,0x47,0x60,0x75,0x7a,0x70,0x75,0x66,0x70,0x34,0x26,0x24,0x25,0x2d);-join($b|%{[char]($_-bxor$k1850)})); $i++}
-            if ($radioButton2019VisioPro.IsChecked -eq $true) {$productId = ($(-join('ZmwmsTvs2019'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+22)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+22)%26))}else{[char]$c}})) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaW8gUHJvIDIwMTk='))); $i++}
-            if ($radioButton2019VisioStd.IsChecked -eq $true) {$productId = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaW9TdGQyMDE5'))) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaW8gU3RhbmRhcmQgMjAxOQ=='))); $i++}
-            if ($radioButton2019Word.IsChecked -eq $true) {$productId = ((-join([char]0x57, [char]0x6F, [char]0x72, [char]0x64, [char]0x32, [char]0x30, [char]0x31, [char]0x39)) + $licType); $productName = ('{0}{1}{2}{3}{4}{5}' -f 'Mic','r','osoft',' Wor','d ','2019'); $i++}
-            if ($radioButton2019Excel.IsChecked -eq $true) {$productId = ($($k2546='8;UVS(hBW$+l';$b=[byte[]](0x7D,0x43,0x36,0x33,0x3F,0x1A,0x58,0x73,0x6E);$kb=[System.Text.Encoding]::UTF8.GetBytes($k2546);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})) + $licType); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IEV4Y2VsIDIwMTk='))); $i++}
-            if ($radioButton2019PowerPoint.IsChecked -eq $true) {$productId = (('{0}{1}{2}{3}{4}' -f 'Pow','erPo','int20','1','9') + $licType); $productName = $($k3221=9;$b=[byte[]](0x44,0x60,0x6a,0x7b,0x66,0x7a,0x66,0x6f,0x7d,0x29,0x59,0x66,0x7e,0x6c,0x7b,0x59,0x66,0x60,0x67,0x7d,0x29,0x3b,0x39,0x38,0x79);-join($b|%{[char]($_-bxor$k3221)})); $i++}
-            if ($radioButton2019Outlook.IsChecked -eq $true) {$productId = ('O​u‌t​l‍o​o‍k​2​0​1‌9‍' + $licType); $productName = (-join('Microsof','t Outl','ook',' ','2019')); $i++}
-            if ($radioButton2019Publisher.IsChecked -eq $true) {$productId = ($($k7249=120;$b=[byte[]](0x28,0x0d,0x1a,0x14,0x11,0x0b,0x10,0x1d,0x0a,0x4a,0x48,0x49,0x41);-join($b|%{[char]($_-bxor$k7249)})) + $licType); $productName = $(-join('Bxrgdhdui Ejqaxhwtg 2019'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+11)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+11)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2019Access.IsChecked -eq $true) {$productId = ((-join('A','cc','ess','2019')) + $licType); $productName = $($k2962='b8[28?';$b=[byte[]](0x2F,0x51,0x38,0x40,0x57,0x4C,0x0D,0x5E,0x2F,0x12,0x79,0x5C,0x01,0x5D,0x28,0x41,0x18,0x0D,0x52,0x09,0x62);$kb=[System.Text.Encoding]::UTF8.GetBytes($k2962);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $i++}
-            if ($radioButton2019HomeBusiness.IsChecked -eq $true) {$productId = (-join([char]0x48, [char]0x6F, [char]0x6D, [char]0x65, [char]0x42, [char]0x75, [char]0x73, [char]0x69, [char]0x6E, [char]0x65, [char]0x73, [char]0x73, [char]0x32, [char]0x30, [char]0x31, [char]0x39, [char]0x52, [char]0x65, [char]0x74, [char]0x61, [char]0x69, [char]0x6C)); $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('T2ZmaWNlIEhvbWVCdXNpbmVzcyAyMDE5'))); $i++}
-            if ($radioButton2019HomeStudent.IsChecked -eq $true) {$productId = ([string]::Format('{0}{1}{2}{3}{4}{5}{6}{7}{8}','HomeS','t','ud','ent','2','019R','eta','i','l')); $productName = $(-join('Neehbd GnldRstcdms 2019'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+1)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+1)%26))}else{[char]$c}})); $i++}
+            if ($radioButton2019Pro.IsChecked -eq $true) {$productId = "ProPlus2019$licType"; $productName = 'Office 2019 Professional Plus'; $i++}
+            if ($radioButton2019Std.IsChecked -eq $true) {$productId = "Standard2019$licType"; $productName = 'Office 2019 Standard'; $i++}
+            if ($radioButton2019ProjectPro.IsChecked -eq $true) {$productId = "ProjectPro2019$licType"; $productName = 'Project Pro 2019'; $i++}
+            if ($radioButton2019ProjectStd.IsChecked -eq $true) {$productId = "ProjectStd2019$licType"; $productName = 'Project Standard 2019'; $i++}
+            if ($radioButton2019VisioPro.IsChecked -eq $true) {$productId = "VisioPro2019$licType"; $productName = 'Visio Pro 2019'; $i++}
+            if ($radioButton2019VisioStd.IsChecked -eq $true) {$productId = "VisioStd2019$licType"; $productName = 'Visio Standard 2019'; $i++}
+            if ($radioButton2019Word.IsChecked -eq $true) {$productId = "Word2019$licType"; $productName = 'Microsoft Word 2019'; $i++}
+            if ($radioButton2019Excel.IsChecked -eq $true) {$productId = "Excel2019$licType"; $productName = 'Microsoft Excel 2019'; $i++}
+            if ($radioButton2019PowerPoint.IsChecked -eq $true) {$productId = "PowerPoint2019$licType"; $productName = 'Microsoft PowerPoint 201p'; $i++}
+            if ($radioButton2019Outlook.IsChecked -eq $true) {$productId = "Outlook2019$licType"; $productName = 'Microsoft Outlook 2019'; $i++}
+            if ($radioButton2019Publisher.IsChecked -eq $true) {$productId = "Publisher2019$licType"; $productName = 'Microsoft Publisher 2019'; $i++}
+            if ($radioButton2019Access.IsChecked -eq $true) {$productId = "Access2019$licType"; $productName = 'Microsoft Access 2019'; $i++}
+            if ($radioButton2019HomeBusiness.IsChecked -eq $true) {$productId = "HomeBusiness2019Retail"; $productName = 'Office HomeBusiness 2019'; $i++}
+            if ($radioButton2019HomeStudent.IsChecked -eq $true) {$productId = "HomeStudent2019Retail"; $productName = 'Office HomeStudent 2019'; $i++}
 
         # For Office 2016
-            if ($radioButton2016Pro.IsChecked -eq $true) {$productId = 'P‍r‍o‌f​e‍s​s‌i‍o‌n‍a‌l‍R‌e‌t‍a​i‌l‍'; $uri = $uri2016; $productName = $($k3558='?4!.!RxQsi0';$b=[byte[]](0x70,0x52,0x47,0x47,0x42,0x37,0x58,0x63,0x43,0x58,0x06,0x1F,0x64,0x53,0x41,0x47,0x37,0x0B,0x22,0x1A,0x06,0x5E,0x5E,0x58,0x01,0x7E,0x4D,0x27,0x0B);$kb=[System.Text.Encoding]::UTF8.GetBytes($k3558);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $i++}
-            if ($radioButton2016Std.IsChecked -eq $true) {$productId = $(-join('WxerhevhVixemp'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+22)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+22)%26))}else{[char]$c}})); $uri = $uri2016; $productName = "$([char]0x4F)$([char]0x66)$([char]0x66)$([char]0x69)$([char]0x63)$([char]0x65)$([char]0x20)$([char]0x32)$([char]0x30)$([char]0x31)$([char]0x36)$([char]0x20)$([char]0x53)$([char]0x74)$([char]0x61)$([char]0x6E)$([char]0x64)$([char]0x61)$([char]0x72)$([char]0x64)"; $i++}
-            if ($radioButton2016ProjectPro.IsChecked -eq $true) {$productId = $(-join('XzwrmkbXzwZmbiqt'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+18)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+18)%26))}else{[char]$c}})); $uri = $uri2016; $productName = "$([char]0x4D)$([char]0x69)$([char]0x63)$([char]0x72)$([char]0x6F)$([char]0x73)$([char]0x6F)$([char]0x66)$([char]0x74)$([char]0x20)$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x6A)$([char]0x65)$([char]0x63)$([char]0x74)$([char]0x20)$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x20)$([char]0x32)$([char]0x30)$([char]0x31)$([char]0x36)"; $i++}
-            if ($radioButton2016ProjectStd.IsChecked -eq $true) {$productId = ('Pr'+'oj'+'ectS'+'tdRetai'+'l'); $uri = $uri2016; $productName = 'M‌i​c‍r‌o‍s‍o‍f‌t​ ‍P‍r​o‍j​e‌c‍t‍ ‍S‍t‌a‍n‌d‍a​r‌d‍ ‍2‍0​1‍6‍'; $i++}
-            if ($radioButton2016VisioPro.IsChecked -eq $true) {$productId = $($k1247='Ydtp^60d;T%;';$b=[byte[]](0x0F,0x0D,0x07,0x19,0x31,0x66,0x42,0x0B,0x69,0x31,0x51,0x5A,0x30,0x08);$kb=[System.Text.Encoding]::UTF8.GetBytes($k1247);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $uri = $uri2016; $productName = 'Місrоsоft Vіsіо Рrо 2ОІ6'; $i++}
-            if ($radioButton2016VisioStd.IsChecked -eq $true) {$productId = ('{0}{1}{2}{3}' -f 'Vis','ioStd','Re','tail'); $uri = $uri2016; $productName = ('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}' -f 'M','icr','osoft',' Vis','i','o',' S','tanda','rd 2','01','6'); $i++}
-            if ($radioButton2016Word.IsChecked -eq $true) {$productId = $(-join('AsvhVixemp'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+22)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+22)%26))}else{[char]$c}})); $uri = $uri2016; $productName = $(-join('Dztifjfwk Nfiu 2016'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+9)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+9)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2016Excel.IsChecked -eq $true) {$productId = (-join('E','x','cel','R','etail')); $uri = $uri2016; $productName = ('{0}{1}{2}{3}{4}{5}{6}' -f 'Mic','ros','oft',' Exc','el',' 201','6'); $i++}
-            if ($radioButton2016PowerPoint.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UG93ZXJQb2ludFJldGFpbA=='))); $uri = $uri2016; $productName = "$([char]0x4D)$([char]0x69)$([char]0x63)$([char]0x72)$([char]0x6F)$([char]0x73)$([char]0x6F)$([char]0x66)$([char]0x74)$([char]0x20)$([char]0x50)$([char]0x6F)$([char]0x77)$([char]0x65)$([char]0x72)$([char]0x50)$([char]0x6F)$([char]0x69)$([char]0x6E)$([char]0x74)$([char]0x20)$([char]0x32)$([char]0x30)$([char]0x31)$([char]0x36)"; $i++}
-            if ($radioButton2016Outlook.IsChecked -eq $true) {$productId = 'O‍u‍t​l‌o‍o‌k‌R​e​t‌a‍i​l‌'; $uri = $uri2016; $productName = (-join('Micro','soft O','utloo','k',' 201','6')); $i++}
-            if ($radioButton2016Publisher.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHVibGlzaGVyUmV0YWls'))); $uri = $uri2016; $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IFB1Ymxpc2hlciAyMDE2'))); $i++}
-            if ($radioButton2016Access.IsChecked -eq $true) {$productId = $($k4584='%;[tZ9),7v{}YCx';$b=[byte[]](0x64,0x58,0x38,0x11,0x29,0x4A,0x7B,0x49,0x43,0x17,0x12,0x11);$kb=[System.Text.Encoding]::UTF8.GetBytes($k4584);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $uri = $uri2016; $productName = $(-join('Dztifjfwk Rttvjj 2016'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+9)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+9)%26))}else{[char]$c}})); $i++}
-            if ($radioButton2016OneNote.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x4F,0x6E,0x65,0x4E,0x6F,0x74,0x65,0x52,0x65,0x74,0x61,0x69,0x6C))); $uri = $uri2016; $productName = $(-join('Qmgvswsjx Srirsxi 2016'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+22)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+22)%26))}else{[char]$c}})); $i++}
+            if ($radioButton2016Pro.IsChecked -eq $true) {$productId = "ProfessionalRetail"; $uri = $uri2016; $productName = 'Office 2016 Professional Plus'; $i++}
+            if ($radioButton2016Std.IsChecked -eq $true) {$productId = "StandardRetail"; $uri = $uri2016; $productName = 'Office 2016 Standard'; $i++}
+            if ($radioButton2016ProjectPro.IsChecked -eq $true) {$productId = "ProjectProRetail"; $uri = $uri2016; $productName = 'Microsoft Project Pro 2016'; $i++}
+            if ($radioButton2016ProjectStd.IsChecked -eq $true) {$productId = "ProjectStdRetail"; $uri = $uri2016; $productName = 'Microsoft Project Standard 2016'; $i++}
+            if ($radioButton2016VisioPro.IsChecked -eq $true) {$productId = "VisioProRetail"; $uri = $uri2016; $productName = 'Microsoft Visio Pro 2016'; $i++}
+            if ($radioButton2016VisioStd.IsChecked -eq $true) {$productId = "VisioStdRetail"; $uri = $uri2016; $productName = 'Microsoft Visio Standard 2016'; $i++}
+            if ($radioButton2016Word.IsChecked -eq $true) {$productId = "WordRetail"; $uri = $uri2016; $productName = 'Microsoft Word 2016'; $i++}
+            if ($radioButton2016Excel.IsChecked -eq $true) {$productId = "ExcelRetail"; $uri = $uri2016; $productName = 'Microsoft Excel 2016'; $i++}
+            if ($radioButton2016PowerPoint.IsChecked -eq $true) {$productId = "PowerPointRetail"; $uri = $uri2016; $productName = 'Microsoft PowerPoint 2016'; $i++}
+            if ($radioButton2016Outlook.IsChecked -eq $true) {$productId = "OutlookRetail"; $uri = $uri2016; $productName = 'Microsoft Outlook 2016'; $i++}
+            if ($radioButton2016Publisher.IsChecked -eq $true) {$productId = "PublisherRetail"; $uri = $uri2016; $productName = 'Microsoft Publisher 2016'; $i++}
+            if ($radioButton2016Access.IsChecked -eq $true) {$productId = "AccessRetail"; $uri = $uri2016; $productName = 'Microsoft Access 2016'; $i++}
+            if ($radioButton2016OneNote.IsChecked -eq $true) {$productId = "OneNoteRetail"; $uri = $uri2016; $productName = 'Microsoft Onenote 2016'; $i++}
 
         # For Office 2013
-            if ($radioButton2013Pro.IsChecked -eq $true) {$productId = $(-join('MolcbppflkxiObqxfi'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+3)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+3)%26))}else{[char]$c}})); $uri = $uri2013; $productName = ([string]::Format('{0}{1}{2}{3}{4}{5}{6}{7}{8}','Offi','ce 2','01','3 Pr','ofes','sion','al ','Plu','s')); $i++}
-            if ($radioButton2013Std.IsChecked -eq $true) {$productId = $($k2242=131;$b=[byte[]](0xd0,0xf7,0xe2,0xed,0xe7,0xe2,0xf1,0xe7,0xd1,0xe6,0xf7,0xe2,0xea,0xef);-join($b|%{[char]($_-bxor$k2242)})); $uri = $uri2013; $productName = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x4F,0x66,0x66,0x69,0x63,0x65,0x20,0x32,0x30,0x31,0x33,0x20,0x53,0x74,0x61,0x6E,0x64,0x61,0x72,0x64))); $i++}
-            if ($radioButton2013ProjectPro.IsChecked -eq $true) {$productId = (-join('ProjectP','roReta','i','l')); $uri = $uri2013; $productName = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x4D,0x69,0x63,0x72,0x6F,0x73,0x6F,0x66,0x74,0x20,0x50,0x72,0x6F,0x6A,0x65,0x63,0x74,0x20,0x50,0x72,0x6F,0x20,0x32,0x30,0x31,0x33))); $i++}
-            if ($radioButton2013ProjectStd.IsChecked -eq $true) {$productId = "$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x6A)$([char]0x65)$([char]0x63)$([char]0x74)$([char]0x53)$([char]0x74)$([char]0x64)$([char]0x52)$([char]0x65)$([char]0x74)$([char]0x61)$([char]0x69)$([char]0x6C)"; $uri = $uri2013; $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IFByb2plY3QgU3RhbmRhcmQgMjAxMw=='))); $i++}
-            if ($radioButton2013VisioPro.IsChecked -eq $true) {$productId = $($k2645='p;GS&?0';$b=[byte[]](0x26,0x52,0x34,0x3A,0x49,0x6F,0x42,0x1F,0x69,0x22,0x27,0x47,0x56,0x5C);$kb=[System.Text.Encoding]::UTF8.GetBytes($k2645);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $uri = $uri2013; $productName = $($k1122='h$M0UYa-';$b=[byte[]](0x25,0x4D,0x2E,0x42,0x3A,0x2A,0x0E,0x4B,0x1C,0x04,0x1B,0x59,0x26,0x30,0x0E,0x0D,0x38,0x56,0x22,0x10,0x67,0x69,0x50,0x1E);$kb=[System.Text.Encoding]::UTF8.GetBytes($k1122);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})); $i++}
-            if ($radioButton2013VisioStd.IsChecked -eq $true) {$productId = $(-join('PcmciMnxLynucf'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+6)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+6)%26))}else{[char]$c}})); $uri = $uri2013; $productName = 'M‌i​c‍r‌o​s‍o‌f‍t‌ ‍V‍i‍s‌i​o‌ ​S‌t​a​n‌d​a‌r‌d​ ‌2‍0​1‌3‌'; $i++}
-            if ($radioButton2013Word.IsChecked -eq $true) {$productId = $(-join('MehtHujqyb'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+10)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+10)%26))}else{[char]$c}})); $uri = $uri2013; $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IFdvcmQgMjAxMw=='))); $i++}
-            if ($radioButton2013Excel.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('RXhjZWxSZXRhaWw='))); $uri = $uri2013; $productName = $($k1038=36;$b=[byte[]](0x69,0x4d,0x47,0x56,0x4b,0x57,0x4b,0x42,0x50,0x04,0x61,0x5c,0x47,0x41,0x48,0x04,0x16,0x14,0x15,0x17);-join($b|%{[char]($_-bxor$k1038)})); $i++}
-            if ($radioButton2013PowerPoint.IsChecked -eq $true) {$productId = (-join([char]0x50, [char]0x6F, [char]0x77, [char]0x65, [char]0x72, [char]0x50, [char]0x6F, [char]0x69, [char]0x6E, [char]0x74, [char]0x52, [char]0x65, [char]0x74, [char]0x61, [char]0x69, [char]0x6C)); $uri = $uri2013; $productName = 'M‌i‌c‌r‌o‌s‌o‍f‍t‌ ‍P‌o‌w‌e​r​P‌o‍i​n‌t‍ ‌2‍0‍1​3​'; $i++}
-            if ($radioButton2013Outlook.IsChecked -eq $true) {$productId = "$([char]0x4F)$([char]0x75)$([char]0x74)$([char]0x6C)$([char]0x6F)$([char]0x6F)$([char]0x6B)$([char]0x52)$([char]0x65)$([char]0x74)$([char]0x61)$([char]0x69)$([char]0x6C)"; $uri = $uri2013; $productName = ([string]::Format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}','M','i','cr','o','sof','t ','O','utloo','k',' 2','01','3')); $i++}
-            if ($radioButton2013Publisher.IsChecked -eq $true) {$productId = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UHVibGlzaGVyUmV0YWls'))); $uri = $uri2013; $productName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('TWljcm9zb2Z0IFB1Ymxpc2hlciAyMDEz'))); $i++}
-            if ($radioButton2013Access.IsChecked -eq $true) {$productId = $(-join('FhhjxxWjyfnq'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+21)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+21)%26))}else{[char]$c}})); $uri = $uri2013; $productName = 'Місrоsоft Ассеss 2ОІ3'; $i++}
+            if ($radioButton2013Pro.IsChecked -eq $true) {$productId = "ProfessionalRetail"; $uri = $uri2013; $productName = 'Office 2013 Professional Plus'; $i++}
+            if ($radioButton2013Std.IsChecked -eq $true) {$productId = "StandardRetail"; $uri = $uri2013; $productName = 'Office 2013 Standard'; $i++}
+            if ($radioButton2013ProjectPro.IsChecked -eq $true) {$productId = "ProjectProRetail"; $uri = $uri2013; $productName = 'Microsoft Project Pro 2013'; $i++}
+            if ($radioButton2013ProjectStd.IsChecked -eq $true) {$productId = "ProjectStdRetail"; $uri = $uri2013; $productName = 'Microsoft Project Standard 2013'; $i++}
+            if ($radioButton2013VisioPro.IsChecked -eq $true) {$productId = "VisioProRetail"; $uri = $uri2013; $productName = 'Microsoft Visio Pro 2013'; $i++}
+            if ($radioButton2013VisioStd.IsChecked -eq $true) {$productId = "VisioStdRetail"; $uri = $uri2013; $productName = 'Microsoft Visio Standard 2013'; $i++}
+            if ($radioButton2013Word.IsChecked -eq $true) {$productId = "WordRetail"; $uri = $uri2013; $productName = 'Microsoft Word 2013'; $i++}
+            if ($radioButton2013Excel.IsChecked -eq $true) {$productId = "ExcelRetail"; $uri = $uri2013; $productName = 'Microsoft Excel 2013'; $i++}
+            if ($radioButton2013PowerPoint.IsChecked -eq $true) {$productId = "PowerPointRetail"; $uri = $uri2013; $productName = 'Microsoft PowerPoint 2013'; $i++}
+            if ($radioButton2013Outlook.IsChecked -eq $true) {$productId = "OutlookRetail"; $uri = $uri2013; $productName = 'Microsoft Outlook 2013'; $i++}
+            if ($radioButton2013Publisher.IsChecked -eq $true) {$productId = "PublisherRetail"; $uri = $uri2013; $productName = 'Microsoft Publisher 2013'; $i++}
+            if ($radioButton2013Access.IsChecked -eq $true) {$productId = "AccessRetail"; $uri = $uri2013; $productName = 'Microsoft Access 2013'; $i++}
         # Update the shared hashtable
             $sync.arch = $arch
             $sync.mode = $mode
@@ -228,9 +552,9 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
                 $PSIinstance.Runspace = $runspace
                 $PSIinstance.BeginInvoke()
             } else {
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Foreground = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UmVk'))) })
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.FontWeight = $($k8510=203;$b=[byte[]](0x89,0xa4,0xa7,0xaf);-join($b|%{[char]($_-bxor$k8510)})) })
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = $($k6796=51;$b=[byte[]](0x65,0x46,0x5a,0x13,0x5f,0xf0,0x81,0x5d,0x54,0x13,0x50,0x5b,0xd2,0x88,0xbe,0x5d,0x13,0x5e,0xd2,0x88,0xaa,0x47,0x13,0x43,0x5b,0x5a,0xf0,0x99,0x5d,0x13,0x51,0xd2,0x89,0x90,0x5d,0x13,0x7c,0x55,0x55,0x5a,0x50,0x56,0x12);-join($b|%{[char]($_-bxor$k6796)})) })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Foreground = "Red" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.FontWeight = "Bold" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Vui lòng chọn một phiên bản Office!" })
             } 
         }
     )
@@ -238,45 +562,45 @@ $xamlInput = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase6
 # Uninstall all installed Microsoft Office apps.
     $UninstallOffice = {
 
-        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = $($k5406=182;$b=[byte[]](0x72,0x26,0xd7,0xd8,0xd1,0x96,0xd1,0x57,0x0d,0x17,0x96,0xd5,0x75,0x16,0xdf,0x96,0x72,0x27,0x57,0x0c,0x01,0xc2,0x96,0xfb,0xdf,0xd5,0xc4,0xd9,0xc5,0xd9,0xd0,0xc2,0x96,0xf9,0xd0,0xd0,0xdf,0xd5,0xd3,0x98,0x98,0x98);-join($b|%{[char]($_-bxor$k5406)})) })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'H‌i‍d​d​e​n‍' })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = $($k4754=108;$b=[byte[]](0x4f,0x2a,0x2a,0x5b,0x5c,0x5b,0x5c,0x5b,0x5c);-join($b|%{[char]($_-bxor$k4754)})) })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang gỡ cài đặt Microsoft Office..." })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "$([char]0x56)$([char]0x69)$([char]0x73)$([char]0x69)$([char]0x62)$([char]0x6C)$([char]0x65)" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
         
         Set-Location -Path $($sync.workingDir)
         Invoke-Item Path $($sync.workingDir)
   
-        (New-Object Net.WebClient).DownloadFile($($sync.removeAllXML), ($($sync.workingDir) + $($k5861=229;$b=[byte[]](0xb9,0x86,0x8a,0x8b,0x83,0x8c,0x82,0x90,0x97,0x84,0x91,0x8c,0x8a,0x8b,0xcb,0x9d,0x88,0x89);-join($b|%{[char]($_-bxor$k5861)}))))
-        (New-Object Net.WebClient).DownloadFile($($sync.uri), ($($sync.workingDir) + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('XGJpbi5leGU=')))))
+        (New-Object Net.WebClient).DownloadFile($($sync.removeAllXML), "$($sync.workingDir)\configuration.xml")
+        (New-Object Net.WebClient).DownloadFile($($sync.uri), "$($sync.workingDir)\bin.exe")
 
-        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('xJBhbmcgZ+G7oSBi4bqxbmcgT2ZmaWNlIERlcGxveW1lbnQgVG9vbC4uLg=='))) })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "$([char]0x48)$([char]0x69)$([char]0x64)$([char]0x64)$([char]0x65)$([char]0x6E)" })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = $(-join('#UU707070'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+11)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+11)%26))}else{[char]$c}})) })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang gỡ bằng Office Deployment Tool..." })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('VmlzaWJsZQ=='))) })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
-        Start-Process -FilePath .\bin.exe -ArgumentList ('{0}{1}{2}{3}{4}{5}{6}{7}' -f '/con','f','igur','e .\c','onfi','gur','atio','n.xml') -NoNewWindow -Wait
+        Start-Process -FilePath .\bin.exe -ArgumentList "/configure .\configuration.xml" -NoNewWindow -Wait
 
-        if (Test-Path -Path "$([char]0x43)$([char]0x3A)$([char]0x5C)$([char]0x50)$([char]0x72)$([char]0x6F)$([char]0x67)$([char]0x72)$([char]0x61)$([char]0x6D)$([char]0x20)$([char]0x46)$([char]0x69)$([char]0x6C)$([char]0x65)$([char]0x73)$([char]0x2A)$([char]0x5C)$([char]0x4D)$([char]0x69)$([char]0x63)$([char]0x72)$([char]0x6F)$([char]0x73)$([char]0x6F)$([char]0x66)$([char]0x74)$([char]0x20)$([char]0x4F)$([char]0x66)$([char]0x66)$([char]0x69)$([char]0x63)$([char]0x65)$([char]0x5C)$([char]0x4F)$([char]0x66)$([char]0x66)$([char]0x69)$([char]0x63)$([char]0x65)$([char]0x31)$([char]0x35)$([char]0x5C)$([char]0x6F)$([char]0x73)$([char]0x70)$([char]0x70)$([char]0x2E)$([char]0x76)$([char]0x62)$([char]0x73)") {
-            (New-Object Net.WebClient).DownloadFile($($k3108=243;$b=[byte[]](0x9b,0x87,0x87,0x83,0x80,0xc9,0xdc,0xdc,0x92,0x98,0x92,0xdd,0x9e,0x80,0xdc,0xa0,0x92,0xa1,0xb2,0xac,0xb6,0x9d,0x87,0x96,0x81,0x83,0x81,0x9a,0x80,0x96,0xa5,0x96,0x81,0x80,0x9a,0x9c,0x9d,0xb5,0x9a,0x9f,0x96,0x80);-join($b|%{[char]($_-bxor$k3108)})), ($($sync.workingDir) + $(-join('\CkBK.jsz'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+16)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+16)%26))}else{[char]$c}}))))
+        if (Test-Path -Path "C:\Program Files*\Microsoft Office\Office15\ospp.vbs") {
+            (New-Object Net.WebClient).DownloadFile('https://aka.ms/SaRA_EnterpriseVersionFiles', "$($sync.workingDir)\SaRA.zip")
             Expand-Archive -Path .\SaRA.zip -DestinationPath .\SaRA
 
-            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = ([string]::Format('{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}{16}{17}','Đ','an','g ','c','hạy',' kịc','h',' bản',' d','ọn ','dẹ','p',' (Of','fice','S','cr','ub).','..')) })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = (-join([char]0x48, [char]0x69, [char]0x64, [char]0x64, [char]0x65, [char]0x6E)) })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = ('#FF70'+'7070') })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang chạy kịch bản dọn dẹp (OfficeScrub)..." })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "$([char]0x56)$([char]0x69)$([char]0x73)$([char]0x69)$([char]0x62)$([char]0x6C)$([char]0x65)" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
-            Start-Process -FilePath ('.\SaRA'+'\Sa'+'RACm'+'d.exe') -ArgumentList $(-join('-I EvvysuIshkrIsudqhye -QssufjUkbq -EvvysuLuhiyed Qbb'.ToCharArray()|%{[int]$c=$_;if($c-ge65-and$c-le90){[char](65+(($c-65+10)%26))}elseif($c-ge97-and$c-le122){[char](97+(($c-97+10)%26))}else{[char]$c}})) -NoNewWindow -Wait
+            Start-Process -FilePath ".\SaRA\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -NoNewWindow -Wait
         }
 
-        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "$([char]0x48)$([char]0x69)$([char]0x64)$([char]0x64)$([char]0x65)$([char]0x6E)" })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = $($k1432='g68[[{k';$b=[byte[]](0x31,0x5F,0x4B,0x32,0x39,0x17,0x0E);$kb=[System.Text.Encoding]::UTF8.GetBytes($k1432);-join(0..($b.Length-1)|%{[char]($b[$_]-bxor$kb[$_%$kb.Length])})) })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = ('{0}{1}{2}{3}{4}' -f 'BẮT Đ','ẦU',' THỰC',' HIỆ','N') })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = ([System.Text.Encoding]::UTF8.GetString([byte[]](0x48,0x6F,0xC3,0xA0,0x6E,0x20,0x74,0xE1,0xBA,0xA5,0x74))) })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU THỰC HIỆN' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = $($k4459=118;$b=[byte[]](0x47,0x46,0x46);-join($b|%{[char]($_-bxor$k4459)})) })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
 
         # Cleanup
         Set-Location ..
