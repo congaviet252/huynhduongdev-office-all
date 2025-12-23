@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
     if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm office.msedu.vn | iex"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1 | iex"
         break
     }
 
@@ -9,377 +9,332 @@
     Add-Type -AssemblyName PresentationFramework, System.Drawing, PresentationFramework, System.Windows.Forms, WindowsFormsIntegration, PresentationCore
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
-# --- GIAO DIỆN XAML NÂNG CẤP (MODERN DARK UI) ---
+# GIAO DIỆN XAML MỚI (MODERN DARK THEME)
 $xamlInput = @'
 <Window x:Class="install.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Huỳnh Dương Developer Pro - Office Tool" 
-        Height="600" Width="1000" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:install"
+        mc:Ignorable="d"
+        Title="Huỳnh Dương Developer - Office Installer" 
+        Height="650" Width="1100" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize"
         Background="#1E1E1E"
-        Icon="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png">
+        Foreground="#FFFFFF"
+        FontFamily="Segoe UI">
 
     <Window.Resources>
-        <!-- Màu sắc chủ đạo -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#007ACC"/>
-        <SolidColorBrush x:Key="AccentColor" Color="#28C840"/>
-        <SolidColorBrush x:Key="DangerColor" Color="#E81123"/>
-        <SolidColorBrush x:Key="DarkBg" Color="#252526"/>
-        <SolidColorBrush x:Key="LightText" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="GrayText" Color="#CCCCCC"/>
-        <SolidColorBrush x:Key="BorderColor" Color="#3E3E42"/>
-
-        <!-- Style cho RadioButton dạng thẻ (Card) -->
-        <Style x:Key="CardRadioButton" TargetType="RadioButton">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource LightText}"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Cursor" Value="Hand"/>
+        <!-- Style cho GroupBox -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <Setter Property="Foreground" Value="#007ACC"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
-                        <Border x:Name="border" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Background="#2D2D30" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryColor}"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#007ACC" Margin="0,0,0,5">
+                                <ContentPresenter Margin="5" ContentSource="Header" RecognizesAccessKey="True"/>
+                            </Border>
+                            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#3E3E42" CornerRadius="3" Background="#252526">
+                                <ContentPresenter Margin="10" />
+                            </Border>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Style cho GroupBox -->
-        <Style TargetType="GroupBox">
-            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <!-- Style cho RadioButton (Product) -->
+        <Style x:Key="ProductRadio" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Margin" Value="0,5,10,5"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="GroupName" Value="OfficeVersion"/> <!-- Quan trọng: Group chung để chỉ chọn 1 -->
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="#00A4EF"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
-        <!-- Style cho Button chính -->
-        <Style x:Key="MainButton" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+        <!-- Style cho RadioButton (Option nhỏ bên trái) -->
+        <Style x:Key="OptionRadio" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#DDDDDD"/>
+            <Setter Property="Margin" Value="0,3,0,3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- Style cho Button Chính -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="10,5"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#32D74B"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="#555"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0097FB"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#555555"/>
+                    <Setter Property="Foreground" Value="#AAAAAA"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
-    <Grid Margin="10">
+    <Grid Margin="15">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="260"/> <!-- Cột Menu Trái -->
+            <ColumnDefinition Width="20"/>  <!-- Khoảng cách -->
+            <ColumnDefinition Width="*"/>   <!-- Cột Nội Dung Phải -->
         </Grid.ColumnDefinitions>
 
-        <!-- CỘT TRÁI: CẤU HÌNH -->
-        <Border Grid.Column="0" Background="{StaticResource DarkBg}" CornerRadius="5" Margin="0,0,10,0" Padding="10">
-            <StackPanel>
-                <TextBlock Text="CẤU HÌNH" Foreground="{StaticResource GrayText}" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                
-                <!-- Kiến trúc -->
-                <GroupBox Header="Kiến trúc (Bit)">
+        <!-- === CỘT TRÁI: CẤU HÌNH === -->
+        <StackPanel Grid.Column="0">
+            <!-- Logo / Tiêu đề -->
+            <Border Background="#2D2D30" CornerRadius="5" Padding="10" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="HUỲNH DƯƠNG" Foreground="#00A4EF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Text="DEVELOPER PRO" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+                    <Image x:Name="image" Height="60" Width="60" Source="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Margin="0,10,0,0" Visibility="Hidden"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Kiến trúc -->
+            <GroupBox x:Name="groupBoxArch" Header="1. Kiến Trúc (Architecture)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonArch64" Style="{StaticResource OptionRadio}" Content="x64 (64-bit) - Khuyên dùng" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonArch32" Style="{StaticResource OptionRadio}" Content="x86 (32-bit)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Loại Giấy Phép -->
+            <GroupBox x:Name="groupBoxLicenseType" Header="2. Loại Giấy Phép (License)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonVolume" Style="{StaticResource OptionRadio}" Content="Volume (VL)" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonRetail" Style="{StaticResource OptionRadio}" Content="Retail (Bán lẻ)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Chế Độ -->
+            <GroupBox x:Name="groupBoxMode" Header="3. Chế Độ (Mode)">
+                <StackPanel>
+                    <RadioButton x:Name="radioButtonInstall" Style="{StaticResource OptionRadio}" Content="Install (Cài đặt ngay)" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonDownload" Style="{StaticResource OptionRadio}" Content="Download (Tải bộ cài)"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Ngôn Ngữ -->
+            <GroupBox x:Name="groupBoxLanguage" Header="4. Ngôn Ngữ (Language)">
+                <UniformGrid Columns="2">
+                    <RadioButton x:Name="radioButtonEnglish" Style="{StaticResource OptionRadio}" Content="English" IsChecked="True"/>
+                    <RadioButton x:Name="radioButtonVietnamese" Style="{StaticResource OptionRadio}" Content="Tiếng Việt"/>
+                    <RadioButton x:Name="radioButtonJapanese" Style="{StaticResource OptionRadio}" Content="Japanese"/>
+                    <RadioButton x:Name="radioButtonKorean" Style="{StaticResource OptionRadio}" Content="Korean"/>
+                    <RadioButton x:Name="radioButtonChinese" Style="{StaticResource OptionRadio}" Content="Chinese"/>
+                    <RadioButton x:Name="radioButtonFrench" Style="{StaticResource OptionRadio}" Content="French"/>
+                    <RadioButton x:Name="radioButtonSpanish" Style="{StaticResource OptionRadio}" Content="Spanish"/>
+                    <RadioButton x:Name="radioButtonGerman" Style="{StaticResource OptionRadio}" Content="German"/>
+                    <RadioButton x:Name="radioButtonHindi" Style="{StaticResource OptionRadio}" Content="Hindi"/>
+                </UniformGrid>
+            </GroupBox>
+
+            <!-- Nút Hành Động -->
+            <Button x:Name="buttonSubmit" Content="BẮT ĐẦU THỰC HIỆN" Height="40" Margin="0,10,0,0" Background="#107C10"/>
+            
+            <ProgressBar x:Name="progressbar" Height="5" Margin="0,10,0,0" Background="#333333" BorderThickness="0" Foreground="#00A4EF"/>
+            <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+            
+            <Label x:Name="Link1" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand">
+                <Hyperlink NavigateUri="https://msedu.vn" Foreground="#00A4EF" TextDecorations="None">
+                    <TextBlock Text="🌐 msedu.vn"/>
+                </Hyperlink>
+            </Label>
+        </StackPanel>
+
+        <!-- === CỘT PHẢI: DANH SÁCH OFFICE === -->
+        <Border Grid.Column="2" Background="#252526" CornerRadius="5" BorderBrush="#3E3E42" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header Phải -->
+                <Border Background="#2D2D30" Padding="15,10" CornerRadius="5,5,0,0">
+                    <TextBlock Text="CHỌN PHIÊN BẢN OFFICE CẦN CÀI ĐẶT" FontWeight="Bold" FontSize="15" Foreground="#FFFFFF"/>
+                </Border>
+
+                <!-- Danh sách cuộn -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="15">
                     <StackPanel>
-                        <RadioButton x:Name="radioButtonArch64" Content="x64 (64-bit)" IsChecked="True" Foreground="White" Margin="5"/>
-                        <RadioButton x:Name="radioButtonArch32" Content="x86 (32-bit)" Foreground="White" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <!-- Giấy phép -->
-                <GroupBox Header="Loại giấy phép">
-                    <StackPanel>
-                        <RadioButton x:Name="radioButtonVolume" Content="Volume (VL)" IsChecked="True" Foreground="White" Margin="5"/>
-                        <RadioButton x:Name="radioButtonRetail" Content="Retail" Foreground="White" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <!-- Chế độ -->
-                <GroupBox Header="Chế độ hoạt động">
-                    <StackPanel>
-                        <RadioButton x:Name="radioButtonInstall" Content="Cài đặt (Install)" IsChecked="True" Foreground="White" Margin="5"/>
-                        <RadioButton x:Name="radioButtonDownload" Content="Tải bộ cài (Download)" Foreground="White" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <!-- Ngôn ngữ -->
-                <GroupBox Header="Ngôn ngữ">
-                    <ComboBox SelectedIndex="0" Height="25">
-                        <ComboBoxItem IsSelected="True">
-                             <RadioButton x:Name="radioButtonEnglish" Content="English (US)" IsChecked="True" BorderThickness="0"/>
-                        </ComboBoxItem>
-                         <ComboBoxItem>
-                             <RadioButton x:Name="radioButtonVietnamese" Content="Tiếng Việt" BorderThickness="0"/>
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                             <RadioButton x:Name="radioButtonJapanese" Content="Japanese" BorderThickness="0"/>
-                        </ComboBoxItem>
-                         <ComboBoxItem>
-                             <RadioButton x:Name="radioButtonKorean" Content="Korean" BorderThickness="0"/>
-                        </ComboBoxItem>
-                         <ComboBoxItem>
-                             <RadioButton x:Name="radioButtonChinese" Content="Chinese" BorderThickness="0"/>
-                        </ComboBoxItem>
-                    </ComboBox>
-                     <!-- Các Radio ẩn để giữ logic code cũ -->
-                    <StackPanel Visibility="Collapsed">
-                        <RadioButton x:Name="radioButtonFrench"/>
-                        <RadioButton x:Name="radioButtonSpanish"/>
-                        <RadioButton x:Name="radioButtonHindi"/>
-                        <RadioButton x:Name="radioButtonGerman"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <Image x:Name="image" Source="https://raw.githubusercontent.com/mseduvn/msoffice/refs/heads/main/Files/images.png" Height="80" Visibility="Hidden"/>
-            </StackPanel>
-        </Border>
-
-        <!-- CỘT PHẢI: LỰA CHỌN PHIÊN BẢN -->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- Tabs chọn phiên bản -->
-            <TabControl Grid.Row="0" Background="Transparent" BorderThickness="0">
-                <TabControl.Resources>
-                    <Style TargetType="TabItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="TabItem">
-                                    <Border Name="Border" BorderThickness="0,0,0,2" BorderBrush="Transparent" Margin="0,0,10,0" Padding="10,5">
-                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
-                                            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-                                            <Setter Property="FontWeight" Value="Bold"/>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="False">
-                                            <Setter Property="Foreground" Value="{StaticResource GrayText}"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabControl.Resources>
-
-                <!-- TAB OFFICE 2024 (MỚI NHẤT) -->
-                <TabItem Header="OFFICE 2024">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel Orientation="Horizontal" ItemWidth="160">
-                            <RadioButton x:Name="radioButton2024Pro" Content="Pro Plus 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024Std" Content="Standard 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024ProjectPro" Content="Project Pro 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024VisioPro" Content="Visio Pro 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024Word" Content="Word 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024Excel" Content="Excel 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024PowerPoint" Content="PowerPoint 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024Outlook" Content="Outlook 2024" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2024Access" Content="Access 2024" Style="{StaticResource CardRadioButton}"/>
-                            <!-- Ẩn bớt các bản ít dùng để gọn, logic vẫn chạy nếu chọn -->
-                            <RadioButton x:Name="radioButton2024ProjectStd" Content="Project Std" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2024VisioStd" Content="Visio Std" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2024Publisher" Content="Publisher" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2024HomeStudent" Content="Home Student" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2024HomeBusiness" Content="Home Business" Visibility="Collapsed"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </TabItem>
-
-                <!-- TAB MICROSOFT 365 -->
-                <TabItem Header="MICROSOFT 365">
-                    <WrapPanel Orientation="Horizontal" ItemWidth="200">
-                        <RadioButton x:Name="radioButton365Enterprise" Content="Apps for Enterprise" Style="{StaticResource CardRadioButton}"/>
-                        <RadioButton x:Name="radioButton365Business" Content="Apps for Business" Style="{StaticResource CardRadioButton}"/>
-                        <RadioButton x:Name="radioButton365Home" Content="Home Premium" Style="{StaticResource CardRadioButton}"/>
-                    </WrapPanel>
-                </TabItem>
-
-                <!-- TAB OFFICE 2021 -->
-                <TabItem Header="OFFICE 2021">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel Orientation="Horizontal" ItemWidth="160">
-                            <RadioButton x:Name="radioButton2021Pro" Content="Pro Plus 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021Std" Content="Standard 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021ProjectPro" Content="Project Pro 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021VisioPro" Content="Visio Pro 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021Word" Content="Word 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021Excel" Content="Excel 2021" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2021PowerPoint" Content="PowerPoint 2021" Style="{StaticResource CardRadioButton}"/>
-                            <!-- Hidden logic fields -->
-                            <RadioButton x:Name="radioButton2021ProjectStd" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021VisioStd" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021Outlook" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021Access" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021Publisher" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021HomeStudent" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2021HomeBusiness" Visibility="Collapsed"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </TabItem>
-
-                <!-- TAB OFFICE 2019 -->
-                <TabItem Header="OFFICE 2019">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel Orientation="Horizontal" ItemWidth="160">
-                            <RadioButton x:Name="radioButton2019Pro" Content="Pro Plus 2019" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2019Std" Content="Standard 2019" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2019Word" Content="Word 2019" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2019Excel" Content="Excel 2019" Style="{StaticResource CardRadioButton}"/>
-                            <RadioButton x:Name="radioButton2019PowerPoint" Content="PowerPoint 2019" Style="{StaticResource CardRadioButton}"/>
-                            <!-- Hidden -->
-                            <RadioButton x:Name="radioButton2019ProjectPro" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019VisioPro" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019Access" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019Publisher" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019HomeStudent" Visibility="Collapsed"/>
-                            <RadioButton x:Name="radioButton2019HomeBusiness" Visibility="Collapsed"/>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </TabItem>
-
-                <!-- TAB CŨ HƠN (2016/2013) -->
-                <TabItem Header="CŨ HƠN (2016/13)">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock Text="Office 2016" Foreground="{StaticResource GrayText}" FontWeight="Bold" Margin="5"/>
-                            <WrapPanel Orientation="Horizontal" ItemWidth="150">
-                                <RadioButton x:Name="radioButton2016Pro" Content="Pro Plus 2016" Style="{StaticResource CardRadioButton}"/>
-                                <RadioButton x:Name="radioButton2016Std" Content="Standard 2016" Style="{StaticResource CardRadioButton}"/>
-                                <!-- Hidden 2016 others to save space -->
-                                <RadioButton x:Name="radioButton2016ProjectPro" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016VisioPro" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016Excel" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016PowerPoint" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016Outlook" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016Access" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016Publisher" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2016OneNote" Visibility="Collapsed"/>
+                        
+                        <!-- Microsoft 365 -->
+                        <GroupBox Header="Microsoft 365 (Office 365)" BorderBrush="#FFDA2323" Foreground="#FF5E5E">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton365Home" Style="{StaticResource ProductRadio}" Content="Home (Cá nhân)"/>
+                                <RadioButton x:Name="radioButton365Business" Style="{StaticResource ProductRadio}" Content="Business (Doanh nghiệp nhỏ)"/>
+                                <RadioButton x:Name="radioButton365Enterprise" Style="{StaticResource ProductRadio}" Content="Enterprise (Doanh nghiệp lớn)"/>
                             </WrapPanel>
+                        </GroupBox>
 
-                            <TextBlock Text="Office 2013" Foreground="{StaticResource GrayText}" FontWeight="Bold" Margin="5,10,5,5"/>
-                            <WrapPanel Orientation="Horizontal" ItemWidth="150">
-                                <RadioButton x:Name="radioButton2013Pro" Content="Pro Plus 2013" Style="{StaticResource CardRadioButton}"/>
-                                <RadioButton x:Name="radioButton2013Std" Content="Standard 2013" Style="{StaticResource CardRadioButton}"/>
-                                <!-- Hidden 2013 others -->
-                                <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013VisioStd" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013Word" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013Excel" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013PowerPoint" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013Outlook" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013Access" Visibility="Collapsed"/>
-                                <RadioButton x:Name="radioButton2013Publisher" Visibility="Collapsed"/>
+                        <!-- Office 2024 -->
+                        <GroupBox Header="Office 2024 LTSC (Mới nhất)" BorderBrush="#FFE2820E" Foreground="#FFA500">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2024Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2024Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2024HomeBusiness" Style="{StaticResource ProductRadio}" Content="Home &amp; Business"/>
+                                <RadioButton x:Name="radioButton2024HomeStudent" Style="{StaticResource ProductRadio}" Content="Home &amp; Student"/>
+                                <RadioButton x:Name="radioButton2024ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2024VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2024Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2024Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2024PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
                             </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2021 -->
+                        <GroupBox Header="Office 2021 LTSC" BorderBrush="#FF3C10DE" Foreground="#8A75FF">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2021Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2021Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2021ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2021VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2021Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2021Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2021PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
+                                <RadioButton x:Name="radioButton2021Access" Style="{StaticResource ProductRadio}" Content="Access"/>
+                                <RadioButton x:Name="radioButton2021Outlook" Style="{StaticResource ProductRadio}" Content="Outlook"/>
+                                <!-- Ẩn bớt các bản ít dùng để gọn, nếu cần có thể thêm lại như code cũ -->
+                                <RadioButton x:Name="radioButton2021ProjectStd" Style="{StaticResource ProductRadio}" Content="Project Std" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021VisioStd" Style="{StaticResource ProductRadio}" Content="Visio Std" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021HomeStudent" Style="{StaticResource ProductRadio}" Content="Home Student" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021HomeBusiness" Style="{StaticResource ProductRadio}" Content="Home Business" Visibility="Collapsed"/>
+                                <RadioButton x:Name="radioButton2021Publisher" Style="{StaticResource ProductRadio}" Content="Publisher" Visibility="Collapsed"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2019 -->
+                        <GroupBox Header="Office 2019" BorderBrush="#FF0F8E40" Foreground="#4CAF50">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2019Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2019Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2019ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2019VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                <RadioButton x:Name="radioButton2019Word" Style="{StaticResource ProductRadio}" Content="Word"/>
+                                <RadioButton x:Name="radioButton2019Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
+                                <RadioButton x:Name="radioButton2019PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
+                                
+                                <!-- Hidden Logic fields to prevent error -->
+                                <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019HomeStudent" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2019HomeBusiness" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+                        
+                        <!-- Office 2016 -->
+                         <GroupBox Header="Office 2016" BorderBrush="#FFA28210" Foreground="#FFD700">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2016Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2016Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                <RadioButton x:Name="radioButton2016ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
+                                <RadioButton x:Name="radioButton2016VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
+                                
+                                <!-- Hidden Logic fields -->
+                                <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Excel" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016PowerPoint" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2016OneNote" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+
+                        <!-- Office 2013 -->
+                         <GroupBox Header="Office 2013" BorderBrush="#777777" Foreground="#AAAAAA">
+                            <WrapPanel>
+                                <RadioButton x:Name="radioButton2013Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
+                                <RadioButton x:Name="radioButton2013Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
+                                
+                                <!-- Hidden Logic fields -->
+                                <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Excel" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013PowerPoint" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Access" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                                <RadioButton x:Name="radioButton2013Publisher" Visibility="Collapsed" GroupName="OfficeVersion"/>
+                            </WrapPanel>
+                        </GroupBox>
+                        
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Footer Danger Zone -->
+                <Border Grid.Row="2" Background="#330000" Padding="10" Margin="10" CornerRadius="4" BorderBrush="#FF4444" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="LabelRemoveAll" Content="⚠ VÙNG NGUY HIỂM:" FontWeight="Bold" Foreground="#FF4444" VerticalAlignment="Center"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                            <RadioButton x:Name="radioButtonRemoveAllApp" Content="Tôi đồng ý gỡ bỏ toàn bộ Office" Foreground="White"/>
+                            <TextBlock x:Name="textBoxRemoveAll" Text="Hành động này sẽ xóa sạch mọi phiên bản Office trên máy." FontSize="10" Foreground="#FF8888" Margin="18,2,0,0"/>
                         </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
-                
-                <!-- TAB CÔNG CỤ XÓA -->
-                <TabItem Header="CÔNG CỤ XÓA">
-                    <Border Background="#2D2D30" CornerRadius="5" Padding="20">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                             <Label x:Name="LabelRemoveAll" Content="GỠ BỎ TOÀN BỘ OFFICE" Foreground="#E81123" FontWeight="Bold" HorizontalAlignment="Center" FontSize="16"/>
-                             <TextBlock x:Name="textBoxRemoveAll" TextWrapping="Wrap" Text="Lưu ý: Hành động này sẽ gỡ sạch mọi phiên bản Office trên máy." Foreground="White" Margin="0,10,0,20" HorizontalAlignment="Center"/>
-                             
-                             <RadioButton x:Name="radioButtonRemoveAllApp" Content="Tôi hiểu và đồng ý xóa" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                             
-                             <Button x:Name="buttonRemoveAll" Content="GỠ CÀI ĐẶT NGAY" Width="200" Height="40" Background="#E81123" Foreground="White" FontWeight="Bold">
-                                 <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border x:Name="bdr" Background="{TemplateBinding Background}" CornerRadius="5">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="bdr" Property="Background" Value="#FF4C4C"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                 </Button.Template>
-                             </Button>
-                        </StackPanel>
-                    </Border>
-                </TabItem>
-            </TabControl>
-
-            <!-- TRẠNG THÁI VÀ NÚT CHẠY -->
-            <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" BorderThickness="0" Foreground="{StaticResource AccentColor}" FontWeight="Bold" FontSize="14" IsReadOnly="True" HorizontalContentAlignment="Right"/>
-                <ProgressBar x:Name="progressbar" Height="5" Background="#333" BorderThickness="0" Foreground="{StaticResource AccentColor}"/>
-            </StackPanel>
-
-            <Grid Grid.Row="2" Margin="0,15,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <Label x:Name="Link1" Content="Trang chủ: msedu.vn" Foreground="{StaticResource GrayText}" Cursor="Hand" VerticalAlignment="Center" FontSize="11">
-                    <Label.Style>
-                         <Style TargetType="Label">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                         </Style>
-                    </Label.Style>
-                </Label>
-
-                <Button x:Name="buttonSubmit" Grid.Column="2" Content="BẮT ĐẦU THỰC HIỆN" Width="200" Height="40" Style="{StaticResource MainButton}"/>
+                        <Button x:Name="buttonRemoveAll" Grid.Column="2" Content="GỠ CÀI ĐẶT" Background="#CC0000" Foreground="White" Width="100" FontWeight="Bold"/>
+                    </Grid>
+                </Border>
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </Window>
 '@
 
 # Store form objects (variables) in PowerShell
 
-    [xml]$xaml = $xamlInput -replace 'mc:Ignorable="d"','' -replace "x:Name",'Name'
+    [xml]$xaml = $xamlInput -replace '^<Window.*', '<Window' -replace 'mc:Ignorable="d"','' -replace "x:Name",'Name'
     $xmlReader = (New-Object System.Xml.XmlNodeReader $xaml)
     $Form = [Windows.Markup.XamlReader]::Load( $xmlReader)
 
@@ -437,18 +392,19 @@ $xamlInput = @'
         # To referece our elements we use the $sync variable from hashtable.
             $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "$($sync.UIstatus) $($sync.productName) $($sync.arch)-bit ($($sync.language))" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
-            # $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" }) # Image hidden in modern UI design
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
         Set-Location -Path $($sync.workingDir)
 
         Start-Process -FilePath .\bin.exe -ArgumentList "$($sync.mode) .\$($sync.configurationFile)" -NoNewWindow -Wait
                 
         # Bring back our Button, set the Label and ProgressBar, we're done..
-            # $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'Bắt Đầu' })
-            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất tác vụ!' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU THỰC HIỆN' })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
     }
@@ -596,8 +552,9 @@ $xamlInput = @'
                 $PSIinstance.Runspace = $runspace
                 $PSIinstance.BeginInvoke()
             } else {
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Foreground = "#E81123" }) # Red color for warning
-                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Vui lòng chọn 1 phiên bản Office!" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Foreground = "Red" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.FontWeight = "Bold" })
+                $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Vui lòng chọn một phiên bản Office!" })
             } 
         }
     )
@@ -607,7 +564,9 @@ $xamlInput = @'
 
         $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang gỡ cài đặt Microsoft Office..." })
         $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
         
         Set-Location -Path $($sync.workingDir)
         Invoke-Item Path $($sync.workingDir)
@@ -617,7 +576,9 @@ $xamlInput = @'
 
         $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang gỡ bằng Office Deployment Tool..." })
         $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
         Start-Process -FilePath .\bin.exe -ArgumentList "/configure .\configuration.xml" -NoNewWindow -Wait
 
@@ -627,14 +588,17 @@ $xamlInput = @'
 
             $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = "Đang chạy kịch bản dọn dẹp (OfficeScrub)..." })
             $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = "Hidden" })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.BorderBrush = "#FF707070" })
             $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $true })
+            $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Visible" })
 
             Start-Process -FilePath ".\SaRA\SaRACmd.exe" -ArgumentList "-S OfficeScrubScenario -AcceptEula -OfficeVersion All" -NoNewWindow -Wait
         }
 
+        $sync.Form.Dispatcher.Invoke([action] { $sync.image.Visibility = "Hidden" })
         $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Visibility = 'Visible' })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'Bắt Đầu' })
-        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Đã gỡ cài đặt hoàn tất!' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.buttonSubmit.Content = 'BẮT ĐẦU THỰC HIỆN' })
+        $sync.Form.Dispatcher.Invoke([action] { $sync.textbox.Text = 'Hoàn tất' })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.IsIndeterminate = $false })
         $sync.Form.Dispatcher.Invoke([action] { $sync.ProgressBar.Value = '100' })
 
