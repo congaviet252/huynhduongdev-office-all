@@ -125,7 +125,7 @@ $xamlInput = @'
                 <StackPanel>
                     <TextBlock Text="HUỲNH DƯƠNG" Foreground="#00A4EF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
                     <TextBlock Text="DEVELOPER" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
-                    <Image x:Name="image" Height="60" Width="60" Source="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/551384385_122223446444134054_1467993974427749848_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=J5mqzzj9NzIQ7kNvwG0ZRRx&_nc_oc=AdkUOvUdojgnksikilA6jBv2XA0Kg_lmRz3dQmnpzex63LXIOBkRUXxf6B5QAaO84IvBlIJafdCfPtxMEXcivN3Z&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=SYS6WLeOiT-BZPAPeaBU6w&oh=00_AflY8hLhQt8k7IyVGH3MMxa--kteDNhP0Aas1CGmoOKLWw&oe=69505394" Margin="0,10,0,0" Visibility="Hidden"/>
+                    <Image x:Name="image" Height="60" Width="60" Source="https://images5.alphacoders.com/136/thumb-1920-1369324.png" Margin="0,10,0,0" Visibility="Hidden"/>
                 </StackPanel>
             </Border>
 
