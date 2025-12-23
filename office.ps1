@@ -175,8 +175,8 @@ $xamlInput = @'
             <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
             
             <Label x:Name="Link1" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand">
-                <Hyperlink NavigateUri="https://msedu.vn" Foreground="#00A4EF" TextDecorations="None">
-                    <TextBlock Text="🌐 msedu.vn"/>
+                <Hyperlink NavigateUri="https://nlacc.site" Foreground="#00A4EF" TextDecorations="None">
+                    <TextBlock Text="🌐 nlacc.site"/>
                 </Hyperlink>
             </Label>
         </StackPanel>
