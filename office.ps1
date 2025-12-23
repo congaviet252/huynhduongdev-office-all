@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
     if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1 | iex"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm office.msedu.vn | iex"
         break
     }
 
@@ -9,7 +9,7 @@
     Add-Type -AssemblyName PresentationFramework, System.Drawing, PresentationFramework, System.Windows.Forms, WindowsFormsIntegration, PresentationCore
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
-# GIAO DIỆN XAML MỚI (MODERN DARK THEME) + LINK FACEBOOK
+# GIAO DIỆN XAML MỚI (MODERN DARK THEME)
 $xamlInput = @'
 <Window x:Class="install.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -18,8 +18,8 @@ $xamlInput = @'
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:install"
         mc:Ignorable="d"
-        Title="Huỳnh Dương Developer Pro - Office Installer" 
-        Height="680" Width="1100" 
+        Title="Huỳnh Dương Developer - Office Installer" 
+        Height="650" Width="1100" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize"
         Background="#1E1E1E"
@@ -60,7 +60,7 @@ $xamlInput = @'
             <Setter Property="Margin" Value="0,5,10,5"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="GroupName" Value="OfficeVersion"/>
+            <Setter Property="GroupName" Value="OfficeVersion"/> <!-- Quan trọng: Group chung để chỉ chọn 1 -->
             <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
@@ -174,16 +174,11 @@ $xamlInput = @'
             <ProgressBar x:Name="progressbar" Height="5" Margin="0,10,0,0" Background="#333333" BorderThickness="0" Foreground="#00A4EF"/>
             <TextBox x:Name="textbox" Text="Sẵn sàng..." Background="Transparent" Foreground="#AAAAAA" BorderThickness="0" TextWrapping="Wrap" Margin="0,5,0,0" HorizontalContentAlignment="Center" IsReadOnly="True"/>
             
-            
-                
-                <!-- LINK FACEBOOK MỚI THÊM VÀO ĐÂY -->
-                <Label x:Name="LinkFacebook" HorizontalAlignment="Center" Cursor="Hand" Margin="0,5,0,0" Padding="0">
-                    <Hyperlink NavigateUri="https://www.facebook.com/huynh.duong.389204/" Foreground="#1877F2" FontWeight="Bold" TextDecorations="None">
-                        <TextBlock Text="📘 Liên hệ FB Tao"/>
-                    </Hyperlink>
-                </Label>
-            </StackPanel>
-
+            <Label x:Name="Link1" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand">
+                <Hyperlink NavigateUri="https://msedu.vn" Foreground="#00A4EF" TextDecorations="None">
+                    <TextBlock Text="🌐 msedu.vn"/>
+                </Hyperlink>
+            </Label>
         </StackPanel>
 
         <!-- === CỘT PHẢI: DANH SÁCH OFFICE === -->
@@ -260,6 +255,7 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2019Excel" Style="{StaticResource ProductRadio}" Content="Excel"/>
                                 <RadioButton x:Name="radioButton2019PowerPoint" Style="{StaticResource ProductRadio}" Content="PowerPoint"/>
                                 
+                                <!-- Hidden Logic fields to prevent error -->
                                 <RadioButton x:Name="radioButton2019ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2019VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2019Outlook" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -278,6 +274,7 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2016ProjectPro" Style="{StaticResource ProductRadio}" Content="Project Pro"/>
                                 <RadioButton x:Name="radioButton2016VisioPro" Style="{StaticResource ProductRadio}" Content="Visio Pro"/>
                                 
+                                <!-- Hidden Logic fields -->
                                 <RadioButton x:Name="radioButton2016ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2016VisioStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2016Word" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -296,6 +293,7 @@ $xamlInput = @'
                                 <RadioButton x:Name="radioButton2013Pro" Style="{StaticResource ProductRadio}" Content="Professional Plus"/>
                                 <RadioButton x:Name="radioButton2013Std" Style="{StaticResource ProductRadio}" Content="Standard"/>
                                 
+                                <!-- Hidden Logic fields -->
                                 <RadioButton x:Name="radioButton2013ProjectPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2013ProjectStd" Visibility="Collapsed" GroupName="OfficeVersion"/>
                                 <RadioButton x:Name="radioButton2013VisioPro" Visibility="Collapsed" GroupName="OfficeVersion"/>
@@ -344,11 +342,7 @@ $xamlInput = @'
         Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)
     }
 
-    # SỰ KIỆN CLICK LINK WEB VÀ FACEBOOK
     $Link1.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://msedu.vn')})
-    
-    # --- THAY ĐỔI LINK FACEBOOK CỦA BẠN TẠI ĐÂY ---
-    $LinkFacebook.Add_PreviewMouseDown({[system.Diagnostics.Process]::start('https://www.facebook.com/huynhduong')}) 
 
 # Download links
     $uri            = "https://github.com/mseduvn/msoffice/raw/refs/heads/main/Files/setup.exe"
