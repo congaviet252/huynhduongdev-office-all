@@ -1,7 +1,7 @@
 # You need to have Administrator rights to run this script!
     if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Warning "Bạn cần quyền Administrator để chạy script này!`nVui lòng chạy lại script dưới quyền Admin (Run as Administrator)!"
-        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm office.msedu.vn | iex"
+        Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm https://raw.githubusercontent.com/congaviet252/huynhduongdev-office-all/refs/heads/main/office.ps1 | iex"
         break
     }
 
